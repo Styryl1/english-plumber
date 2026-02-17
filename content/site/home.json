@@ -56,43 +56,43 @@
   "autoPilotChips": [
     {
       "label": "Boiler Servicing",
-      "iconPath": "/api/media/file/Metabolic%20Health.png"
+      "iconPath": "/assets/images/imported/metabolic-health.png"
     },
     {
       "label": "Radiator Installation",
-      "iconPath": "/api/media/file/Kidney%20and%20Liver%20Function.png"
+      "iconPath": "/assets/images/imported/kidney-and-liver-function.png"
     },
     {
       "label": "Radiator Repair",
-      "iconPath": "/api/media/file/Cardiovascular%20Health.png"
+      "iconPath": "/assets/images/imported/cardiovascular-health.png"
     },
     {
       "label": "Tap Repair",
-      "iconPath": "/api/media/file/Hormone%20Levels.png"
+      "iconPath": "/assets/images/imported/hormone-levels.png"
     },
     {
       "label": "Tap Replacement",
-      "iconPath": "/api/media/file/Nutrient%20Levels.png"
+      "iconPath": "/assets/images/imported/nutrient-levels.png"
     },
     {
       "label": "General Plumbing",
-      "iconPath": "/api/media/file/Inflammation%20Markers.png"
+      "iconPath": "/assets/images/imported/inflammation-markers.png"
     },
     {
       "label": "Heating Checks",
-      "iconPath": "/api/media/file/Immunity%20Markers.png"
+      "iconPath": "/assets/images/imported/immunity-markers.png"
     },
     {
       "label": "Home Plumbing Checks",
-      "iconPath": "/api/media/file/Biological%20Aging%20Rate.png"
+      "iconPath": "/assets/images/imported/biological-aging-rate.png"
     },
     {
       "label": "Leak Detection",
-      "iconPath": "/api/media/file/Autoimmune%20Indicators.png"
+      "iconPath": "/assets/images/imported/autoimmune-indicators.png"
     },
     {
       "label": "Boiler Brands: Vaillant, Intergas, Remeha, ATAG",
-      "iconPath": "/api/media/file/Blood%20Cell%20Analysis.png"
+      "iconPath": "/assets/images/imported/blood-cell-analysis.png"
     }
   ],
   "quickFixHeading": "Not Just Quick Fixes,",
@@ -109,14 +109,14 @@
       "title": "Home",
       "accent": "Plumbing Visits",
       "href": "#services",
-      "imagePath": "/api/media/file/Testing%20for%20home%20page.webp",
+      "imagePath": "/assets/images/imported/testing-for-home-page.webp",
       "linkLabel": "View Service"
     },
     {
       "title": "Transparent",
       "accent": "Repairs",
       "href": "#pricing",
-      "imagePath": "/api/media/file/Supps%20for%20home%20page.webp",
+      "imagePath": "/assets/images/imported/supps-for-home-page.webp",
       "linkLabel": "View Service"
     }
   ],
@@ -130,14 +130,14 @@
       "title": "Free",
       "accent": "Quotes",
       "href": "#pricing",
-      "imagePath": "/api/media/file/Longevity%20Rx%20for%20home%20page.webp",
+      "imagePath": "/assets/images/imported/longevity-rx-for-home-page.webp",
       "linkLabel": "View Service"
     },
     {
       "title": "CO-vakmanschap",
       "accent": "+ VCA",
       "href": "#about",
-      "imagePath": "/api/media/file/Care%20team%20for%20home%20page.webp",
+      "imagePath": "/assets/images/imported/care-team-for-home-page.webp",
       "linkLabel": "View Service"
     }
   ],
@@ -148,25 +148,25 @@
       "name": "Cathy F.",
       "area": "Medemblik",
       "quote": "Quick response, clear communication in English, and the repair was done cleanly.",
-      "imagePath": "/api/media/file/Ellipse%201978.png"
+      "imagePath": "/assets/images/imported/ellipse-1978.png"
     },
     {
       "name": "Brenda M.",
       "area": "Hoorn",
       "quote": "Friendly service and transparent pricing. My radiator issue was fixed quickly and everything was explained clearly.",
-      "imagePath": "/api/media/file/testimonial%20photo%204.webp"
+      "imagePath": "/assets/images/imported/testimonial-photo-4.webp"
     },
     {
       "name": "Mark L.",
       "area": "Purmerend",
       "quote": "Boiler servicing was smooth and professional. Heating is stable again and communication over WhatsApp made everything easy.",
-      "imagePath": "/api/media/file/Ellipse%201979.png"
+      "imagePath": "/assets/images/imported/ellipse-1979.png"
     },
     {
       "name": "Angela D.",
       "area": "Alkmaar",
       "quote": "Great option for expats in North Holland. Easy to share photos on WhatsApp and book the right visit quickly.",
-      "imagePath": "/api/media/file/testimonial%20photo%205.webp"
+      "imagePath": "/assets/images/imported/testimonial-photo-4.webp"
     }
   ],
   "commandCenterHeading": "Your Plumbing Command Center,",
@@ -176,7 +176,7 @@
   "commandCenterImageAlt": "Plumber service overview",
   "howItWorksHeading": "How",
   "howItWorksHeadingAccent": "it works",
-  "howItWorksImagePath": "/api/media/file/miles%20bloodwork.webp",
+  "howItWorksImagePath": "/assets/images/imported/miles-bloodwork.webp",
   "howItWorksImageAlt": "How English Plumber works",
   "howItWorksSteps": [
     {
@@ -265,7 +265,7 @@
       "answer": "95 EUR per hour labour, 145 EUR for boiler servicing, and free quotes. WhatsApp photos and text for a fast first assessment."
     }
   ],
-  "faqImagePath": "/faq.webp",
+  "faqImagePath": "/assets/images/imported/faq.webp",
   "faqImageAlt": "FAQ support",
   "faqCtaHeading": "Still have questions?",
   "faqCtaBody": "Send a WhatsApp message and include photos of the problem.",
@@ -274,7 +274,7 @@
   "aboutHeading": "Built Around",
   "aboutHeadingAccent": "Clear, Reliable Service",
   "aboutBody": "English Plumber was built to give expats and Dutch homeowners a reliable plumber with clear communication, fair pricing, and quality workmanship.",
-  "aboutImagePath": "/api/media/file/nate%20%2B%20fam.png",
+  "aboutImagePath": "/assets/images/imported/nate-plus-fam.png",
   "aboutImageAlt": "English Plumber profile",
   "aboutName": "English Plumber",
   "aboutRole": "Friendly local plumber in Medemblik",
@@ -284,7 +284,7 @@
   "connectedHeadingAccent": "to Your Home",
   "connectedCtaLabel": "Message on WhatsApp",
   "connectedCtaUrl": "https://wa.me/31642869931",
-  "finalCtaImagePath": "/api/media/file/woman%20newsletter.jpg",
+  "finalCtaImagePath": "/assets/images/imported/woman-newsletter.jpg",
   "finalCtaImageAlt": "Message us on WhatsApp",
   "finalCtaHeading": "Ready for fast plumbing help?",
   "finalCtaHeadingAccent": "Send photos on WhatsApp and get a clear plan.",

@@ -19,6 +19,7 @@ This project is now a native Astro site (no live-site mirror dependency), with l
 - `src/generated/asset-manifest.json` - local stylesheet list used by `index.astro`
 - `public/assets/styles/*` - localized CSS files
 - `public/assets/fonts/*` - localized fonts referenced by CSS
+- `public/assets/images/imported/*` - localized image assets used by editable content
 - `scripts/sync_assets.py` - asset localization script
 
 ## Asset Refresh Flow
