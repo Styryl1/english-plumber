@@ -1,13 +1,6 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
-import client from '../../tina/__generated__/client';
-import SiteContentBridge from '../../tina/pages/SiteContentBridge.jsx';
-import EditableHeaderHero from '../components/EditableHeaderHero.astro';
-import EditableAutoPilotSection from '../components/EditableAutoPilotSection.astro';
-import EditableQuickFixSection from '../components/EditableQuickFixSection.astro';
-import EditableNoJargonSection from '../components/EditableNoJargonSection.astro';
-import EditableRemainingSite from '../components/EditableRemainingSite.astro';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -68,57 +61,6 @@ delete bodyAttrs.class;
 
 const headInner = extractInner('head');
 const bodyInner = extractInner('body');
-
-function stripMirroredHeaderAndHero(input: string): string {
-  let output = input;
-
-  output = output.replace(/<header\b[\s\S]*?<\/header>/i, '');
-
-  const heroStartMarker = '<div class="relative safe-h-screen';
-  const nextSectionMarker = '<div class="mt-[52px] lg:mt-[110px] mb-[52px] lg:mb-[110px]">';
-
-  const heroStart = output.indexOf(heroStartMarker);
-  if (heroStart !== -1) {
-    const nextSection = output.indexOf(nextSectionMarker, heroStart);
-    if (nextSection !== -1) {
-      output = `${output.slice(0, heroStart)}${output.slice(nextSection)}`;
-    }
-  }
-
-  const firstFeatureSectionMarker = '<div class="mt-[52px] lg:mt-[110px] mb-[52px] lg:mb-[110px]">';
-  const secondFeatureSectionMarker = '<div class="mt-[52px] lg:mt-[265px] mb-[63px] lg:mb-[198px]">';
-  const firstFeatureStart = output.indexOf(firstFeatureSectionMarker);
-  if (firstFeatureStart !== -1) {
-    const secondFeatureStart = output.indexOf(secondFeatureSectionMarker, firstFeatureStart);
-    if (secondFeatureStart !== -1) {
-      output = `${output.slice(0, firstFeatureStart)}${output.slice(secondFeatureStart)}`;
-    }
-  }
-
-  const splitSectionMarker = '<div class="mt-[52px] lg:mt-[265px] mb-[63px] lg:mb-[198px]">';
-  const firstSplitStart = output.indexOf(splitSectionMarker);
-  if (firstSplitStart !== -1) {
-    const secondSplitStart = output.indexOf(splitSectionMarker, firstSplitStart + splitSectionMarker.length);
-    if (secondSplitStart !== -1) {
-      output = `${output.slice(0, firstSplitStart)}${output.slice(secondSplitStart)}`;
-    }
-  }
-
-  const testimonialsSectionMarker = '<div class="mb-[78px] lg:mb-[263px] mt-[87px] lg:mt-[188px]">';
-  const remainingSplitStart = output.indexOf(splitSectionMarker);
-  if (remainingSplitStart !== -1) {
-    const testimonialsStart = output.indexOf(testimonialsSectionMarker, remainingSplitStart);
-    if (testimonialsStart !== -1) {
-      output = `${output.slice(0, remainingSplitStart)}${output.slice(testimonialsStart)}`;
-    }
-  }
-
-  return output;
-}
-
-const bodyInnerWithoutHeaderHero = stripMirroredHeaderAndHero(bodyInner);
-const siteContentQuery = await client.queries.site({ relativePath: 'home.json' });
-const initialSiteContent = siteContentQuery.data.site;
 ---
 
 <!doctype html>
@@ -184,21 +126,21 @@ const initialSiteContent = siteContentQuery.data.site;
         display: none !important;
       }
 
-      [data-native-hero='true'] .hero-video-wrapper {
+      .hero-video-wrapper {
         background-image: url('/IMG_8233.PNG') !important;
         background-size: cover !important;
         background-position: center center !important;
         background-repeat: no-repeat !important;
       }
 
-      [data-native-hero='true'] .hero-video-wrapper video,
-      [data-native-hero='true'] .hero-video-wrapper iframe,
-      [data-native-hero='true'] .hero-video-wrapper canvas {
+      .hero-video-wrapper video,
+      .hero-video-wrapper iframe,
+      .hero-video-wrapper canvas {
         display: none !important;
         pointer-events: none !important;
       }
 
-      [data-native-hero='true'] .safe-h-screen[data-theme='dark'] {
+      .safe-h-screen[data-theme='dark'] {
         background-image: url('/IMG_8233.PNG') !important;
         background-size: cover !important;
         background-position: center center !important;
@@ -218,17 +160,8 @@ const initialSiteContent = siteContentQuery.data.site;
       body[data-scroll-locked] {
         overflow: auto !important;
       }
-
-      .__tina-quick-editing-enabled [data-tina-field] {
-        outline: 2px dashed rgba(254, 34, 56, 0.55);
-        outline-offset: 2px;
-      }
-
-      .__tina-quick-editing-enabled [data-tina-field]:hover {
-        outline: 2px dashed rgba(254, 34, 56, 0.95);
-      }
     </style>
-    <script is:inline define:vars={{ initialSiteContent }}>
+    <script is:inline>
       (() => {
         const promoMarker = 'data-hide-promo';
         const MEDIA_ORIGIN = 'https://www.gogeviti.com';
@@ -249,55 +182,13 @@ const initialSiteContent = siteContentQuery.data.site;
           '/footer/',
           '/faq.webp',
         ];
-        const normalizeSiteValue = (value) => (typeof value === 'string' ? value.trim() : '');
-        let siteContent =
-          initialSiteContent && typeof initialSiteContent === 'object' ? initialSiteContent : {};
+        const BUSINESS_NAME = 'English Plumber';
+        const BASE_CITY = 'Medemblik';
+        const WHATSAPP_NUMBER = '+31 6 428 699 31';
+        const PRIMARY_AREA = 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
+        const HERO_IMAGE_PATH = '/IMG_8233.PNG';
 
-        let BUSINESS_NAME = 'English Plumber';
-        let BASE_CITY = 'Medemblik';
-        let WHATSAPP_NUMBER = '+31 6 428 699 31';
-        let PRIMARY_AREA = 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
-        let HERO_IMAGE_PATH = '/IMG_8233.PNG';
-        let HERO_HEADING = 'Friendly Local';
-        let HERO_HEADING_ACCENT = 'Plumber in Medemblik.';
-        let HERO_SUBHEADING =
-          'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.';
-        let AUTOPILOT_HEADING = 'One Trusted Plumber';
-        let AUTOPILOT_HEADING_ACCENT = 'Fast, Clean Repairs';
-        let SEO_TITLE = 'English Plumber | Plumbing & Heating in Medemblik';
-        let SEO_DESCRIPTION =
-          'English Plumber is a friendly local plumber in Medemblik. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp +31 6 428 699 31.';
-
-        const readSiteValue = (key, fallbackValue) => {
-          const directValue = normalizeSiteValue(siteContent?.[key]);
-          return directValue || fallbackValue;
-        };
-
-        const refreshSiteSettings = () => {
-          BUSINESS_NAME = readSiteValue('businessName', 'English Plumber');
-          BASE_CITY = readSiteValue('baseCity', 'Medemblik');
-          WHATSAPP_NUMBER = readSiteValue('whatsappNumber', '+31 6 428 699 31');
-          PRIMARY_AREA = readSiteValue('primaryArea', 'Hoorn, Heerhugowaard, Purmerend, Alkmaar');
-          HERO_IMAGE_PATH = readSiteValue('heroImagePath', '/IMG_8233.PNG');
-          HERO_HEADING = readSiteValue('heroHeading', 'Friendly Local');
-          HERO_HEADING_ACCENT = readSiteValue('heroHeadingAccent', 'Plumber in Medemblik.');
-          HERO_SUBHEADING = readSiteValue(
-            'heroSubheading',
-            'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.',
-          );
-          AUTOPILOT_HEADING = readSiteValue('autoPilotHeading', 'One Trusted Plumber');
-          AUTOPILOT_HEADING_ACCENT = readSiteValue('autoPilotHeadingAccent', 'Fast, Clean Repairs');
-          SEO_TITLE = readSiteValue('seoTitle', `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`);
-          SEO_DESCRIPTION = readSiteValue(
-            'seoDescription',
-            `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`,
-          );
-        };
-
-        refreshSiteSettings();
-
-        const buildExactTextReplacements = () =>
-          new Map([
+        const exactTextReplacements = new Map([
           ['Geviti | Blood Testing & Personalized Longevity Care', `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`],
           ['Get 25% Off - 24 Hour Flash Sale', `Friendly local plumber in ${BASE_CITY}`],
           ['Bloodwork', 'Boiler Servicing'],
@@ -308,15 +199,15 @@ const initialSiteContent = siteContentQuery.data.site;
           ['Gift Geviti', 'WhatsApp'],
           ['Login', 'Dutch + English'],
           ['Try Geviti', 'Free Quote'],
-          ['Your Best Years', HERO_HEADING],
-          ["Haven't Happened Yet.", HERO_HEADING_ACCENT],
+          ['Your Best Years', 'Friendly Local Plumber'],
+          ["Haven't Happened Yet.", `Based in ${BASE_CITY}.`],
           [
             'Comprehensive blood testing and personalized care designed to keep you thriving, today and for decades to come.',
-            HERO_SUBHEADING,
+            `${BUSINESS_NAME} helps expats and Dutch homeowners with reliable plumbing and heating in ${BASE_CITY} and nearby towns.`,
           ],
           ['Start Testing', 'Free Quote'],
-          ['One Blood Test', AUTOPILOT_HEADING],
-          ['Total Optimization', AUTOPILOT_HEADING_ACCENT],
+          ['One Blood Test', 'One Trusted Plumber'],
+          ['Total Optimization', 'Fast, Clean Repairs'],
           ['Test My Biomarkers Now', `WhatsApp ${WHATSAPP_NUMBER}`],
           ['Metabolic Health', 'Boiler Servicing'],
           ['Kidney and Liver Function', 'Radiator Installation'],
@@ -481,24 +372,15 @@ const initialSiteContent = siteContentQuery.data.site;
           ],
           ['Find us on the App Store and Google Play Store', 'WhatsApp is the fastest way to reach us.'],
           ['Geviti Inc. | All Rights Reserved', `${BUSINESS_NAME} | All Rights Reserved`],
-          ]);
+        ]);
 
-        const buildRegexTextReplacements = () => [
+        const regexTextReplacements = [
           [/\bGeviti\b/g, BUSINESS_NAME],
           [/\bLongeviti\b/g, 'Plumbing'],
           [/\bbiomarkers?\b/gi, 'plumbing and heating'],
           [/\bwellness\b/gi, 'home comfort'],
           [/\blongevity\b/gi, 'long-term home reliability'],
         ];
-
-        let exactTextReplacements = buildExactTextReplacements();
-        let regexTextReplacements = buildRegexTextReplacements();
-
-        const refreshCopySettings = () => {
-          refreshSiteSettings();
-          exactTextReplacements = buildExactTextReplacements();
-          regexTextReplacements = buildRegexTextReplacements();
-        };
         const copyAttributeNames = ['title', 'alt', 'aria-label', 'placeholder', 'content'];
 
         const normalizeTextValue = (value) => (value || '').replace(/\s+/g, ' ').trim();
@@ -545,12 +427,13 @@ const initialSiteContent = siteContentQuery.data.site;
         };
 
         const rewriteDocumentMetadata = () => {
-          document.title = SEO_TITLE;
+          document.title = `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`;
+          const description = `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`;
           document
             .querySelectorAll(
               'meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]',
             )
-            .forEach((meta) => meta.setAttribute('content', SEO_DESCRIPTION));
+            .forEach((meta) => meta.setAttribute('content', description));
           document
             .querySelectorAll('meta[property="og:title"],meta[name="twitter:title"]')
             .forEach((meta) => meta.setAttribute('content', document.title));
@@ -574,111 +457,6 @@ const initialSiteContent = siteContentQuery.data.site;
           if (root instanceof Document || root === document.documentElement || root === document.body) {
             rewriteDocumentMetadata();
           }
-        };
-
-        let tinaFieldMap = {};
-        let rerenderPage = () => {};
-
-        const isInTinaFrame = () => {
-          try {
-            return window.self !== window.top;
-          } catch {
-            return false;
-          }
-        };
-
-        const setManagedTinaField = (element, fieldId) => {
-          if (!(element instanceof HTMLElement)) return;
-          if (!fieldId) return;
-          element.setAttribute('data-tina-field', fieldId);
-          element.setAttribute('data-managed-tina-field', 'site-copy');
-        };
-
-        const clearManagedTinaFields = (root) => {
-          if (!(root instanceof Element || root instanceof Document)) return;
-          root.querySelectorAll('[data-managed-tina-field="site-copy"]').forEach((element) => {
-            if (element instanceof HTMLElement) {
-              element.removeAttribute('data-tina-field');
-              element.removeAttribute('data-managed-tina-field');
-            }
-          });
-        };
-
-        const setFieldByTextMatch = (root, textValue, fieldId) => {
-          const needle = normalize(textValue);
-          if (!needle || !fieldId) return;
-          if (!(root instanceof Element || root instanceof Document)) return;
-
-          root.querySelectorAll('*:not(script):not(style):not(noscript)').forEach((element) => {
-            if (!(element instanceof HTMLElement)) return;
-            if (element.children.length > 0) return;
-            if (element.closest('[role="dialog"]')) return;
-            const text = normalize(element.textContent);
-            if (!text || !text.includes(needle)) return;
-            setManagedTinaField(element, fieldId);
-          });
-        };
-
-        const applyTinaFieldMarkers = (root = document) => {
-          if (!isInTinaFrame()) return;
-          if (!(root instanceof Element || root instanceof Document)) return;
-
-          clearManagedTinaFields(root);
-
-          root.querySelectorAll('[data-site-field]').forEach((element) => {
-            if (!(element instanceof HTMLElement)) return;
-            const fieldName = element.getAttribute('data-site-field');
-            if (!fieldName) return;
-            const fieldId = tinaFieldMap[fieldName];
-            if (!fieldId) return;
-            setManagedTinaField(element, fieldId);
-          });
-
-          const fieldMatchers = [
-            ['businessName', BUSINESS_NAME],
-            ['baseCity', BASE_CITY],
-            ['whatsappNumber', WHATSAPP_NUMBER],
-            ['primaryArea', PRIMARY_AREA],
-            ['heroHeading', HERO_HEADING],
-            ['heroHeadingAccent', HERO_HEADING_ACCENT],
-            ['heroSubheading', HERO_SUBHEADING],
-            ['autoPilotHeading', AUTOPILOT_HEADING],
-            ['autoPilotHeadingAccent', AUTOPILOT_HEADING_ACCENT],
-          ];
-
-          fieldMatchers.forEach(([fieldName, textValue]) => {
-            setFieldByTextMatch(root, textValue, tinaFieldMap[fieldName]);
-          });
-
-          const heroImageField = tinaFieldMap.heroImagePath;
-          if (heroImageField) {
-            root
-              .querySelectorAll('.safe-h-screen, .hero-video-wrapper, img[data-hero-image="english-plumber"]')
-              .forEach((element) => {
-                if (element instanceof HTMLElement) {
-                  setManagedTinaField(element, heroImageField);
-                }
-              });
-          }
-        };
-
-        const updateSiteContent = (nextContent) => {
-          if (!nextContent || typeof nextContent !== 'object') return;
-          siteContent = {
-            ...siteContent,
-            ...nextContent,
-          };
-          refreshCopySettings();
-          rerenderPage();
-        };
-
-        const updateTinaFieldMap = (nextMap) => {
-          if (!nextMap || typeof nextMap !== 'object') return;
-          tinaFieldMap = {
-            ...tinaFieldMap,
-            ...nextMap,
-          };
-          applyTinaFieldMarkers(document);
         };
 
         const isApiMediaPath = (value) => {
@@ -838,109 +616,95 @@ const initialSiteContent = siteContentQuery.data.site;
 
         const enforceHeroImage = (root) => {
           if (!(root instanceof Element || root instanceof Document)) return;
-          const heroRoots = [];
+          const heroSections = [];
 
-          if (root instanceof Element && root.getAttribute('data-native-hero') === 'true') {
-            heroRoots.push(root);
+          if (root instanceof Element && root.classList.contains('safe-h-screen')) {
+            heroSections.push(root);
           }
 
-          root.querySelectorAll('[data-native-hero="true"]').forEach((heroRoot) => {
-            if (heroRoot instanceof HTMLElement) {
-              heroRoots.push(heroRoot);
-            }
+          root
+            .querySelectorAll('.safe-h-screen[data-theme="dark"], .safe-h-screen')
+            .forEach((section) => heroSections.push(section));
+
+          heroSections.forEach((section) => {
+            if (!(section instanceof HTMLElement)) return;
+            section.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
+            section.style.backgroundSize = 'cover';
+            section.style.backgroundPosition = 'center center';
+            section.style.backgroundRepeat = 'no-repeat';
+
+            Array.from(section.children).forEach((child) => {
+              if (!(child instanceof HTMLElement)) return;
+              if (child.classList.contains('hero-video-wrapper')) return;
+
+              const className = child.getAttribute('class') || '';
+              const styleValue = child.getAttribute('style') || '';
+              const isDarkOverlay =
+                className.includes('-z-[9]') || styleValue.includes('#14191A') || styleValue.includes('#14191a');
+
+              if (isDarkOverlay) {
+                child.setAttribute('data-hide-hero-overlay', 'true');
+              }
+            });
           });
 
-          heroRoots.forEach((heroRoot) => {
-            const heroSections = [];
+          const wrappers = [];
 
-            if (heroRoot.classList.contains('safe-h-screen')) {
-              heroSections.push(heroRoot);
-            }
+          if (root instanceof Element && root.classList.contains('hero-video-wrapper')) {
+            wrappers.push(root);
+          }
 
-            heroRoot
-              .querySelectorAll('.safe-h-screen[data-theme="dark"], .safe-h-screen')
-              .forEach((section) => heroSections.push(section));
+          root.querySelectorAll('.hero-video-wrapper').forEach((wrapper) => wrappers.push(wrapper));
 
-            heroSections.forEach((section) => {
-              if (!(section instanceof HTMLElement)) return;
-              section.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
-              section.style.backgroundSize = 'cover';
-              section.style.backgroundPosition = 'center center';
-              section.style.backgroundRepeat = 'no-repeat';
+          wrappers.forEach((wrapper) => {
+            if (!(wrapper instanceof HTMLElement)) return;
 
-              Array.from(section.children).forEach((child) => {
-                if (!(child instanceof HTMLElement)) return;
-                if (child.classList.contains('hero-video-wrapper')) return;
+            wrapper.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
+            wrapper.style.backgroundSize = 'cover';
+            wrapper.style.backgroundPosition = 'center center';
+            wrapper.style.backgroundRepeat = 'no-repeat';
+            wrapper.style.zIndex = '0';
+            wrapper.style.overflow = 'hidden';
 
-                const className = child.getAttribute('class') || '';
-                const styleValue = child.getAttribute('style') || '';
-                const isDarkOverlay =
-                  className.includes('-z-[9]') || styleValue.includes('#14191A') || styleValue.includes('#14191a');
-
-                if (isDarkOverlay) {
-                  child.setAttribute('data-hide-hero-overlay', 'true');
-                }
-              });
+            wrapper.querySelectorAll('video,iframe,canvas').forEach((media) => {
+              if (media instanceof HTMLVideoElement) {
+                try {
+                  media.pause();
+                } catch {}
+              }
+              media.setAttribute('aria-hidden', 'true');
+              media.style.display = 'none';
+              media.style.pointerEvents = 'none';
             });
 
-            const wrappers = [];
+            Array.from(wrapper.children).forEach((child) => {
+              if (
+                child instanceof HTMLImageElement &&
+                child.getAttribute('data-hero-image') === 'english-plumber'
+              ) {
+                return;
+              }
+              child.remove();
+            });
 
-            if (heroRoot.classList.contains('hero-video-wrapper')) {
-              wrappers.push(heroRoot);
+            let image = wrapper.querySelector('img[data-hero-image="english-plumber"]');
+            if (!(image instanceof HTMLImageElement)) {
+              image = document.createElement('img');
+              image.setAttribute('data-hero-image', 'english-plumber');
+              image.setAttribute('alt', 'English Plumber hero image');
+              image.setAttribute('loading', 'eager');
+              image.setAttribute('decoding', 'async');
+              image.setAttribute('fetchpriority', 'high');
+              image.setAttribute('aria-hidden', 'true');
+              image.className = 'absolute inset-0 w-full h-full object-cover object-center';
+              image.style.pointerEvents = 'none';
+              image.style.zIndex = '0';
+              wrapper.append(image);
             }
 
-            heroRoot.querySelectorAll('.hero-video-wrapper').forEach((wrapper) => wrappers.push(wrapper));
-
-            wrappers.forEach((wrapper) => {
-              if (!(wrapper instanceof HTMLElement)) return;
-
-              wrapper.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
-              wrapper.style.backgroundSize = 'cover';
-              wrapper.style.backgroundPosition = 'center center';
-              wrapper.style.backgroundRepeat = 'no-repeat';
-              wrapper.style.zIndex = '0';
-              wrapper.style.overflow = 'hidden';
-
-              wrapper.querySelectorAll('video,iframe,canvas').forEach((media) => {
-                if (media instanceof HTMLVideoElement) {
-                  try {
-                    media.pause();
-                  } catch {}
-                }
-                media.setAttribute('aria-hidden', 'true');
-                media.style.display = 'none';
-                media.style.pointerEvents = 'none';
-              });
-
-              Array.from(wrapper.children).forEach((child) => {
-                if (
-                  child instanceof HTMLImageElement &&
-                  child.getAttribute('data-hero-image') === 'english-plumber'
-                ) {
-                  return;
-                }
-                child.remove();
-              });
-
-              let image = wrapper.querySelector('img[data-hero-image="english-plumber"]');
-              if (!(image instanceof HTMLImageElement)) {
-                image = document.createElement('img');
-                image.setAttribute('data-hero-image', 'english-plumber');
-                image.setAttribute('alt', 'English Plumber hero image');
-                image.setAttribute('loading', 'eager');
-                image.setAttribute('decoding', 'async');
-                image.setAttribute('fetchpriority', 'high');
-                image.setAttribute('aria-hidden', 'true');
-                image.className = 'absolute inset-0 w-full h-full object-cover object-center';
-                image.style.pointerEvents = 'none';
-                image.style.zIndex = '0';
-                wrapper.append(image);
-              }
-
-              if (image.getAttribute('src') !== HERO_IMAGE_PATH) {
-                image.setAttribute('src', HERO_IMAGE_PATH);
-              }
-            });
+            if (image.getAttribute('src') !== HERO_IMAGE_PATH) {
+              image.setAttribute('src', HERO_IMAGE_PATH);
+            }
           });
         };
 
@@ -1082,16 +846,12 @@ const initialSiteContent = siteContentQuery.data.site;
         };
 
         const run = () => {
-          refreshCopySettings();
           rewriteMediaUrlsInRoot(document);
           enforceHeroImage(document);
           hidePromoInRoot(document);
           rewriteCopyInRoot(document);
           unlockInteractionLocks();
-          applyTinaFieldMarkers(document);
         };
-
-        rerenderPage = run;
 
         document.addEventListener(
           'click',
@@ -1108,22 +868,6 @@ const initialSiteContent = siteContentQuery.data.site;
           },
           true,
         );
-
-        window.addEventListener('site-content:update', (event) => {
-          updateSiteContent(event.detail);
-        });
-
-        window.addEventListener('site-tina-fields:update', (event) => {
-          updateTinaFieldMap(event.detail);
-        });
-
-        if (window.__SITE_CONTENT__) {
-          updateSiteContent(window.__SITE_CONTENT__);
-        }
-
-        if (window.__SITE_TINA_FIELDS__) {
-          updateTinaFieldMap(window.__SITE_TINA_FIELDS__);
-        }
 
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', run, { once: true });
@@ -1161,8 +905,6 @@ const initialSiteContent = siteContentQuery.data.site;
                 rewriteMediaUrlsInRoot(addedNode);
                 enforceHeroImage(addedNode);
                 hidePromoInRoot(addedNode);
-                rewriteCopyInRoot(addedNode);
-                applyTinaFieldMarkers(document);
                 unlockInteractionLocks();
               }
             }
@@ -1177,11 +919,6 @@ const initialSiteContent = siteContentQuery.data.site;
     </script>
   </head>
   <body class={bodyClass} {...bodyAttrs}>
-    <EditableHeaderHero site={initialSiteContent} />
-    <EditableAutoPilotSection site={initialSiteContent} />
-    <EditableQuickFixSection site={initialSiteContent} />
-    <EditableNoJargonSection site={initialSiteContent} />
-    <EditableRemainingSite site={initialSiteContent} />
-    <SiteContentBridge {...siteContentQuery} client:tina />
+    <Fragment set:html={bodyInner} />
   </body>
 </html>

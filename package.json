@@ -1,12 +1,13 @@
 {
   "name": "bob",
   "version": "1.0.0",
-  "description": "Pixel-perfect Astro snapshot from Builder JSON",
+  "description": "Pixel-perfect mirrored site served by Next.js",
   "scripts": {
-    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"astro dev --port 4322\"",
-    "build": "TINA_PUBLIC_IS_LOCAL=true tinacms build --local --skip-cloud-checks -c \"astro build\"",
-    "preview": "astro preview",
+    "dev": "next dev -p 4322",
+    "build": "next build",
+    "start": "next start -p 4322",
     "sync:assets": "python scripts/sync_assets.py",
+    "sync:media": "python scripts/sync_media_assets.py",
     "clone:live": "bash scripts/clone_live_site.sh"
   },
   "keywords": [],
@@ -14,14 +15,8 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@astrojs/react": "^4.4.0",
-    "@tanstack/react-virtual": "^3.13.12",
+    "next": "^14.2.33",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tinacms": "^2.9.0"
-  },
-  "devDependencies": {
-    "@tinacms/cli": "^1.8.1",
-    "astro": "^5.17.2"
+    "react-dom": "^18.3.1"
   }
 }

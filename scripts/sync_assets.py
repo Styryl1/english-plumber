@@ -79,7 +79,7 @@ def relink_css_assets(css_text: str) -> tuple[str, int]:
 
 
 def normalize_css_for_static(css_text: str) -> str:
-    # Next.js runtime reveals the page after hydration; static Astro needs visible HTML immediately.
+    # Ensure mirrored HTML is visible immediately, even outside the original app runtime.
     css_text = HIDDEN_HTML_PATTERN.sub("html{opacity:1}", css_text)
     return css_text
 

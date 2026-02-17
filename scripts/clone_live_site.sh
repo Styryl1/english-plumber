@@ -36,6 +36,7 @@ echo "[clone:live] rewriting dynamic image/API endpoints to live origin..."
 perl -0pi -e 's@(?<!https://www\.gogeviti\.com)/_next/image\?@https://www.gogeviti.com/_next/image?@g; s@(?<!https://www\.gogeviti\.com)/api/globals/@https://www.gogeviti.com/api/globals/@g; s@(?<!https://www\.gogeviti\.com)/api/search/@https://www.gogeviti.com/api/search/@g;' "$SOURCE_HTML"
 
 echo "[clone:live] syncing static files into public/..."
+rm -rf "$PUBLIC_DIR/mirror_next"
 cd "$TMP_DIR"
 while IFS= read -r -d '' file; do
   relative_path="${file#./}"
@@ -56,10 +57,19 @@ while IFS= read -r -d '' file; do
     continue
   fi
 
+  # Keep mirrored upstream Next bundles separate from this app's own /_next.
+  if [[ "$safe_relative_path" == _next/static/* ]]; then
+    safe_relative_path="mirror_next/static/${safe_relative_path#_next/static/}"
+  fi
+
   destination="$PUBLIC_DIR/$safe_relative_path"
   mkdir -p "$(dirname "$destination")"
   cp "$file" "$destination"
 done < <(find . -type f -print0)
+
+echo "[clone:live] syncing local media mirror..."
+cd "$ROOT_DIR"
+python3 "$ROOT_DIR/scripts/sync_media_assets.py"
 
 echo "[clone:live] done."
 echo "[clone:live] editable source: $SOURCE_HTML"

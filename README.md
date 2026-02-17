@@ -1,48 +1,52 @@
-# Astro Pixel Snapshot
+# Next.js Mirror Snapshot
 
-This project is an Astro site built from `layout.builder (1).json`, with localized CSS/font assets for deployable ownership.
-It now includes TinaCMS visual editing for business copy fields.
+This project serves a pixel-clone snapshot of `gogeviti.com` through Next.js, while keeping mirrored assets local and editable.
+
+The homepage HTML source is `src/mirror/live-index.html`. At runtime, Next reads that file, injects local overrides, and serves it directly (no React hydration for the mirrored page), which keeps scripts/animations stable.
 
 ## Commands
 
-- `npm run dev` - start local dev server
-- `npm run build` - build static output in `dist/`
-- `npm run preview` - preview built output
+- `npm run dev` - start Next dev server on port `4322`
+- `npm run build` - production build
+- `npm run start` - run production server on port `4322`
 - `npm run sync:assets` - re-download live Geviti CSS/font assets into `public/assets`
+- `npm run sync:media` - download mirror image/video assets used by the page into `public/mirror_media`
+- `npm run clone:live` - re-clone live homepage and static bundles into local mirror paths
 
 ## Files
 
-- `src/pages/index.astro` - main page (loads and renders `index.from-json.html` body)
-- `tina/config.ts` - TinaCMS schema and build settings
-- `tina/pages/SiteContentBridge.jsx` - visual editing bridge (`client:tina`) for inline updates
-- `content/site/home.json` - editable business content source
-- `public/admin/` - generated Tina admin app
-- `src/generated/asset-manifest.json` - local stylesheet list used by `index.astro`
+- `pages/index.js` - Next route that serves rendered mirror HTML
+- `src/mirror/render-mirror-html.js` - HTML renderer/parser/injector
+- `src/mirror/live-index.html` - editable mirrored homepage source
+- `src/mirror/injections/*` - guard/runtime/style injections (promo removal, copy rewrite, hero swap, lock fixes)
+- `content/site/mirror-content.json` - single editable content source for site text/brand/copy replacements
+- `public/mirror_next/static/*` - mirrored upstream Next bundles (kept separate from real Next `/_next`)
+- `public/mirror_media/*` - locally owned mirrored media assets (images/video) referenced by runtime rewrites
 - `public/assets/styles/*` - localized CSS files
 - `public/assets/fonts/*` - localized fonts referenced by CSS
 - `scripts/sync_assets.py` - asset localization script
-- `build_site.py` - JSON-to-HTML snapshot generator (`index.from-json.html`)
+- `scripts/sync_media_assets.py` - media downloader + manifest generator (`src/generated/media-manifest.json`)
+- `scripts/clone_live_site.sh` - live clone + local asset sync script
 
-## Regenerate flow
+## Refresh flow
 
-1. Regenerate snapshot HTML from JSON:
-   - `python build_site.py`
-2. Refresh owned CSS/font assets:
+1. Re-clone current live HTML and static bundles:
+   - `npm run clone:live`
+2. Refresh owned CSS/font assets (optional but recommended):
    - `npm run sync:assets`
-3. Build:
+3. Refresh owned media files used by the mirrored page:
+   - `npm run sync:media`
+4. Build:
    - `npm run build`
 
-Images/video links are currently external by design so they can be swapped later.
+Images/video links are intentionally left remote where dynamic processing is required, so the site remains visually accurate and easy to swap later.
 
-## Tina Editing
+## Editing copy
 
-1. Start dev:
-   - `npm run dev`
-2. Open admin:
-   - `http://localhost:4322/admin/index.html`
-3. Use visual editing:
-   - open the visual editor from Tina, then click highlighted copy on the page.
+Edit `content/site/mirror-content.json`:
 
-Notes:
-- Local mode is enabled with `TINA_PUBLIC_IS_LOCAL=true` in scripts.
-- Build uses `tinacms build --local --skip-cloud-checks -c "astro build"` so static generation works without TinaCloud credentials.
+- `site.businessName`, `site.baseCity`, `site.whatsappNumber`, etc. for brand/contact values.
+- `site.exactTextReplacements` for direct text swaps (`[from, to]` pairs).
+- `site.regexTextReplacements` for pattern-based replacements.
+
+The mirror runtime reads this file on every render, so copy updates do not require code changes.

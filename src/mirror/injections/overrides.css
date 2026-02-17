@@ -1,0 +1,52 @@
+      button.fixed.bottom-5.left-5.z-40.hover\:scale-110.transition-transform {
+        display: none !important;
+      }
+
+      [role='dialog']:has(img[alt*='percent off' i]),
+      [role='dialog']:has(img[src*='25percentoff']),
+      [role='dialog']:has(input#name):has(input#email):has(button[type='submit']) {
+        display: none !important;
+      }
+
+      [data-hide-promo='flash-sale'] {
+        display: none !important;
+      }
+
+      [data-hide-promo='overlay'] {
+        display: none !important;
+      }
+
+      .hero-video-wrapper {
+        background-image: url('/IMG_8233.PNG') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+      }
+
+      .hero-video-wrapper video,
+      .hero-video-wrapper iframe,
+      .hero-video-wrapper canvas {
+        display: none !important;
+        pointer-events: none !important;
+      }
+
+      .safe-h-screen[data-theme='dark'] {
+        background-image: url('/IMG_8233.PNG') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+      }
+
+      [data-hide-hero-overlay='true'] {
+        display: none !important;
+      }
+
+      html,
+      body {
+        pointer-events: auto !important;
+      }
+
+      html[data-scroll-locked],
+      body[data-scroll-locked] {
+        overflow: auto !important;
+      }
