@@ -6,6 +6,7 @@ import SiteContentBridge from '../../tina/pages/SiteContentBridge.jsx';
 import EditableHeaderHero from '../components/EditableHeaderHero.astro';
 import EditableAutoPilotSection from '../components/EditableAutoPilotSection.astro';
 import EditableQuickFixSection from '../components/EditableQuickFixSection.astro';
+import EditableNoJargonSection from '../components/EditableNoJargonSection.astro';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -99,6 +100,15 @@ function stripMirroredHeaderAndHero(input: string): string {
     const secondSplitStart = output.indexOf(splitSectionMarker, firstSplitStart + splitSectionMarker.length);
     if (secondSplitStart !== -1) {
       output = `${output.slice(0, firstSplitStart)}${output.slice(secondSplitStart)}`;
+    }
+  }
+
+  const testimonialsSectionMarker = '<div class="mb-[78px] lg:mb-[263px] mt-[87px] lg:mt-[188px]">';
+  const remainingSplitStart = output.indexOf(splitSectionMarker);
+  if (remainingSplitStart !== -1) {
+    const testimonialsStart = output.indexOf(testimonialsSectionMarker, remainingSplitStart);
+    if (testimonialsStart !== -1) {
+      output = `${output.slice(0, remainingSplitStart)}${output.slice(testimonialsStart)}`;
     }
   }
 
@@ -1162,6 +1172,7 @@ const initialSiteContent = siteContentQuery.data.site;
     <EditableHeaderHero site={initialSiteContent} />
     <EditableAutoPilotSection site={initialSiteContent} />
     <EditableQuickFixSection site={initialSiteContent} />
+    <EditableNoJargonSection site={initialSiteContent} />
     <Fragment set:html={bodyInnerWithoutHeaderHero} />
     <SiteContentBridge {...siteContentQuery} client:tina />
   </body>

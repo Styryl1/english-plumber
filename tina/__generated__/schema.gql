@@ -105,6 +105,14 @@ type SiteQuickFixCards {
   linkLabel: String!
 }
 
+type SiteNoJargonCards {
+  title: String!
+  accent: String!
+  href: String!
+  imagePath: String!
+  linkLabel: String!
+}
+
 type Site implements Node & Document {
   businessName: String!
   baseCity: String!
@@ -136,6 +144,12 @@ type Site implements Node & Document {
   quickFixStatTwoLabelTop: String!
   quickFixStatTwoLabelBottom: String!
   quickFixCards: [SiteQuickFixCards]
+  noJargonHeading: String!
+  noJargonHeadingAccent: String!
+  noJargonBody: String!
+  noJargonBadgeLabel: String!
+  noJargonBadgeValue: String!
+  noJargonCards: [SiteNoJargonCards]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -159,6 +173,14 @@ input SiteAutoPilotChipsFilter {
 }
 
 input SiteQuickFixCardsFilter {
+  title: StringFilter
+  accent: StringFilter
+  href: StringFilter
+  imagePath: StringFilter
+  linkLabel: StringFilter
+}
+
+input SiteNoJargonCardsFilter {
   title: StringFilter
   accent: StringFilter
   href: StringFilter
@@ -197,6 +219,12 @@ input SiteFilter {
   quickFixStatTwoLabelTop: StringFilter
   quickFixStatTwoLabelBottom: StringFilter
   quickFixCards: SiteQuickFixCardsFilter
+  noJargonHeading: StringFilter
+  noJargonHeadingAccent: StringFilter
+  noJargonBody: StringFilter
+  noJargonBadgeLabel: StringFilter
+  noJargonBadgeValue: StringFilter
+  noJargonCards: SiteNoJargonCardsFilter
 }
 
 type SiteConnectionEdges {
@@ -247,6 +275,14 @@ input SiteQuickFixCardsMutation {
   linkLabel: String
 }
 
+input SiteNoJargonCardsMutation {
+  title: String
+  accent: String
+  href: String
+  imagePath: String
+  linkLabel: String
+}
+
 input SiteMutation {
   businessName: String
   baseCity: String
@@ -278,6 +314,12 @@ input SiteMutation {
   quickFixStatTwoLabelTop: String
   quickFixStatTwoLabelBottom: String
   quickFixCards: [SiteQuickFixCardsMutation]
+  noJargonHeading: String
+  noJargonHeadingAccent: String
+  noJargonBody: String
+  noJargonBadgeLabel: String
+  noJargonBadgeValue: String
+  noJargonCards: [SiteNoJargonCardsMutation]
 }
 
 schema {

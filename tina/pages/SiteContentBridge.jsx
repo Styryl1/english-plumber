@@ -42,6 +42,12 @@ const SiteContentBridge = (props) => {
       quickFixStatTwoLabelTop: tinaField(site, 'quickFixStatTwoLabelTop'),
       quickFixStatTwoLabelBottom: tinaField(site, 'quickFixStatTwoLabelBottom'),
       quickFixCards: tinaField(site, 'quickFixCards'),
+      noJargonHeading: tinaField(site, 'noJargonHeading'),
+      noJargonHeadingAccent: tinaField(site, 'noJargonHeadingAccent'),
+      noJargonBody: tinaField(site, 'noJargonBody'),
+      noJargonBadgeLabel: tinaField(site, 'noJargonBadgeLabel'),
+      noJargonBadgeValue: tinaField(site, 'noJargonBadgeValue'),
+      noJargonCards: tinaField(site, 'noJargonCards'),
     };
 
     window.__SITE_CONTENT__ = site;

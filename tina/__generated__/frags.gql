@@ -45,4 +45,17 @@ fragment SiteParts on Site {
     imagePath
     linkLabel
   }
+  noJargonHeading
+  noJargonHeadingAccent
+  noJargonBody
+  noJargonBadgeLabel
+  noJargonBadgeValue
+  noJargonCards {
+    __typename
+    title
+    accent
+    href
+    imagePath
+    linkLabel
+  }
 }

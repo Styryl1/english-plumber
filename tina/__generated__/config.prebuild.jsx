@@ -277,6 +277,77 @@ var config_default = defineConfig({
                 required: true
               }
             ]
+          },
+          {
+            type: "string",
+            name: "noJargonHeading",
+            label: "No Jargon Heading",
+            required: true
+          },
+          {
+            type: "string",
+            name: "noJargonHeadingAccent",
+            label: "No Jargon Heading Accent",
+            required: true
+          },
+          {
+            type: "string",
+            name: "noJargonBody",
+            label: "No Jargon Body",
+            required: true,
+            ui: {
+              component: "textarea"
+            }
+          },
+          {
+            type: "string",
+            name: "noJargonBadgeLabel",
+            label: "No Jargon Badge Label",
+            required: true
+          },
+          {
+            type: "string",
+            name: "noJargonBadgeValue",
+            label: "No Jargon Badge Value",
+            required: true
+          },
+          {
+            type: "object",
+            name: "noJargonCards",
+            label: "No Jargon Cards",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Title",
+                required: true
+              },
+              {
+                type: "string",
+                name: "accent",
+                label: "Accent",
+                required: true
+              },
+              {
+                type: "string",
+                name: "href",
+                label: "URL",
+                required: true
+              },
+              {
+                type: "string",
+                name: "imagePath",
+                label: "Image Path",
+                required: true
+              },
+              {
+                type: "string",
+                name: "linkLabel",
+                label: "Link Label",
+                required: true
+              }
+            ]
           }
         ]
       }

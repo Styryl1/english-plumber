@@ -113,5 +113,26 @@
       "imagePath": "/api/media/file/Supps%20for%20home%20page.webp",
       "linkLabel": "View Service"
     }
+  ],
+  "noJargonHeading": "No confusing jargon,",
+  "noJargonHeadingAccent": "just honest plumbing help.",
+  "noJargonBody": "English Plumber is a friendly local service in Medemblik. We support expats and Dutch homeowners with clear advice, quality repairs, and reliable follow-up.",
+  "noJargonBadgeLabel": "English + Dutch",
+  "noJargonBadgeValue": "spoken",
+  "noJargonCards": [
+    {
+      "title": "Free",
+      "accent": "Quotes",
+      "href": "#pricing",
+      "imagePath": "/api/media/file/Longevity%20Rx%20for%20home%20page.webp",
+      "linkLabel": "View Service"
+    },
+    {
+      "title": "CO-vakmanschap",
+      "accent": "+ VCA",
+      "href": "#about",
+      "imagePath": "/api/media/file/Care%20team%20for%20home%20page.webp",
+      "linkLabel": "View Service"
+    }
   ]
 }
