@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { tinaField, useTina } from 'tinacms/dist/react';
 
 const OMIT_KEYS = new Set(['__typename', '_sys', 'id']);
+const MANAGED_ATTR = 'data-managed-tina-field';
+const MANAGED_VALUE = 'site-copy';
 
 const isRecord = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 
@@ -49,6 +51,36 @@ const buildFieldMap = (node, prefix = '') => {
   }, {});
 };
 
+const isInIframe = () => {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return false;
+  }
+};
+
+const clearManagedFields = () => {
+  document.querySelectorAll(`[${MANAGED_ATTR}="${MANAGED_VALUE}"]`).forEach((element) => {
+    element.removeAttribute('data-tina-field');
+    element.removeAttribute(MANAGED_ATTR);
+  });
+};
+
+const applyInlineFieldBindings = (fieldMap) => {
+  if (!isInIframe()) return;
+
+  clearManagedFields();
+
+  document.querySelectorAll('[data-site-field]').forEach((element) => {
+    const fieldName = element.getAttribute('data-site-field');
+    if (!fieldName) return;
+    const fieldId = fieldMap[fieldName];
+    if (!fieldId) return;
+    element.setAttribute('data-tina-field', fieldId);
+    element.setAttribute(MANAGED_ATTR, MANAGED_VALUE);
+  });
+};
+
 const SiteContentBridge = (props) => {
   const { data } = useTina({
     query: props.query,
@@ -63,18 +95,7 @@ const SiteContentBridge = (props) => {
 
     window.__SITE_CONTENT__ = site;
     window.__SITE_TINA_FIELDS__ = fieldMap;
-
-    window.dispatchEvent(
-      new CustomEvent('site-content:update', {
-        detail: site,
-      }),
-    );
-
-    window.dispatchEvent(
-      new CustomEvent('site-tina-fields:update', {
-        detail: fieldMap,
-      }),
-    );
+    applyInlineFieldBindings(fieldMap);
   }, [site]);
 
   return null;

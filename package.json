@@ -6,8 +6,7 @@
     "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"astro dev --port 4322\"",
     "build": "TINA_PUBLIC_IS_LOCAL=true tinacms build --local --skip-cloud-checks -c \"astro build\"",
     "preview": "astro preview",
-    "sync:assets": "python scripts/sync_assets.py",
-    "clone:live": "bash scripts/clone_live_site.sh"
+    "sync:assets": "python scripts/sync_assets.py"
   },
   "keywords": [],
   "author": "",

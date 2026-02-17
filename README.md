@@ -1,7 +1,6 @@
-# Astro Pixel Snapshot
+# Astro Tina Site
 
-This project is an Astro site built from `layout.builder (1).json`, with localized CSS/font assets for deployable ownership.
-It now includes TinaCMS visual editing for business copy fields.
+This project is now a native Astro site (no live-site mirror dependency), with localized CSS/font assets and TinaCMS visual editing.
 
 ## Commands
 
@@ -12,7 +11,7 @@ It now includes TinaCMS visual editing for business copy fields.
 
 ## Files
 
-- `src/pages/index.astro` - main page (loads and renders `index.from-json.html` body)
+- `src/pages/index.astro` - main page shell (native Astro layout + component composition)
 - `tina/config.ts` - TinaCMS schema and build settings
 - `tina/pages/SiteContentBridge.jsx` - visual editing bridge (`client:tina`) for inline updates
 - `content/site/home.json` - editable business content source
@@ -21,15 +20,12 @@ It now includes TinaCMS visual editing for business copy fields.
 - `public/assets/styles/*` - localized CSS files
 - `public/assets/fonts/*` - localized fonts referenced by CSS
 - `scripts/sync_assets.py` - asset localization script
-- `build_site.py` - JSON-to-HTML snapshot generator (`index.from-json.html`)
 
-## Regenerate flow
+## Asset Refresh Flow
 
-1. Regenerate snapshot HTML from JSON:
-   - `python build_site.py`
-2. Refresh owned CSS/font assets:
+1. Refresh owned CSS/font assets:
    - `npm run sync:assets`
-3. Build:
+2. Build:
    - `npm run build`
 
 Images/video links are currently external by design so they can be swapped later.
