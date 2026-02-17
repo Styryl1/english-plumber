@@ -177,6 +177,15 @@ export type SiteAutoPilotChips = {
   iconPath: Scalars['String']['output'];
 };
 
+export type SiteQuickFixCards = {
+  __typename?: 'SiteQuickFixCards';
+  title: Scalars['String']['output'];
+  accent: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+  imagePath: Scalars['String']['output'];
+  linkLabel: Scalars['String']['output'];
+};
+
 export type Site = Node & Document & {
   __typename?: 'Site';
   businessName: Scalars['String']['output'];
@@ -199,6 +208,16 @@ export type Site = Node & Document & {
   autoPilotCtaLabel: Scalars['String']['output'];
   autoPilotCtaUrl: Scalars['String']['output'];
   autoPilotChips?: Maybe<Array<Maybe<SiteAutoPilotChips>>>;
+  quickFixHeading: Scalars['String']['output'];
+  quickFixHeadingAccent: Scalars['String']['output'];
+  quickFixBody: Scalars['String']['output'];
+  quickFixStatOneValue: Scalars['String']['output'];
+  quickFixStatOneLabelTop: Scalars['String']['output'];
+  quickFixStatOneLabelBottom: Scalars['String']['output'];
+  quickFixStatTwoValue: Scalars['String']['output'];
+  quickFixStatTwoLabelTop: Scalars['String']['output'];
+  quickFixStatTwoLabelBottom: Scalars['String']['output'];
+  quickFixCards?: Maybe<Array<Maybe<SiteQuickFixCards>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -219,6 +238,14 @@ export type SiteHeaderMenuFilter = {
 export type SiteAutoPilotChipsFilter = {
   label?: InputMaybe<StringFilter>;
   iconPath?: InputMaybe<StringFilter>;
+};
+
+export type SiteQuickFixCardsFilter = {
+  title?: InputMaybe<StringFilter>;
+  accent?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+  imagePath?: InputMaybe<StringFilter>;
+  linkLabel?: InputMaybe<StringFilter>;
 };
 
 export type SiteFilter = {
@@ -242,6 +269,16 @@ export type SiteFilter = {
   autoPilotCtaLabel?: InputMaybe<StringFilter>;
   autoPilotCtaUrl?: InputMaybe<StringFilter>;
   autoPilotChips?: InputMaybe<SiteAutoPilotChipsFilter>;
+  quickFixHeading?: InputMaybe<StringFilter>;
+  quickFixHeadingAccent?: InputMaybe<StringFilter>;
+  quickFixBody?: InputMaybe<StringFilter>;
+  quickFixStatOneValue?: InputMaybe<StringFilter>;
+  quickFixStatOneLabelTop?: InputMaybe<StringFilter>;
+  quickFixStatOneLabelBottom?: InputMaybe<StringFilter>;
+  quickFixStatTwoValue?: InputMaybe<StringFilter>;
+  quickFixStatTwoLabelTop?: InputMaybe<StringFilter>;
+  quickFixStatTwoLabelBottom?: InputMaybe<StringFilter>;
+  quickFixCards?: InputMaybe<SiteQuickFixCardsFilter>;
 };
 
 export type SiteConnectionEdges = {
@@ -332,6 +369,14 @@ export type SiteAutoPilotChipsMutation = {
   iconPath?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SiteQuickFixCardsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  accent?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  imagePath?: InputMaybe<Scalars['String']['input']>;
+  linkLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SiteMutation = {
   businessName?: InputMaybe<Scalars['String']['input']>;
   baseCity?: InputMaybe<Scalars['String']['input']>;
@@ -353,16 +398,26 @@ export type SiteMutation = {
   autoPilotCtaLabel?: InputMaybe<Scalars['String']['input']>;
   autoPilotCtaUrl?: InputMaybe<Scalars['String']['input']>;
   autoPilotChips?: InputMaybe<Array<InputMaybe<SiteAutoPilotChipsMutation>>>;
+  quickFixHeading?: InputMaybe<Scalars['String']['input']>;
+  quickFixHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  quickFixBody?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatOneValue?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatOneLabelTop?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatOneLabelBottom?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatTwoValue?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatTwoLabelTop?: InputMaybe<Scalars['String']['input']>;
+  quickFixStatTwoLabelBottom?: InputMaybe<Scalars['String']['input']>;
+  quickFixCards?: InputMaybe<Array<InputMaybe<SiteQuickFixCardsMutation>>>;
 };
 
-export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null };
+export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null };
 
 export type SiteQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null } };
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null } };
 
 export type SiteConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -374,7 +429,7 @@ export type SiteConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null } | null } | null> | null } };
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null } | null } | null> | null } };
 
 export const SitePartsFragmentDoc = gql`
     fragment SiteParts on Site {
@@ -406,6 +461,23 @@ export const SitePartsFragmentDoc = gql`
     __typename
     label
     iconPath
+  }
+  quickFixHeading
+  quickFixHeadingAccent
+  quickFixBody
+  quickFixStatOneValue
+  quickFixStatOneLabelTop
+  quickFixStatOneLabelBottom
+  quickFixStatTwoValue
+  quickFixStatTwoLabelTop
+  quickFixStatTwoLabelBottom
+  quickFixCards {
+    __typename
+    title
+    accent
+    href
+    imagePath
+    linkLabel
   }
 }
     `;

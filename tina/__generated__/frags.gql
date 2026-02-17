@@ -28,4 +28,21 @@ fragment SiteParts on Site {
     label
     iconPath
   }
+  quickFixHeading
+  quickFixHeadingAccent
+  quickFixBody
+  quickFixStatOneValue
+  quickFixStatOneLabelTop
+  quickFixStatOneLabelBottom
+  quickFixStatTwoValue
+  quickFixStatTwoLabelTop
+  quickFixStatTwoLabelBottom
+  quickFixCards {
+    __typename
+    title
+    accent
+    href
+    imagePath
+    linkLabel
+  }
 }

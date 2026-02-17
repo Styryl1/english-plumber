@@ -88,5 +88,30 @@
       "label": "Boiler Brands: Vaillant, Intergas, Remeha, ATAG",
       "iconPath": "/api/media/file/Blood%20Cell%20Analysis.png"
     }
+  ],
+  "quickFixHeading": "Not Just Quick Fixes,",
+  "quickFixHeadingAccent": "Complete Home Plumbing Support",
+  "quickFixBody": "Most companies patch the issue. We diagnose the cause and fix it properly with clear communication, fair pricing, and practical solutions.",
+  "quickFixStatOneValue": "95 EUR",
+  "quickFixStatOneLabelTop": "per hour",
+  "quickFixStatOneLabelBottom": "labour",
+  "quickFixStatTwoValue": "145 EUR",
+  "quickFixStatTwoLabelTop": "boiler",
+  "quickFixStatTwoLabelBottom": "servicing",
+  "quickFixCards": [
+    {
+      "title": "Home",
+      "accent": "Plumbing Visits",
+      "href": "#services",
+      "imagePath": "/api/media/file/Testing%20for%20home%20page.webp",
+      "linkLabel": "View Service"
+    },
+    {
+      "title": "Transparent",
+      "accent": "Repairs",
+      "href": "#pricing",
+      "imagePath": "/api/media/file/Supps%20for%20home%20page.webp",
+      "linkLabel": "View Service"
+    }
   ]
 }

@@ -32,6 +32,16 @@ const SiteContentBridge = (props) => {
       autoPilotCtaLabel: tinaField(site, 'autoPilotCtaLabel'),
       autoPilotCtaUrl: tinaField(site, 'autoPilotCtaUrl'),
       autoPilotChips: tinaField(site, 'autoPilotChips'),
+      quickFixHeading: tinaField(site, 'quickFixHeading'),
+      quickFixHeadingAccent: tinaField(site, 'quickFixHeadingAccent'),
+      quickFixBody: tinaField(site, 'quickFixBody'),
+      quickFixStatOneValue: tinaField(site, 'quickFixStatOneValue'),
+      quickFixStatOneLabelTop: tinaField(site, 'quickFixStatOneLabelTop'),
+      quickFixStatOneLabelBottom: tinaField(site, 'quickFixStatOneLabelBottom'),
+      quickFixStatTwoValue: tinaField(site, 'quickFixStatTwoValue'),
+      quickFixStatTwoLabelTop: tinaField(site, 'quickFixStatTwoLabelTop'),
+      quickFixStatTwoLabelBottom: tinaField(site, 'quickFixStatTwoLabelBottom'),
+      quickFixCards: tinaField(site, 'quickFixCards'),
     };
 
     window.__SITE_CONTENT__ = site;

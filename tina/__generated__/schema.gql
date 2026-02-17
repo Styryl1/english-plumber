@@ -97,6 +97,14 @@ type SiteAutoPilotChips {
   iconPath: String!
 }
 
+type SiteQuickFixCards {
+  title: String!
+  accent: String!
+  href: String!
+  imagePath: String!
+  linkLabel: String!
+}
+
 type Site implements Node & Document {
   businessName: String!
   baseCity: String!
@@ -118,6 +126,16 @@ type Site implements Node & Document {
   autoPilotCtaLabel: String!
   autoPilotCtaUrl: String!
   autoPilotChips: [SiteAutoPilotChips]
+  quickFixHeading: String!
+  quickFixHeadingAccent: String!
+  quickFixBody: String!
+  quickFixStatOneValue: String!
+  quickFixStatOneLabelTop: String!
+  quickFixStatOneLabelBottom: String!
+  quickFixStatTwoValue: String!
+  quickFixStatTwoLabelTop: String!
+  quickFixStatTwoLabelBottom: String!
+  quickFixCards: [SiteQuickFixCards]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -138,6 +156,14 @@ input SiteHeaderMenuFilter {
 input SiteAutoPilotChipsFilter {
   label: StringFilter
   iconPath: StringFilter
+}
+
+input SiteQuickFixCardsFilter {
+  title: StringFilter
+  accent: StringFilter
+  href: StringFilter
+  imagePath: StringFilter
+  linkLabel: StringFilter
 }
 
 input SiteFilter {
@@ -161,6 +187,16 @@ input SiteFilter {
   autoPilotCtaLabel: StringFilter
   autoPilotCtaUrl: StringFilter
   autoPilotChips: SiteAutoPilotChipsFilter
+  quickFixHeading: StringFilter
+  quickFixHeadingAccent: StringFilter
+  quickFixBody: StringFilter
+  quickFixStatOneValue: StringFilter
+  quickFixStatOneLabelTop: StringFilter
+  quickFixStatOneLabelBottom: StringFilter
+  quickFixStatTwoValue: StringFilter
+  quickFixStatTwoLabelTop: StringFilter
+  quickFixStatTwoLabelBottom: StringFilter
+  quickFixCards: SiteQuickFixCardsFilter
 }
 
 type SiteConnectionEdges {
@@ -203,6 +239,14 @@ input SiteAutoPilotChipsMutation {
   iconPath: String
 }
 
+input SiteQuickFixCardsMutation {
+  title: String
+  accent: String
+  href: String
+  imagePath: String
+  linkLabel: String
+}
+
 input SiteMutation {
   businessName: String
   baseCity: String
@@ -224,6 +268,16 @@ input SiteMutation {
   autoPilotCtaLabel: String
   autoPilotCtaUrl: String
   autoPilotChips: [SiteAutoPilotChipsMutation]
+  quickFixHeading: String
+  quickFixHeadingAccent: String
+  quickFixBody: String
+  quickFixStatOneValue: String
+  quickFixStatOneLabelTop: String
+  quickFixStatOneLabelBottom: String
+  quickFixStatTwoValue: String
+  quickFixStatTwoLabelTop: String
+  quickFixStatTwoLabelBottom: String
+  quickFixCards: [SiteQuickFixCardsMutation]
 }
 
 schema {
