@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Disallow: /admin/*
+
+# Host
+Host: https://gogeviti.com
+
+# Sitemaps
+Sitemap: https://gogeviti.com/sitemap.xml
+Sitemap: https://gogeviti.com/pages-sitemap.xml
+Sitemap: https://gogeviti.com/posts-sitemap.xml

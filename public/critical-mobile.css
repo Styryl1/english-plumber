@@ -1,0 +1,53 @@
+/* Critical mobile-first styles - inline for immediate rendering */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    loading: lazy;
+  }
+  /* Reduce motion for mobile performance */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Optimize text animations for mobile performance */
+  * {
+    /* Disable complex transforms that are expensive on mobile */
+    will-change: auto;
+  }
+
+  /* Simplify framer-motion animations on mobile */
+  [data-framer-motion] {
+    /* Reduce paint operations */
+    backface-visibility: hidden;
+    perspective: 1000px;
+    /* Optimize for mobile rendering */
+    transform: translateZ(0);
+  }
+
+  /* Limit blur effects which are expensive on mobile */
+  [style*="blur"] {
+    filter: none !important;
+  }
+  /* Optimize mobile scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+}
