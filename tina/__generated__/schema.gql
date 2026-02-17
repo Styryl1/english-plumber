@@ -87,6 +87,11 @@ type Collection {
 
 union DocumentNode = Site | Folder
 
+type SiteHeaderMenu {
+  label: String!
+  href: String!
+}
+
 type Site implements Node & Document {
   businessName: String!
   baseCity: String!
@@ -94,7 +99,15 @@ type Site implements Node & Document {
   primaryArea: String!
   heroImagePath: String!
   heroHeading: String!
+  heroHeadingAccent: String!
   heroSubheading: String!
+  headerMenu: [SiteHeaderMenu]
+  headerWhatsappLabel: String!
+  headerWhatsappUrl: String!
+  headerPrimaryCtaLabel: String!
+  headerPrimaryCtaUrl: String!
+  heroPrimaryCtaLabel: String!
+  heroPrimaryCtaUrl: String!
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -107,6 +120,11 @@ input StringFilter {
   in: [String]
 }
 
+input SiteHeaderMenuFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input SiteFilter {
   businessName: StringFilter
   baseCity: StringFilter
@@ -114,7 +132,15 @@ input SiteFilter {
   primaryArea: StringFilter
   heroImagePath: StringFilter
   heroHeading: StringFilter
+  heroHeadingAccent: StringFilter
   heroSubheading: StringFilter
+  headerMenu: SiteHeaderMenuFilter
+  headerWhatsappLabel: StringFilter
+  headerWhatsappUrl: StringFilter
+  headerPrimaryCtaLabel: StringFilter
+  headerPrimaryCtaUrl: StringFilter
+  heroPrimaryCtaLabel: StringFilter
+  heroPrimaryCtaUrl: StringFilter
 }
 
 type SiteConnectionEdges {
@@ -147,6 +173,11 @@ input DocumentMutation {
   site: SiteMutation
 }
 
+input SiteHeaderMenuMutation {
+  label: String
+  href: String
+}
+
 input SiteMutation {
   businessName: String
   baseCity: String
@@ -154,7 +185,15 @@ input SiteMutation {
   primaryArea: String
   heroImagePath: String
   heroHeading: String
+  heroHeadingAccent: String
   heroSubheading: String
+  headerMenu: [SiteHeaderMenuMutation]
+  headerWhatsappLabel: String
+  headerWhatsappUrl: String
+  headerPrimaryCtaLabel: String
+  headerPrimaryCtaUrl: String
+  heroPrimaryCtaLabel: String
+  heroPrimaryCtaUrl: String
 }
 
 schema {

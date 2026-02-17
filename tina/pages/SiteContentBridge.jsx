@@ -17,8 +17,16 @@ const SiteContentBridge = (props) => {
       whatsappNumber: tinaField(site, 'whatsappNumber'),
       primaryArea: tinaField(site, 'primaryArea'),
       heroHeading: tinaField(site, 'heroHeading'),
+      heroHeadingAccent: tinaField(site, 'heroHeadingAccent'),
       heroSubheading: tinaField(site, 'heroSubheading'),
       heroImagePath: tinaField(site, 'heroImagePath'),
+      headerMenu: tinaField(site, 'headerMenu'),
+      headerWhatsappLabel: tinaField(site, 'headerWhatsappLabel'),
+      headerWhatsappUrl: tinaField(site, 'headerWhatsappUrl'),
+      headerPrimaryCtaLabel: tinaField(site, 'headerPrimaryCtaLabel'),
+      headerPrimaryCtaUrl: tinaField(site, 'headerPrimaryCtaUrl'),
+      heroPrimaryCtaLabel: tinaField(site, 'heroPrimaryCtaLabel'),
+      heroPrimaryCtaUrl: tinaField(site, 'heroPrimaryCtaUrl'),
     };
 
     window.__SITE_CONTENT__ = site;

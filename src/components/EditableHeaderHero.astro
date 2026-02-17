@@ -1,0 +1,293 @@
+---
+const { site } = Astro.props;
+
+const headerMenu = Array.isArray(site?.headerMenu) ? site.headerMenu : [];
+const heroImagePath = site?.heroImagePath || '/IMG_8233.PNG';
+const headerWhatsappLabel = site?.headerWhatsappLabel || 'WhatsApp';
+const headerWhatsappUrl = site?.headerWhatsappUrl || 'https://wa.me/31642869931';
+const headerPrimaryCtaLabel = site?.headerPrimaryCtaLabel || 'Free Quote';
+const headerPrimaryCtaUrl = site?.headerPrimaryCtaUrl || 'https://wa.me/31642869931';
+const heroPrimaryCtaLabel = site?.heroPrimaryCtaLabel || `WhatsApp ${site?.whatsappNumber || ''}`;
+const heroPrimaryCtaUrl = site?.heroPrimaryCtaUrl || 'https://wa.me/31642869931';
+const heroHeading = site?.heroHeading || 'Friendly Local';
+const heroHeadingAccent = site?.heroHeadingAccent || 'Plumber in Medemblik.';
+const heroSubheading =
+  site?.heroSubheading ||
+  `${site?.businessName || 'English Plumber'} helps expats and Dutch homeowners with reliable plumbing and heating.`;
+---
+
+<header class="w-full top-0 left-0 right-0 z-30 fixed pt-5 lg:pt-[36px]" style="transform:none" data-native-header="true">
+  <div class="w-full xl:container max-xl:px-4">
+    <div class="relative rounded-full transition-all duration-300 ease-in-out bg-white/10 backdrop-blur-[25px] border border-white/15">
+      <div
+        class="absolute inset-0 z-[1] rounded-full pointer-events-none hidden"
+        style="padding:1.44px;background:linear-gradient(0deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+      ></div>
+      <div
+        class="absolute inset-[1.44px] z-[2] rounded-full pointer-events-none hidden"
+        style="padding:1.44px;background:linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+      ></div>
+      <div class="py-4 lg:pr-4 px-6 lg:pl-[42px] lg:gap-5 xl:gap-16 flex items-center justify-between w-full">
+        <a href="/" aria-label={site?.businessName || 'English Plumber'}>
+          <img
+            alt={site?.businessName || 'English Plumber'}
+            width="85"
+            height="22"
+            decoding="async"
+            data-nimg="1"
+            class="max-w-[85px] w-full shrink-0 h-[22px] transition-all duration-300 ease-in-out"
+            style="color:transparent"
+            src="/logo-blue.svg"
+          />
+        </a>
+
+        <nav class="flex gap-6 items-center flex-1 justify-end lg:justify-between">
+          <ul class="flex items-center space-x-0 hidden lg:flex" data-site-field="headerMenu">
+            {headerMenu.map((item) => (
+              <li>
+                <a
+                  class="relative flex cursor-pointer items-center justify-center gap-1 py-1.5 px-4 text-sm font-medium transition-colors duration-300 group text-white"
+                  href={item?.href || '#'}
+                >
+                  <span class="font-aspekta font-400">{item?.label || 'Menu'}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div class="max-lg:hidden flex items-center gap-4">
+            <div class="group relative rounded-full w-fit bg-[#D5EFFF] [--btn-bg:#D5EFFF] hover:[--btn-bg:#C0E7FF] active:[--btn-bg:#C0E7FF] transition-colors duration-200">
+              <div
+                class="relative rounded-full border-[1.44px] border-transparent overflow-hidden shadow-buttonPrimary bg-[var(--btn-bg)]"
+                style="background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%) border-box"
+              >
+                <div
+                  class="absolute inset-0 rounded-full pointer-events-none"
+                  style="border:1.44px solid transparent;background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%) border-box"
+                ></div>
+                <a
+                  class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[51px] px-[42px] py-3 text-base bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] font-medium !bg-transparent"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={headerWhatsappUrl}
+                >
+                  <span class="inline align-middle" data-site-field="headerWhatsappLabel">{headerWhatsappLabel}</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="relative rounded-full w-fit">
+              <div
+                class="absolute inset-0 z-[1] rounded-full pointer-events-none"
+                style="padding:1.44px;background:linear-gradient(0deg, rgba(0, 15, 31, 0) 0%, rgba(0, 15, 31, 0.66) 49%, rgba(0, 15, 31, 0) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+              ></div>
+              <div
+                class="absolute inset-[1.44px] z-[2] rounded-full pointer-events-none"
+                style="padding:1.44px;background:linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.15) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+              ></div>
+              <a
+                class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[51px] px-[42px] py-3 text-base bg-blueZodiac text-skyBlue hover:bg-blueZodiac/90 active:bg-blueZodiac font-medium"
+                href={headerPrimaryCtaUrl}
+              >
+                <span class="inline align-middle" data-site-field="headerPrimaryCtaLabel">{headerPrimaryCtaLabel}</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:hidden">
+            <button
+              type="button"
+              aria-label="Open menu"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              class="relative w-9 h-9 flex items-center justify-center rounded-full transition-colors outline-none focus:ring-2 focus:ring-blueZodiac/40"
+              data-mobile-menu-toggle
+            >
+              <span
+                aria-hidden="true"
+                class="absolute block h-[3px] w-6 rounded-full bg-charlotte transition-all duration-300"
+                data-mobile-bar="top"
+                style="transform:translateY(-6px)"
+              ></span>
+              <span
+                aria-hidden="true"
+                class="absolute block h-[3px] w-6 rounded-full bg-charlotte transition-all duration-300"
+                data-mobile-bar="middle"
+                style="opacity:1"
+              ></span>
+              <span
+                aria-hidden="true"
+                class="absolute block h-[3px] w-6 rounded-full bg-charlotte transition-all duration-300"
+                data-mobile-bar="bottom"
+                style="transform:translateY(6px)"
+              ></span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div
+      id="mobile-nav"
+      class="lg:hidden mt-3 rounded-3xl border border-white/20 bg-[#0f1a24]/92 backdrop-blur-[25px] overflow-hidden"
+      data-mobile-menu-panel
+      hidden
+    >
+      <ul class="flex flex-col py-2" data-site-field="headerMenu">
+        {headerMenu.map((item) => (
+          <li>
+            <a
+              class="flex items-center px-6 py-3 text-[15px] text-white/95 font-aspekta"
+              href={item?.href || '#'}
+              data-mobile-menu-link
+            >
+              {item?.label || 'Menu'}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="px-4 pb-4 pt-1 flex flex-col gap-3">
+        <a
+          class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all h-[51px] px-[42px] py-3 text-base bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] font-medium"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={headerWhatsappUrl}
+          data-mobile-menu-link
+        >
+          <span class="inline align-middle" data-site-field="headerWhatsappLabel">{headerWhatsappLabel}</span>
+        </a>
+        <a
+          class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all h-[51px] px-[42px] py-3 text-base bg-blueZodiac text-skyBlue hover:bg-blueZodiac/90 active:bg-blueZodiac font-medium"
+          href={headerPrimaryCtaUrl}
+          data-mobile-menu-link
+        >
+          <span class="inline align-middle" data-site-field="headerPrimaryCtaLabel">{headerPrimaryCtaLabel}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div data-native-hero="true">
+  <div class="relative safe-h-screen flex items-end justify-center text-white overflow-hidden" data-theme="dark" data-site-field="heroImagePath">
+    <div class="lg:container max-lg:px-4 w-full flex flex-col mb-8 lg:mb-[96px] z-10 relative text-left items-start">
+      <h1 class="text-[35px]/[50px] lg:text-[80px]/[115px] font-450">
+        <span class="whitespace-pre-wrap" data-site-field="heroHeading">{heroHeading}</span>
+        <br />
+        <em
+          class="whitespace-pre-wrap text-skyBlue font-victorSerif font-medium text-[35px]/[46px] lg:text-[80px]/[105px]"
+          data-site-field="heroHeadingAccent"
+        >
+          {heroHeadingAccent}
+        </em>
+      </h1>
+      <p class="whitespace-pre-wrap text-sm max-lg:max-w-[271px] lg:text-xl mt-6 font-light" data-site-field="heroSubheading">
+        {heroSubheading}
+      </p>
+      <div class="mt-[42px] flex flex-col lg:flex-row gap-6 w-fit max-lg:w-full max-lg:max-w-[500px] lg:items-center">
+        <ul class="flex flex-col lg:flex-row gap-6">
+          <li>
+            <div class="group relative rounded-full w-fit bg-[#D5EFFF] [--btn-bg:#D5EFFF] hover:[--btn-bg:#C0E7FF] active:[--btn-bg:#C0E7FF] transition-colors duration-200 max-lg:w-full">
+              <div
+                class="relative rounded-full border-[1.44px] border-transparent overflow-hidden shadow-buttonPrimary bg-[var(--btn-bg)]"
+                style="background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%) border-box"
+              >
+                <div
+                  class="absolute inset-0 rounded-full pointer-events-none"
+                  style="border:1.44px solid transparent;background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%) border-box"
+                ></div>
+                <a
+                  class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] font-550 max-lg:w-full !bg-transparent"
+                  href={heroPrimaryCtaUrl}
+                >
+                  <span class="inline align-middle" data-site-field="heroPrimaryCtaLabel">{heroPrimaryCtaLabel}</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="absolute inset-0 hero-video-wrapper -z-10" data-site-field="heroImagePath">
+      <img
+        src={heroImagePath}
+        alt="English Plumber hero image"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        data-hero-image="english-plumber"
+      />
+    </div>
+
+    <div class="max-lg:hidden absolute bottom-0 left-0 w-full h-full -z-[9] inset-0" style="background:linear-gradient(180deg, rgba(20, 25, 26, 0.00) 0%, rgba(20, 25, 26, 0.45) 29.81%, #14191A 100%)"></div>
+    <div class="lg:hidden absolute bottom-0 left-0 w-full h-[426px] -z-[9] right-0" style="background:linear-gradient(180deg, rgba(20, 25, 26, 0.00) 0%, rgba(20, 25, 26, 0.45) 29.81%, #14191A 100%)"></div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-native-header="true"]');
+    if (!(root instanceof HTMLElement)) return;
+
+    const button = root.querySelector('[data-mobile-menu-toggle]');
+    const panel = root.querySelector('[data-mobile-menu-panel]');
+    const links = root.querySelectorAll('[data-mobile-menu-link]');
+    const topBar = root.querySelector('[data-mobile-bar="top"]');
+    const middleBar = root.querySelector('[data-mobile-bar="middle"]');
+    const bottomBar = root.querySelector('[data-mobile-bar="bottom"]');
+
+    if (!(button instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) return;
+
+    let isOpen = false;
+
+    const setBars = () => {
+      if (!(topBar instanceof HTMLElement) || !(middleBar instanceof HTMLElement) || !(bottomBar instanceof HTMLElement)) {
+        return;
+      }
+
+      if (isOpen) {
+        topBar.style.transform = 'rotate(45deg)';
+        middleBar.style.opacity = '0';
+        bottomBar.style.transform = 'rotate(-45deg)';
+      } else {
+        topBar.style.transform = 'translateY(-6px)';
+        middleBar.style.opacity = '1';
+        bottomBar.style.transform = 'translateY(6px)';
+      }
+    };
+
+    const closeMenu = () => {
+      isOpen = false;
+      button.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      setBars();
+    };
+
+    const openMenu = () => {
+      isOpen = true;
+      button.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      setBars();
+    };
+
+    button.addEventListener('click', () => {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    links.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        closeMenu();
+      }
+    });
+  })();
+</script>

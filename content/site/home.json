@@ -4,6 +4,43 @@
   "whatsappNumber": "+31 6 428 699 31",
   "primaryArea": "Hoorn, Heerhugowaard, Purmerend, Alkmaar",
   "heroImagePath": "/IMG_8233.PNG",
-  "heroHeading": "Friendly Local Plumber",
-  "heroSubheading": "Send photos and a short description on WhatsApp for a fast, clear quote."
+  "heroHeading": "Friendly Local",
+  "heroHeadingAccent": "Plumber in Medemblik.",
+  "heroSubheading": "English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.",
+  "headerMenu": [
+    {
+      "label": "Boiler Servicing",
+      "href": "#services"
+    },
+    {
+      "label": "Radiator Services",
+      "href": "#services"
+    },
+    {
+      "label": "Tap Repairs",
+      "href": "#services"
+    },
+    {
+      "label": "Plumbing Handyman",
+      "href": "#services"
+    },
+    {
+      "label": "Pricing",
+      "href": "#pricing"
+    },
+    {
+      "label": "Service Area",
+      "href": "#service-area"
+    },
+    {
+      "label": "WhatsApp",
+      "href": "https://wa.me/31642869931"
+    }
+  ],
+  "headerWhatsappLabel": "WhatsApp",
+  "headerWhatsappUrl": "https://wa.me/31642869931",
+  "headerPrimaryCtaLabel": "Free Quote",
+  "headerPrimaryCtaUrl": "https://wa.me/31642869931",
+  "heroPrimaryCtaLabel": "WhatsApp +31 6 428 699 31",
+  "heroPrimaryCtaUrl": "https://wa.me/31642869931"
 }

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import client from '../../tina/__generated__/client';
 import SiteContentBridge from '../../tina/pages/SiteContentBridge.jsx';
+import EditableHeaderHero from '../components/EditableHeaderHero.astro';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -63,6 +64,27 @@ delete bodyAttrs.class;
 
 const headInner = extractInner('head');
 const bodyInner = extractInner('body');
+
+function stripMirroredHeaderAndHero(input: string): string {
+  let output = input;
+
+  output = output.replace(/<header\b[\s\S]*?<\/header>/i, '');
+
+  const heroStartMarker = '<div class="relative safe-h-screen';
+  const nextSectionMarker = '<div class="mt-[52px] lg:mt-[110px] mb-[52px] lg:mb-[110px]">';
+
+  const heroStart = output.indexOf(heroStartMarker);
+  if (heroStart !== -1) {
+    const nextSection = output.indexOf(nextSectionMarker, heroStart);
+    if (nextSection !== -1) {
+      output = `${output.slice(0, heroStart)}${output.slice(nextSection)}`;
+    }
+  }
+
+  return output;
+}
+
+const bodyInnerWithoutHeaderHero = stripMirroredHeaderAndHero(bodyInner);
 const siteContentQuery = await client.queries.site({ relativePath: 'home.json' });
 const initialSiteContent = siteContentQuery.data.site;
 ---
@@ -130,21 +152,21 @@ const initialSiteContent = siteContentQuery.data.site;
         display: none !important;
       }
 
-      .hero-video-wrapper {
+      [data-native-hero='true'] .hero-video-wrapper {
         background-image: url('/IMG_8233.PNG') !important;
         background-size: cover !important;
         background-position: center center !important;
         background-repeat: no-repeat !important;
       }
 
-      .hero-video-wrapper video,
-      .hero-video-wrapper iframe,
-      .hero-video-wrapper canvas {
+      [data-native-hero='true'] .hero-video-wrapper video,
+      [data-native-hero='true'] .hero-video-wrapper iframe,
+      [data-native-hero='true'] .hero-video-wrapper canvas {
         display: none !important;
         pointer-events: none !important;
       }
 
-      .safe-h-screen[data-theme='dark'] {
+      [data-native-hero='true'] .safe-h-screen[data-theme='dark'] {
         background-image: url('/IMG_8233.PNG') !important;
         background-size: cover !important;
         background-position: center center !important;
@@ -204,8 +226,10 @@ const initialSiteContent = siteContentQuery.data.site;
         let WHATSAPP_NUMBER = '+31 6 428 699 31';
         let PRIMARY_AREA = 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
         let HERO_IMAGE_PATH = '/IMG_8233.PNG';
-        let HERO_HEADING = 'Friendly Local Plumber';
-        let HERO_SUBHEADING = 'Send photos and a short description on WhatsApp for a fast, clear quote.';
+        let HERO_HEADING = 'Friendly Local';
+        let HERO_HEADING_ACCENT = 'Plumber in Medemblik.';
+        let HERO_SUBHEADING =
+          'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.';
 
         const readSiteValue = (key, fallbackValue) => {
           const directValue = normalizeSiteValue(siteContent?.[key]);
@@ -218,10 +242,11 @@ const initialSiteContent = siteContentQuery.data.site;
           WHATSAPP_NUMBER = readSiteValue('whatsappNumber', '+31 6 428 699 31');
           PRIMARY_AREA = readSiteValue('primaryArea', 'Hoorn, Heerhugowaard, Purmerend, Alkmaar');
           HERO_IMAGE_PATH = readSiteValue('heroImagePath', '/IMG_8233.PNG');
-          HERO_HEADING = readSiteValue('heroHeading', 'Friendly Local Plumber');
+          HERO_HEADING = readSiteValue('heroHeading', 'Friendly Local');
+          HERO_HEADING_ACCENT = readSiteValue('heroHeadingAccent', 'Plumber in Medemblik.');
           HERO_SUBHEADING = readSiteValue(
             'heroSubheading',
-            'Send photos and a short description on WhatsApp for a fast, clear quote.',
+            'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.',
           );
         };
 
@@ -240,7 +265,7 @@ const initialSiteContent = siteContentQuery.data.site;
           ['Login', 'Dutch + English'],
           ['Try Geviti', 'Free Quote'],
           ['Your Best Years', HERO_HEADING],
-          ["Haven't Happened Yet.", `Based in ${BASE_CITY}.`],
+          ["Haven't Happened Yet.", HERO_HEADING_ACCENT],
           [
             'Comprehensive blood testing and personalized care designed to keep you thriving, today and for decades to come.',
             HERO_SUBHEADING,
@@ -557,12 +582,22 @@ const initialSiteContent = siteContentQuery.data.site;
 
           clearManagedTinaFields(root);
 
+          root.querySelectorAll('[data-site-field]').forEach((element) => {
+            if (!(element instanceof HTMLElement)) return;
+            const fieldName = element.getAttribute('data-site-field');
+            if (!fieldName) return;
+            const fieldId = tinaFieldMap[fieldName];
+            if (!fieldId) return;
+            setManagedTinaField(element, fieldId);
+          });
+
           const fieldMatchers = [
             ['businessName', BUSINESS_NAME],
             ['baseCity', BASE_CITY],
             ['whatsappNumber', WHATSAPP_NUMBER],
             ['primaryArea', PRIMARY_AREA],
             ['heroHeading', HERO_HEADING],
+            ['heroHeadingAccent', HERO_HEADING_ACCENT],
             ['heroSubheading', HERO_SUBHEADING],
           ];
 
@@ -758,95 +793,109 @@ const initialSiteContent = siteContentQuery.data.site;
 
         const enforceHeroImage = (root) => {
           if (!(root instanceof Element || root instanceof Document)) return;
-          const heroSections = [];
+          const heroRoots = [];
 
-          if (root instanceof Element && root.classList.contains('safe-h-screen')) {
-            heroSections.push(root);
+          if (root instanceof Element && root.getAttribute('data-native-hero') === 'true') {
+            heroRoots.push(root);
           }
 
-          root
-            .querySelectorAll('.safe-h-screen[data-theme="dark"], .safe-h-screen')
-            .forEach((section) => heroSections.push(section));
-
-          heroSections.forEach((section) => {
-            if (!(section instanceof HTMLElement)) return;
-            section.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
-            section.style.backgroundSize = 'cover';
-            section.style.backgroundPosition = 'center center';
-            section.style.backgroundRepeat = 'no-repeat';
-
-            Array.from(section.children).forEach((child) => {
-              if (!(child instanceof HTMLElement)) return;
-              if (child.classList.contains('hero-video-wrapper')) return;
-
-              const className = child.getAttribute('class') || '';
-              const styleValue = child.getAttribute('style') || '';
-              const isDarkOverlay =
-                className.includes('-z-[9]') || styleValue.includes('#14191A') || styleValue.includes('#14191a');
-
-              if (isDarkOverlay) {
-                child.setAttribute('data-hide-hero-overlay', 'true');
-              }
-            });
+          root.querySelectorAll('[data-native-hero="true"]').forEach((heroRoot) => {
+            if (heroRoot instanceof HTMLElement) {
+              heroRoots.push(heroRoot);
+            }
           });
 
-          const wrappers = [];
+          heroRoots.forEach((heroRoot) => {
+            const heroSections = [];
 
-          if (root instanceof Element && root.classList.contains('hero-video-wrapper')) {
-            wrappers.push(root);
-          }
-
-          root.querySelectorAll('.hero-video-wrapper').forEach((wrapper) => wrappers.push(wrapper));
-
-          wrappers.forEach((wrapper) => {
-            if (!(wrapper instanceof HTMLElement)) return;
-
-            wrapper.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
-            wrapper.style.backgroundSize = 'cover';
-            wrapper.style.backgroundPosition = 'center center';
-            wrapper.style.backgroundRepeat = 'no-repeat';
-            wrapper.style.zIndex = '0';
-            wrapper.style.overflow = 'hidden';
-
-            wrapper.querySelectorAll('video,iframe,canvas').forEach((media) => {
-              if (media instanceof HTMLVideoElement) {
-                try {
-                  media.pause();
-                } catch {}
-              }
-              media.setAttribute('aria-hidden', 'true');
-              media.style.display = 'none';
-              media.style.pointerEvents = 'none';
-            });
-
-            Array.from(wrapper.children).forEach((child) => {
-              if (
-                child instanceof HTMLImageElement &&
-                child.getAttribute('data-hero-image') === 'english-plumber'
-              ) {
-                return;
-              }
-              child.remove();
-            });
-
-            let image = wrapper.querySelector('img[data-hero-image="english-plumber"]');
-            if (!(image instanceof HTMLImageElement)) {
-              image = document.createElement('img');
-              image.setAttribute('data-hero-image', 'english-plumber');
-              image.setAttribute('alt', 'English Plumber hero image');
-              image.setAttribute('loading', 'eager');
-              image.setAttribute('decoding', 'async');
-              image.setAttribute('fetchpriority', 'high');
-              image.setAttribute('aria-hidden', 'true');
-              image.className = 'absolute inset-0 w-full h-full object-cover object-center';
-              image.style.pointerEvents = 'none';
-              image.style.zIndex = '0';
-              wrapper.append(image);
+            if (heroRoot.classList.contains('safe-h-screen')) {
+              heroSections.push(heroRoot);
             }
 
-            if (image.getAttribute('src') !== HERO_IMAGE_PATH) {
-              image.setAttribute('src', HERO_IMAGE_PATH);
+            heroRoot
+              .querySelectorAll('.safe-h-screen[data-theme="dark"], .safe-h-screen')
+              .forEach((section) => heroSections.push(section));
+
+            heroSections.forEach((section) => {
+              if (!(section instanceof HTMLElement)) return;
+              section.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
+              section.style.backgroundSize = 'cover';
+              section.style.backgroundPosition = 'center center';
+              section.style.backgroundRepeat = 'no-repeat';
+
+              Array.from(section.children).forEach((child) => {
+                if (!(child instanceof HTMLElement)) return;
+                if (child.classList.contains('hero-video-wrapper')) return;
+
+                const className = child.getAttribute('class') || '';
+                const styleValue = child.getAttribute('style') || '';
+                const isDarkOverlay =
+                  className.includes('-z-[9]') || styleValue.includes('#14191A') || styleValue.includes('#14191a');
+
+                if (isDarkOverlay) {
+                  child.setAttribute('data-hide-hero-overlay', 'true');
+                }
+              });
+            });
+
+            const wrappers = [];
+
+            if (heroRoot.classList.contains('hero-video-wrapper')) {
+              wrappers.push(heroRoot);
             }
+
+            heroRoot.querySelectorAll('.hero-video-wrapper').forEach((wrapper) => wrappers.push(wrapper));
+
+            wrappers.forEach((wrapper) => {
+              if (!(wrapper instanceof HTMLElement)) return;
+
+              wrapper.style.backgroundImage = `url('${HERO_IMAGE_PATH}')`;
+              wrapper.style.backgroundSize = 'cover';
+              wrapper.style.backgroundPosition = 'center center';
+              wrapper.style.backgroundRepeat = 'no-repeat';
+              wrapper.style.zIndex = '0';
+              wrapper.style.overflow = 'hidden';
+
+              wrapper.querySelectorAll('video,iframe,canvas').forEach((media) => {
+                if (media instanceof HTMLVideoElement) {
+                  try {
+                    media.pause();
+                  } catch {}
+                }
+                media.setAttribute('aria-hidden', 'true');
+                media.style.display = 'none';
+                media.style.pointerEvents = 'none';
+              });
+
+              Array.from(wrapper.children).forEach((child) => {
+                if (
+                  child instanceof HTMLImageElement &&
+                  child.getAttribute('data-hero-image') === 'english-plumber'
+                ) {
+                  return;
+                }
+                child.remove();
+              });
+
+              let image = wrapper.querySelector('img[data-hero-image="english-plumber"]');
+              if (!(image instanceof HTMLImageElement)) {
+                image = document.createElement('img');
+                image.setAttribute('data-hero-image', 'english-plumber');
+                image.setAttribute('alt', 'English Plumber hero image');
+                image.setAttribute('loading', 'eager');
+                image.setAttribute('decoding', 'async');
+                image.setAttribute('fetchpriority', 'high');
+                image.setAttribute('aria-hidden', 'true');
+                image.className = 'absolute inset-0 w-full h-full object-cover object-center';
+                image.style.pointerEvents = 'none';
+                image.style.zIndex = '0';
+                wrapper.append(image);
+              }
+
+              if (image.getAttribute('src') !== HERO_IMAGE_PATH) {
+                image.setAttribute('src', HERO_IMAGE_PATH);
+              }
+            });
           });
         };
 
@@ -1083,7 +1132,8 @@ const initialSiteContent = siteContentQuery.data.site;
     </script>
   </head>
   <body class={bodyClass} {...bodyAttrs}>
-    <Fragment set:html={bodyInner} />
+    <EditableHeaderHero site={initialSiteContent} />
+    <Fragment set:html={bodyInnerWithoutHeaderHero} />
     <SiteContentBridge {...siteContentQuery} client:tina />
   </body>
 </html>
