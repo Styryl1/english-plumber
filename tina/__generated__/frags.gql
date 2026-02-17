@@ -1,0 +1,10 @@
+fragment SiteParts on Site {
+  __typename
+  businessName
+  baseCity
+  whatsappNumber
+  primaryArea
+  heroImagePath
+  heroHeading
+  heroSubheading
+}

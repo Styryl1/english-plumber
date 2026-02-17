@@ -1,6 +1,8 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
+import client from '../../tina/__generated__/client';
+import SiteContentBridge from '../../tina/pages/SiteContentBridge.jsx';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -61,6 +63,8 @@ delete bodyAttrs.class;
 
 const headInner = extractInner('head');
 const bodyInner = extractInner('body');
+const siteContentQuery = await client.queries.site({ relativePath: 'home.json' });
+const initialSiteContent = siteContentQuery.data.site;
 ---
 
 <!doctype html>
@@ -160,8 +164,17 @@ const bodyInner = extractInner('body');
       body[data-scroll-locked] {
         overflow: auto !important;
       }
+
+      .__tina-quick-editing-enabled [data-tina-field] {
+        outline: 2px dashed rgba(254, 34, 56, 0.55);
+        outline-offset: 2px;
+      }
+
+      .__tina-quick-editing-enabled [data-tina-field]:hover {
+        outline: 2px dashed rgba(254, 34, 56, 0.95);
+      }
     </style>
-    <script is:inline>
+    <script is:inline define:vars={{ initialSiteContent }}>
       (() => {
         const promoMarker = 'data-hide-promo';
         const MEDIA_ORIGIN = 'https://www.gogeviti.com';
@@ -182,13 +195,40 @@ const bodyInner = extractInner('body');
           '/footer/',
           '/faq.webp',
         ];
-        const BUSINESS_NAME = 'English Plumber';
-        const BASE_CITY = 'Medemblik';
-        const WHATSAPP_NUMBER = '+31 6 428 699 31';
-        const PRIMARY_AREA = 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
-        const HERO_IMAGE_PATH = '/IMG_8233.PNG';
+        const normalizeSiteValue = (value) => (typeof value === 'string' ? value.trim() : '');
+        let siteContent =
+          initialSiteContent && typeof initialSiteContent === 'object' ? initialSiteContent : {};
 
-        const exactTextReplacements = new Map([
+        let BUSINESS_NAME = 'English Plumber';
+        let BASE_CITY = 'Medemblik';
+        let WHATSAPP_NUMBER = '+31 6 428 699 31';
+        let PRIMARY_AREA = 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
+        let HERO_IMAGE_PATH = '/IMG_8233.PNG';
+        let HERO_HEADING = 'Friendly Local Plumber';
+        let HERO_SUBHEADING = 'Send photos and a short description on WhatsApp for a fast, clear quote.';
+
+        const readSiteValue = (key, fallbackValue) => {
+          const directValue = normalizeSiteValue(siteContent?.[key]);
+          return directValue || fallbackValue;
+        };
+
+        const refreshSiteSettings = () => {
+          BUSINESS_NAME = readSiteValue('businessName', 'English Plumber');
+          BASE_CITY = readSiteValue('baseCity', 'Medemblik');
+          WHATSAPP_NUMBER = readSiteValue('whatsappNumber', '+31 6 428 699 31');
+          PRIMARY_AREA = readSiteValue('primaryArea', 'Hoorn, Heerhugowaard, Purmerend, Alkmaar');
+          HERO_IMAGE_PATH = readSiteValue('heroImagePath', '/IMG_8233.PNG');
+          HERO_HEADING = readSiteValue('heroHeading', 'Friendly Local Plumber');
+          HERO_SUBHEADING = readSiteValue(
+            'heroSubheading',
+            'Send photos and a short description on WhatsApp for a fast, clear quote.',
+          );
+        };
+
+        refreshSiteSettings();
+
+        const buildExactTextReplacements = () =>
+          new Map([
           ['Geviti | Blood Testing & Personalized Longevity Care', `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`],
           ['Get 25% Off - 24 Hour Flash Sale', `Friendly local plumber in ${BASE_CITY}`],
           ['Bloodwork', 'Boiler Servicing'],
@@ -199,11 +239,11 @@ const bodyInner = extractInner('body');
           ['Gift Geviti', 'WhatsApp'],
           ['Login', 'Dutch + English'],
           ['Try Geviti', 'Free Quote'],
-          ['Your Best Years', 'Friendly Local Plumber'],
+          ['Your Best Years', HERO_HEADING],
           ["Haven't Happened Yet.", `Based in ${BASE_CITY}.`],
           [
             'Comprehensive blood testing and personalized care designed to keep you thriving, today and for decades to come.',
-            `${BUSINESS_NAME} helps expats and Dutch homeowners with reliable plumbing and heating in ${BASE_CITY} and nearby towns.`,
+            HERO_SUBHEADING,
           ],
           ['Start Testing', 'Free Quote'],
           ['One Blood Test', 'One Trusted Plumber'],
@@ -372,15 +412,24 @@ const bodyInner = extractInner('body');
           ],
           ['Find us on the App Store and Google Play Store', 'WhatsApp is the fastest way to reach us.'],
           ['Geviti Inc. | All Rights Reserved', `${BUSINESS_NAME} | All Rights Reserved`],
-        ]);
+          ]);
 
-        const regexTextReplacements = [
+        const buildRegexTextReplacements = () => [
           [/\bGeviti\b/g, BUSINESS_NAME],
           [/\bLongeviti\b/g, 'Plumbing'],
           [/\bbiomarkers?\b/gi, 'plumbing and heating'],
           [/\bwellness\b/gi, 'home comfort'],
           [/\blongevity\b/gi, 'long-term home reliability'],
         ];
+
+        let exactTextReplacements = buildExactTextReplacements();
+        let regexTextReplacements = buildRegexTextReplacements();
+
+        const refreshCopySettings = () => {
+          refreshSiteSettings();
+          exactTextReplacements = buildExactTextReplacements();
+          regexTextReplacements = buildRegexTextReplacements();
+        };
         const copyAttributeNames = ['title', 'alt', 'aria-label', 'placeholder', 'content'];
 
         const normalizeTextValue = (value) => (value || '').replace(/\s+/g, ' ').trim();
@@ -457,6 +506,99 @@ const bodyInner = extractInner('body');
           if (root instanceof Document || root === document.documentElement || root === document.body) {
             rewriteDocumentMetadata();
           }
+        };
+
+        let tinaFieldMap = {};
+        let rerenderPage = () => {};
+
+        const isInTinaFrame = () => {
+          try {
+            return window.self !== window.top;
+          } catch {
+            return false;
+          }
+        };
+
+        const setManagedTinaField = (element, fieldId) => {
+          if (!(element instanceof HTMLElement)) return;
+          if (!fieldId) return;
+          element.setAttribute('data-tina-field', fieldId);
+          element.setAttribute('data-managed-tina-field', 'site-copy');
+        };
+
+        const clearManagedTinaFields = (root) => {
+          if (!(root instanceof Element || root instanceof Document)) return;
+          root.querySelectorAll('[data-managed-tina-field="site-copy"]').forEach((element) => {
+            if (element instanceof HTMLElement) {
+              element.removeAttribute('data-tina-field');
+              element.removeAttribute('data-managed-tina-field');
+            }
+          });
+        };
+
+        const setFieldByTextMatch = (root, textValue, fieldId) => {
+          const needle = normalize(textValue);
+          if (!needle || !fieldId) return;
+          if (!(root instanceof Element || root instanceof Document)) return;
+
+          root.querySelectorAll('*:not(script):not(style):not(noscript)').forEach((element) => {
+            if (!(element instanceof HTMLElement)) return;
+            if (element.children.length > 0) return;
+            if (element.closest('[role="dialog"]')) return;
+            const text = normalize(element.textContent);
+            if (!text || !text.includes(needle)) return;
+            setManagedTinaField(element, fieldId);
+          });
+        };
+
+        const applyTinaFieldMarkers = (root = document) => {
+          if (!isInTinaFrame()) return;
+          if (!(root instanceof Element || root instanceof Document)) return;
+
+          clearManagedTinaFields(root);
+
+          const fieldMatchers = [
+            ['businessName', BUSINESS_NAME],
+            ['baseCity', BASE_CITY],
+            ['whatsappNumber', WHATSAPP_NUMBER],
+            ['primaryArea', PRIMARY_AREA],
+            ['heroHeading', HERO_HEADING],
+            ['heroSubheading', HERO_SUBHEADING],
+          ];
+
+          fieldMatchers.forEach(([fieldName, textValue]) => {
+            setFieldByTextMatch(root, textValue, tinaFieldMap[fieldName]);
+          });
+
+          const heroImageField = tinaFieldMap.heroImagePath;
+          if (heroImageField) {
+            root
+              .querySelectorAll('.safe-h-screen, .hero-video-wrapper, img[data-hero-image="english-plumber"]')
+              .forEach((element) => {
+                if (element instanceof HTMLElement) {
+                  setManagedTinaField(element, heroImageField);
+                }
+              });
+          }
+        };
+
+        const updateSiteContent = (nextContent) => {
+          if (!nextContent || typeof nextContent !== 'object') return;
+          siteContent = {
+            ...siteContent,
+            ...nextContent,
+          };
+          refreshCopySettings();
+          rerenderPage();
+        };
+
+        const updateTinaFieldMap = (nextMap) => {
+          if (!nextMap || typeof nextMap !== 'object') return;
+          tinaFieldMap = {
+            ...tinaFieldMap,
+            ...nextMap,
+          };
+          applyTinaFieldMarkers(document);
         };
 
         const isApiMediaPath = (value) => {
@@ -846,12 +988,16 @@ const bodyInner = extractInner('body');
         };
 
         const run = () => {
+          refreshCopySettings();
           rewriteMediaUrlsInRoot(document);
           enforceHeroImage(document);
           hidePromoInRoot(document);
           rewriteCopyInRoot(document);
           unlockInteractionLocks();
+          applyTinaFieldMarkers(document);
         };
+
+        rerenderPage = run;
 
         document.addEventListener(
           'click',
@@ -868,6 +1014,22 @@ const bodyInner = extractInner('body');
           },
           true,
         );
+
+        window.addEventListener('site-content:update', (event) => {
+          updateSiteContent(event.detail);
+        });
+
+        window.addEventListener('site-tina-fields:update', (event) => {
+          updateTinaFieldMap(event.detail);
+        });
+
+        if (window.__SITE_CONTENT__) {
+          updateSiteContent(window.__SITE_CONTENT__);
+        }
+
+        if (window.__SITE_TINA_FIELDS__) {
+          updateTinaFieldMap(window.__SITE_TINA_FIELDS__);
+        }
 
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', run, { once: true });
@@ -905,6 +1067,8 @@ const bodyInner = extractInner('body');
                 rewriteMediaUrlsInRoot(addedNode);
                 enforceHeroImage(addedNode);
                 hidePromoInRoot(addedNode);
+                rewriteCopyInRoot(addedNode);
+                applyTinaFieldMarkers(document);
                 unlockInteractionLocks();
               }
             }
@@ -920,5 +1084,6 @@ const bodyInner = extractInner('body');
   </head>
   <body class={bodyClass} {...bodyAttrs}>
     <Fragment set:html={bodyInner} />
+    <SiteContentBridge {...siteContentQuery} client:tina />
   </body>
 </html>

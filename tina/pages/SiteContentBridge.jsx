@@ -1,0 +1,43 @@
+import { useEffect } from 'react';
+import { tinaField, useTina } from 'tinacms/dist/react';
+
+const SiteContentBridge = (props) => {
+  const { data } = useTina({
+    query: props.query,
+    variables: props.variables,
+    data: props.data,
+  });
+
+  const site = data?.site || {};
+
+  useEffect(() => {
+    const fieldMap = {
+      businessName: tinaField(site, 'businessName'),
+      baseCity: tinaField(site, 'baseCity'),
+      whatsappNumber: tinaField(site, 'whatsappNumber'),
+      primaryArea: tinaField(site, 'primaryArea'),
+      heroHeading: tinaField(site, 'heroHeading'),
+      heroSubheading: tinaField(site, 'heroSubheading'),
+      heroImagePath: tinaField(site, 'heroImagePath'),
+    };
+
+    window.__SITE_CONTENT__ = site;
+    window.__SITE_TINA_FIELDS__ = fieldMap;
+
+    window.dispatchEvent(
+      new CustomEvent('site-content:update', {
+        detail: site,
+      }),
+    );
+
+    window.dispatchEvent(
+      new CustomEvent('site-tina-fields:update', {
+        detail: fieldMap,
+      }),
+    );
+  }, [site]);
+
+  return null;
+};
+
+export default SiteContentBridge;
