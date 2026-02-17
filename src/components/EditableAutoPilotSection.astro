@@ -20,10 +20,11 @@ const defaultChips = [
 ];
 
 const chips = Array.isArray(site?.autoPilotChips) && site.autoPilotChips.length > 0 ? site.autoPilotChips : defaultChips;
+const indexedChips = chips.map((chip, index) => ({ chip, index }));
 
-const rowA = chips.slice(0, 3);
-const rowB = chips.slice(3, 7);
-const rowC = chips.slice(7, chips.length);
+const rowA = indexedChips.slice(0, 3);
+const rowB = indexedChips.slice(3, 7);
+const rowC = indexedChips.slice(7, indexedChips.length);
 const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
 ---
 
@@ -59,6 +60,7 @@ const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
                   <a
                     class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] max-sm:w-full font-semibold !bg-transparent"
                     href={autoPilotCtaUrl}
+                    data-site-field="autoPilotCtaUrl"
                   >
                     <span data-site-field="autoPilotCtaLabel">{autoPilotCtaLabel}</span>
                   </a>
@@ -84,6 +86,7 @@ const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
                 <a
                   class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] max-sm:w-full font-semibold !bg-transparent"
                   href={autoPilotCtaUrl}
+                  data-site-field="autoPilotCtaUrl"
                 >
                   <span data-site-field="autoPilotCtaLabel">{autoPilotCtaLabel}</span>
                 </a>
@@ -97,18 +100,21 @@ const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
         <div class="hidden lg:flex flex-col gap-4" data-site-field="autoPilotChips">
           {desktopRows.map((row) => (
             <div class="flex justify-center gap-4">
-              {row.map((chip) => (
-                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]">
+              {row.map((item) => (
+                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]" data-site-field={`autoPilotChips.${item.index}`}>
                   <img
-                    alt={chip?.label || 'Service'}
+                    alt={item?.chip?.label || 'Service'}
                     loading="lazy"
                     width="40"
                     height="40"
                     decoding="async"
                     class="w-10 h-10 object-contain"
-                    src={chip?.iconPath || '/favicon.ico'}
+                    src={item?.chip?.iconPath || '/favicon.ico'}
+                    data-site-field={`autoPilotChips.${item.index}.iconPath`}
                   />
-                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac lg:font-450">{chip?.label || 'Service'}</span>
+                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac lg:font-450" data-site-field={`autoPilotChips.${item.index}.label`}>
+                    {item?.chip?.label || 'Service'}
+                  </span>
                 </div>
               ))}
             </div>
@@ -118,18 +124,21 @@ const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
         <div class="lg:hidden flex flex-col gap-4 w-screen overflow-hidden -mx-4" data-site-field="autoPilotChips">
           <div class="overflow-x-auto no-scrollbar px-4">
             <div class="flex gap-4 w-max">
-              {chips.map((chip) => (
-                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]">
+              {indexedChips.map((item) => (
+                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]" data-site-field={`autoPilotChips.${item.index}`}>
                   <img
-                    alt={chip?.label || 'Service'}
+                    alt={item?.chip?.label || 'Service'}
                     loading="lazy"
                     width="40"
                     height="40"
                     decoding="async"
                     class="w-10 h-10 object-contain"
-                    src={chip?.iconPath || '/favicon.ico'}
+                    src={item?.chip?.iconPath || '/favicon.ico'}
+                    data-site-field={`autoPilotChips.${item.index}.iconPath`}
                   />
-                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac">{chip?.label || 'Service'}</span>
+                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac" data-site-field={`autoPilotChips.${item.index}.label`}>
+                    {item?.chip?.label || 'Service'}
+                  </span>
                 </div>
               ))}
             </div>

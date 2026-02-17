@@ -264,6 +264,9 @@ const initialSiteContent = siteContentQuery.data.site;
           'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.';
         let AUTOPILOT_HEADING = 'One Trusted Plumber';
         let AUTOPILOT_HEADING_ACCENT = 'Fast, Clean Repairs';
+        let SEO_TITLE = 'English Plumber | Plumbing & Heating in Medemblik';
+        let SEO_DESCRIPTION =
+          'English Plumber is a friendly local plumber in Medemblik. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp +31 6 428 699 31.';
 
         const readSiteValue = (key, fallbackValue) => {
           const directValue = normalizeSiteValue(siteContent?.[key]);
@@ -284,6 +287,11 @@ const initialSiteContent = siteContentQuery.data.site;
           );
           AUTOPILOT_HEADING = readSiteValue('autoPilotHeading', 'One Trusted Plumber');
           AUTOPILOT_HEADING_ACCENT = readSiteValue('autoPilotHeadingAccent', 'Fast, Clean Repairs');
+          SEO_TITLE = readSiteValue('seoTitle', `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`);
+          SEO_DESCRIPTION = readSiteValue(
+            'seoDescription',
+            `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`,
+          );
         };
 
         refreshSiteSettings();
@@ -537,13 +545,12 @@ const initialSiteContent = siteContentQuery.data.site;
         };
 
         const rewriteDocumentMetadata = () => {
-          document.title = `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`;
-          const description = `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`;
+          document.title = SEO_TITLE;
           document
             .querySelectorAll(
               'meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]',
             )
-            .forEach((meta) => meta.setAttribute('content', description));
+            .forEach((meta) => meta.setAttribute('content', SEO_DESCRIPTION));
           document
             .querySelectorAll('meta[property="og:title"],meta[name="twitter:title"]')
             .forEach((meta) => meta.setAttribute('content', document.title));

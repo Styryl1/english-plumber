@@ -195,17 +195,67 @@ export type SiteNoJargonCards = {
   linkLabel: Scalars['String']['output'];
 };
 
+export type SiteTestimonialsList = {
+  __typename?: 'SiteTestimonialsList';
+  name: Scalars['String']['output'];
+  area: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
+  imagePath: Scalars['String']['output'];
+};
+
+export type SiteHowItWorksSteps = {
+  __typename?: 'SiteHowItWorksSteps';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+};
+
+export type SitePricingPlans = {
+  __typename?: 'SitePricingPlans';
+  name: Scalars['String']['output'];
+  subtitle: Scalars['String']['output'];
+  price: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+  badge?: Maybe<Scalars['String']['output']>;
+  features: Array<Scalars['String']['output']>;
+  buttonLabel: Scalars['String']['output'];
+  buttonUrl: Scalars['String']['output'];
+};
+
+export type SiteFaqList = {
+  __typename?: 'SiteFaqList';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
+export type SiteFooterSupportLinks = {
+  __typename?: 'SiteFooterSupportLinks';
+  label: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+};
+
+export type SiteFooterAboutLinks = {
+  __typename?: 'SiteFooterAboutLinks';
+  label: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+};
+
 export type Site = Node & Document & {
   __typename?: 'Site';
   businessName: Scalars['String']['output'];
   baseCity: Scalars['String']['output'];
   whatsappNumber: Scalars['String']['output'];
   primaryArea: Scalars['String']['output'];
+  seoTitle: Scalars['String']['output'];
+  seoDescription: Scalars['String']['output'];
   heroImagePath: Scalars['String']['output'];
   heroHeading: Scalars['String']['output'];
   heroHeadingAccent: Scalars['String']['output'];
   heroSubheading: Scalars['String']['output'];
+  heroImageAlt: Scalars['String']['output'];
   headerMenu?: Maybe<Array<Maybe<SiteHeaderMenu>>>;
+  headerLogoPath: Scalars['String']['output'];
+  headerLogoAlt: Scalars['String']['output'];
+  mobileMenuToggleLabel: Scalars['String']['output'];
   headerWhatsappLabel: Scalars['String']['output'];
   headerWhatsappUrl: Scalars['String']['output'];
   headerPrimaryCtaLabel: Scalars['String']['output'];
@@ -233,6 +283,62 @@ export type Site = Node & Document & {
   noJargonBadgeLabel: Scalars['String']['output'];
   noJargonBadgeValue: Scalars['String']['output'];
   noJargonCards?: Maybe<Array<Maybe<SiteNoJargonCards>>>;
+  testimonialsHeading: Scalars['String']['output'];
+  testimonialsHeadingAccent: Scalars['String']['output'];
+  testimonialsList?: Maybe<Array<Maybe<SiteTestimonialsList>>>;
+  commandCenterHeading: Scalars['String']['output'];
+  commandCenterHeadingAccent: Scalars['String']['output'];
+  commandCenterBody: Scalars['String']['output'];
+  commandCenterImagePath: Scalars['String']['output'];
+  commandCenterImageAlt: Scalars['String']['output'];
+  howItWorksHeading: Scalars['String']['output'];
+  howItWorksHeadingAccent: Scalars['String']['output'];
+  howItWorksImagePath: Scalars['String']['output'];
+  howItWorksImageAlt: Scalars['String']['output'];
+  howItWorksSteps?: Maybe<Array<Maybe<SiteHowItWorksSteps>>>;
+  pricingHeading: Scalars['String']['output'];
+  pricingSubheading: Scalars['String']['output'];
+  pricingPlans?: Maybe<Array<Maybe<SitePricingPlans>>>;
+  faqHeading: Scalars['String']['output'];
+  faqHeadingAccent: Scalars['String']['output'];
+  faqList?: Maybe<Array<Maybe<SiteFaqList>>>;
+  faqImagePath: Scalars['String']['output'];
+  faqImageAlt: Scalars['String']['output'];
+  faqCtaHeading: Scalars['String']['output'];
+  faqCtaBody: Scalars['String']['output'];
+  faqCtaLabel: Scalars['String']['output'];
+  faqCtaUrl: Scalars['String']['output'];
+  aboutHeading: Scalars['String']['output'];
+  aboutHeadingAccent: Scalars['String']['output'];
+  aboutBody: Scalars['String']['output'];
+  aboutImagePath: Scalars['String']['output'];
+  aboutImageAlt: Scalars['String']['output'];
+  aboutName: Scalars['String']['output'];
+  aboutRole: Scalars['String']['output'];
+  aboutCtaLabel: Scalars['String']['output'];
+  aboutCtaUrl: Scalars['String']['output'];
+  connectedHeading: Scalars['String']['output'];
+  connectedHeadingAccent: Scalars['String']['output'];
+  connectedCtaLabel: Scalars['String']['output'];
+  connectedCtaUrl: Scalars['String']['output'];
+  finalCtaImagePath: Scalars['String']['output'];
+  finalCtaImageAlt: Scalars['String']['output'];
+  finalCtaHeading: Scalars['String']['output'];
+  finalCtaHeadingAccent: Scalars['String']['output'];
+  finalCtaBody: Scalars['String']['output'];
+  finalCtaButtonLabel: Scalars['String']['output'];
+  finalCtaButtonUrl: Scalars['String']['output'];
+  footerDescription: Scalars['String']['output'];
+  footerSupportTitle: Scalars['String']['output'];
+  footerSupportLinks?: Maybe<Array<Maybe<SiteFooterSupportLinks>>>;
+  footerAboutTitle: Scalars['String']['output'];
+  footerAboutLinks?: Maybe<Array<Maybe<SiteFooterAboutLinks>>>;
+  footerCopyright: Scalars['String']['output'];
+  footerNote: Scalars['String']['output'];
+  footerLogoPath: Scalars['String']['output'];
+  footerLogoAlt: Scalars['String']['output'];
+  footerBigLogoPath: Scalars['String']['output'];
+  footerBigLogoAlt: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -271,16 +377,60 @@ export type SiteNoJargonCardsFilter = {
   linkLabel?: InputMaybe<StringFilter>;
 };
 
+export type SiteTestimonialsListFilter = {
+  name?: InputMaybe<StringFilter>;
+  area?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  imagePath?: InputMaybe<StringFilter>;
+};
+
+export type SiteHowItWorksStepsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type SitePricingPlansFilter = {
+  name?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  price?: InputMaybe<StringFilter>;
+  note?: InputMaybe<StringFilter>;
+  badge?: InputMaybe<StringFilter>;
+  features?: InputMaybe<StringFilter>;
+  buttonLabel?: InputMaybe<StringFilter>;
+  buttonUrl?: InputMaybe<StringFilter>;
+};
+
+export type SiteFaqListFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+};
+
+export type SiteFooterSupportLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type SiteFooterAboutLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
 export type SiteFilter = {
   businessName?: InputMaybe<StringFilter>;
   baseCity?: InputMaybe<StringFilter>;
   whatsappNumber?: InputMaybe<StringFilter>;
   primaryArea?: InputMaybe<StringFilter>;
+  seoTitle?: InputMaybe<StringFilter>;
+  seoDescription?: InputMaybe<StringFilter>;
   heroImagePath?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroHeadingAccent?: InputMaybe<StringFilter>;
   heroSubheading?: InputMaybe<StringFilter>;
+  heroImageAlt?: InputMaybe<StringFilter>;
   headerMenu?: InputMaybe<SiteHeaderMenuFilter>;
+  headerLogoPath?: InputMaybe<StringFilter>;
+  headerLogoAlt?: InputMaybe<StringFilter>;
+  mobileMenuToggleLabel?: InputMaybe<StringFilter>;
   headerWhatsappLabel?: InputMaybe<StringFilter>;
   headerWhatsappUrl?: InputMaybe<StringFilter>;
   headerPrimaryCtaLabel?: InputMaybe<StringFilter>;
@@ -308,6 +458,62 @@ export type SiteFilter = {
   noJargonBadgeLabel?: InputMaybe<StringFilter>;
   noJargonBadgeValue?: InputMaybe<StringFilter>;
   noJargonCards?: InputMaybe<SiteNoJargonCardsFilter>;
+  testimonialsHeading?: InputMaybe<StringFilter>;
+  testimonialsHeadingAccent?: InputMaybe<StringFilter>;
+  testimonialsList?: InputMaybe<SiteTestimonialsListFilter>;
+  commandCenterHeading?: InputMaybe<StringFilter>;
+  commandCenterHeadingAccent?: InputMaybe<StringFilter>;
+  commandCenterBody?: InputMaybe<StringFilter>;
+  commandCenterImagePath?: InputMaybe<StringFilter>;
+  commandCenterImageAlt?: InputMaybe<StringFilter>;
+  howItWorksHeading?: InputMaybe<StringFilter>;
+  howItWorksHeadingAccent?: InputMaybe<StringFilter>;
+  howItWorksImagePath?: InputMaybe<StringFilter>;
+  howItWorksImageAlt?: InputMaybe<StringFilter>;
+  howItWorksSteps?: InputMaybe<SiteHowItWorksStepsFilter>;
+  pricingHeading?: InputMaybe<StringFilter>;
+  pricingSubheading?: InputMaybe<StringFilter>;
+  pricingPlans?: InputMaybe<SitePricingPlansFilter>;
+  faqHeading?: InputMaybe<StringFilter>;
+  faqHeadingAccent?: InputMaybe<StringFilter>;
+  faqList?: InputMaybe<SiteFaqListFilter>;
+  faqImagePath?: InputMaybe<StringFilter>;
+  faqImageAlt?: InputMaybe<StringFilter>;
+  faqCtaHeading?: InputMaybe<StringFilter>;
+  faqCtaBody?: InputMaybe<StringFilter>;
+  faqCtaLabel?: InputMaybe<StringFilter>;
+  faqCtaUrl?: InputMaybe<StringFilter>;
+  aboutHeading?: InputMaybe<StringFilter>;
+  aboutHeadingAccent?: InputMaybe<StringFilter>;
+  aboutBody?: InputMaybe<StringFilter>;
+  aboutImagePath?: InputMaybe<StringFilter>;
+  aboutImageAlt?: InputMaybe<StringFilter>;
+  aboutName?: InputMaybe<StringFilter>;
+  aboutRole?: InputMaybe<StringFilter>;
+  aboutCtaLabel?: InputMaybe<StringFilter>;
+  aboutCtaUrl?: InputMaybe<StringFilter>;
+  connectedHeading?: InputMaybe<StringFilter>;
+  connectedHeadingAccent?: InputMaybe<StringFilter>;
+  connectedCtaLabel?: InputMaybe<StringFilter>;
+  connectedCtaUrl?: InputMaybe<StringFilter>;
+  finalCtaImagePath?: InputMaybe<StringFilter>;
+  finalCtaImageAlt?: InputMaybe<StringFilter>;
+  finalCtaHeading?: InputMaybe<StringFilter>;
+  finalCtaHeadingAccent?: InputMaybe<StringFilter>;
+  finalCtaBody?: InputMaybe<StringFilter>;
+  finalCtaButtonLabel?: InputMaybe<StringFilter>;
+  finalCtaButtonUrl?: InputMaybe<StringFilter>;
+  footerDescription?: InputMaybe<StringFilter>;
+  footerSupportTitle?: InputMaybe<StringFilter>;
+  footerSupportLinks?: InputMaybe<SiteFooterSupportLinksFilter>;
+  footerAboutTitle?: InputMaybe<StringFilter>;
+  footerAboutLinks?: InputMaybe<SiteFooterAboutLinksFilter>;
+  footerCopyright?: InputMaybe<StringFilter>;
+  footerNote?: InputMaybe<StringFilter>;
+  footerLogoPath?: InputMaybe<StringFilter>;
+  footerLogoAlt?: InputMaybe<StringFilter>;
+  footerBigLogoPath?: InputMaybe<StringFilter>;
+  footerBigLogoAlt?: InputMaybe<StringFilter>;
 };
 
 export type SiteConnectionEdges = {
@@ -414,16 +620,60 @@ export type SiteNoJargonCardsMutation = {
   linkLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SiteTestimonialsListMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  area?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  imagePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteHowItWorksStepsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SitePricingPlansMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
+  badge?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  buttonLabel?: InputMaybe<Scalars['String']['input']>;
+  buttonUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteFaqListMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteFooterSupportLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteFooterAboutLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SiteMutation = {
   businessName?: InputMaybe<Scalars['String']['input']>;
   baseCity?: InputMaybe<Scalars['String']['input']>;
   whatsappNumber?: InputMaybe<Scalars['String']['input']>;
   primaryArea?: InputMaybe<Scalars['String']['input']>;
+  seoTitle?: InputMaybe<Scalars['String']['input']>;
+  seoDescription?: InputMaybe<Scalars['String']['input']>;
   heroImagePath?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroHeadingAccent?: InputMaybe<Scalars['String']['input']>;
   heroSubheading?: InputMaybe<Scalars['String']['input']>;
+  heroImageAlt?: InputMaybe<Scalars['String']['input']>;
   headerMenu?: InputMaybe<Array<InputMaybe<SiteHeaderMenuMutation>>>;
+  headerLogoPath?: InputMaybe<Scalars['String']['input']>;
+  headerLogoAlt?: InputMaybe<Scalars['String']['input']>;
+  mobileMenuToggleLabel?: InputMaybe<Scalars['String']['input']>;
   headerWhatsappLabel?: InputMaybe<Scalars['String']['input']>;
   headerWhatsappUrl?: InputMaybe<Scalars['String']['input']>;
   headerPrimaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
@@ -451,16 +701,72 @@ export type SiteMutation = {
   noJargonBadgeLabel?: InputMaybe<Scalars['String']['input']>;
   noJargonBadgeValue?: InputMaybe<Scalars['String']['input']>;
   noJargonCards?: InputMaybe<Array<InputMaybe<SiteNoJargonCardsMutation>>>;
+  testimonialsHeading?: InputMaybe<Scalars['String']['input']>;
+  testimonialsHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  testimonialsList?: InputMaybe<Array<InputMaybe<SiteTestimonialsListMutation>>>;
+  commandCenterHeading?: InputMaybe<Scalars['String']['input']>;
+  commandCenterHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  commandCenterBody?: InputMaybe<Scalars['String']['input']>;
+  commandCenterImagePath?: InputMaybe<Scalars['String']['input']>;
+  commandCenterImageAlt?: InputMaybe<Scalars['String']['input']>;
+  howItWorksHeading?: InputMaybe<Scalars['String']['input']>;
+  howItWorksHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  howItWorksImagePath?: InputMaybe<Scalars['String']['input']>;
+  howItWorksImageAlt?: InputMaybe<Scalars['String']['input']>;
+  howItWorksSteps?: InputMaybe<Array<InputMaybe<SiteHowItWorksStepsMutation>>>;
+  pricingHeading?: InputMaybe<Scalars['String']['input']>;
+  pricingSubheading?: InputMaybe<Scalars['String']['input']>;
+  pricingPlans?: InputMaybe<Array<InputMaybe<SitePricingPlansMutation>>>;
+  faqHeading?: InputMaybe<Scalars['String']['input']>;
+  faqHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  faqList?: InputMaybe<Array<InputMaybe<SiteFaqListMutation>>>;
+  faqImagePath?: InputMaybe<Scalars['String']['input']>;
+  faqImageAlt?: InputMaybe<Scalars['String']['input']>;
+  faqCtaHeading?: InputMaybe<Scalars['String']['input']>;
+  faqCtaBody?: InputMaybe<Scalars['String']['input']>;
+  faqCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  faqCtaUrl?: InputMaybe<Scalars['String']['input']>;
+  aboutHeading?: InputMaybe<Scalars['String']['input']>;
+  aboutHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  aboutBody?: InputMaybe<Scalars['String']['input']>;
+  aboutImagePath?: InputMaybe<Scalars['String']['input']>;
+  aboutImageAlt?: InputMaybe<Scalars['String']['input']>;
+  aboutName?: InputMaybe<Scalars['String']['input']>;
+  aboutRole?: InputMaybe<Scalars['String']['input']>;
+  aboutCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  aboutCtaUrl?: InputMaybe<Scalars['String']['input']>;
+  connectedHeading?: InputMaybe<Scalars['String']['input']>;
+  connectedHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  connectedCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  connectedCtaUrl?: InputMaybe<Scalars['String']['input']>;
+  finalCtaImagePath?: InputMaybe<Scalars['String']['input']>;
+  finalCtaImageAlt?: InputMaybe<Scalars['String']['input']>;
+  finalCtaHeading?: InputMaybe<Scalars['String']['input']>;
+  finalCtaHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  finalCtaBody?: InputMaybe<Scalars['String']['input']>;
+  finalCtaButtonLabel?: InputMaybe<Scalars['String']['input']>;
+  finalCtaButtonUrl?: InputMaybe<Scalars['String']['input']>;
+  footerDescription?: InputMaybe<Scalars['String']['input']>;
+  footerSupportTitle?: InputMaybe<Scalars['String']['input']>;
+  footerSupportLinks?: InputMaybe<Array<InputMaybe<SiteFooterSupportLinksMutation>>>;
+  footerAboutTitle?: InputMaybe<Scalars['String']['input']>;
+  footerAboutLinks?: InputMaybe<Array<InputMaybe<SiteFooterAboutLinksMutation>>>;
+  footerCopyright?: InputMaybe<Scalars['String']['input']>;
+  footerNote?: InputMaybe<Scalars['String']['input']>;
+  footerLogoPath?: InputMaybe<Scalars['String']['input']>;
+  footerLogoAlt?: InputMaybe<Scalars['String']['input']>;
+  footerBigLogoPath?: InputMaybe<Scalars['String']['input']>;
+  footerBigLogoAlt?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null };
+export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, seoTitle: string, seoDescription: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, heroImageAlt: string, headerLogoPath: string, headerLogoAlt: string, mobileMenuToggleLabel: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, testimonialsHeading: string, testimonialsHeadingAccent: string, commandCenterHeading: string, commandCenterHeadingAccent: string, commandCenterBody: string, commandCenterImagePath: string, commandCenterImageAlt: string, howItWorksHeading: string, howItWorksHeadingAccent: string, howItWorksImagePath: string, howItWorksImageAlt: string, pricingHeading: string, pricingSubheading: string, faqHeading: string, faqHeadingAccent: string, faqImagePath: string, faqImageAlt: string, faqCtaHeading: string, faqCtaBody: string, faqCtaLabel: string, faqCtaUrl: string, aboutHeading: string, aboutHeadingAccent: string, aboutBody: string, aboutImagePath: string, aboutImageAlt: string, aboutName: string, aboutRole: string, aboutCtaLabel: string, aboutCtaUrl: string, connectedHeading: string, connectedHeadingAccent: string, connectedCtaLabel: string, connectedCtaUrl: string, finalCtaImagePath: string, finalCtaImageAlt: string, finalCtaHeading: string, finalCtaHeadingAccent: string, finalCtaBody: string, finalCtaButtonLabel: string, finalCtaButtonUrl: string, footerDescription: string, footerSupportTitle: string, footerAboutTitle: string, footerCopyright: string, footerNote: string, footerLogoPath: string, footerLogoAlt: string, footerBigLogoPath: string, footerBigLogoAlt: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, testimonialsList?: Array<{ __typename: 'SiteTestimonialsList', name: string, area: string, quote: string, imagePath: string } | null> | null, howItWorksSteps?: Array<{ __typename: 'SiteHowItWorksSteps', title: string, description: string } | null> | null, pricingPlans?: Array<{ __typename: 'SitePricingPlans', name: string, subtitle: string, price: string, note: string, badge?: string | null, features: Array<string>, buttonLabel: string, buttonUrl: string } | null> | null, faqList?: Array<{ __typename: 'SiteFaqList', question: string, answer: string } | null> | null, footerSupportLinks?: Array<{ __typename: 'SiteFooterSupportLinks', label: string, href: string } | null> | null, footerAboutLinks?: Array<{ __typename: 'SiteFooterAboutLinks', label: string, href: string } | null> | null };
 
 export type SiteQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null } };
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, seoTitle: string, seoDescription: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, heroImageAlt: string, headerLogoPath: string, headerLogoAlt: string, mobileMenuToggleLabel: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, testimonialsHeading: string, testimonialsHeadingAccent: string, commandCenterHeading: string, commandCenterHeadingAccent: string, commandCenterBody: string, commandCenterImagePath: string, commandCenterImageAlt: string, howItWorksHeading: string, howItWorksHeadingAccent: string, howItWorksImagePath: string, howItWorksImageAlt: string, pricingHeading: string, pricingSubheading: string, faqHeading: string, faqHeadingAccent: string, faqImagePath: string, faqImageAlt: string, faqCtaHeading: string, faqCtaBody: string, faqCtaLabel: string, faqCtaUrl: string, aboutHeading: string, aboutHeadingAccent: string, aboutBody: string, aboutImagePath: string, aboutImageAlt: string, aboutName: string, aboutRole: string, aboutCtaLabel: string, aboutCtaUrl: string, connectedHeading: string, connectedHeadingAccent: string, connectedCtaLabel: string, connectedCtaUrl: string, finalCtaImagePath: string, finalCtaImageAlt: string, finalCtaHeading: string, finalCtaHeadingAccent: string, finalCtaBody: string, finalCtaButtonLabel: string, finalCtaButtonUrl: string, footerDescription: string, footerSupportTitle: string, footerAboutTitle: string, footerCopyright: string, footerNote: string, footerLogoPath: string, footerLogoAlt: string, footerBigLogoPath: string, footerBigLogoAlt: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, testimonialsList?: Array<{ __typename: 'SiteTestimonialsList', name: string, area: string, quote: string, imagePath: string } | null> | null, howItWorksSteps?: Array<{ __typename: 'SiteHowItWorksSteps', title: string, description: string } | null> | null, pricingPlans?: Array<{ __typename: 'SitePricingPlans', name: string, subtitle: string, price: string, note: string, badge?: string | null, features: Array<string>, buttonLabel: string, buttonUrl: string } | null> | null, faqList?: Array<{ __typename: 'SiteFaqList', question: string, answer: string } | null> | null, footerSupportLinks?: Array<{ __typename: 'SiteFooterSupportLinks', label: string, href: string } | null> | null, footerAboutLinks?: Array<{ __typename: 'SiteFooterAboutLinks', label: string, href: string } | null> | null } };
 
 export type SiteConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -472,7 +778,7 @@ export type SiteConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null } | null } | null> | null } };
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, seoTitle: string, seoDescription: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, heroImageAlt: string, headerLogoPath: string, headerLogoAlt: string, mobileMenuToggleLabel: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, quickFixHeading: string, quickFixHeadingAccent: string, quickFixBody: string, quickFixStatOneValue: string, quickFixStatOneLabelTop: string, quickFixStatOneLabelBottom: string, quickFixStatTwoValue: string, quickFixStatTwoLabelTop: string, quickFixStatTwoLabelBottom: string, noJargonHeading: string, noJargonHeadingAccent: string, noJargonBody: string, noJargonBadgeLabel: string, noJargonBadgeValue: string, testimonialsHeading: string, testimonialsHeadingAccent: string, commandCenterHeading: string, commandCenterHeadingAccent: string, commandCenterBody: string, commandCenterImagePath: string, commandCenterImageAlt: string, howItWorksHeading: string, howItWorksHeadingAccent: string, howItWorksImagePath: string, howItWorksImageAlt: string, pricingHeading: string, pricingSubheading: string, faqHeading: string, faqHeadingAccent: string, faqImagePath: string, faqImageAlt: string, faqCtaHeading: string, faqCtaBody: string, faqCtaLabel: string, faqCtaUrl: string, aboutHeading: string, aboutHeadingAccent: string, aboutBody: string, aboutImagePath: string, aboutImageAlt: string, aboutName: string, aboutRole: string, aboutCtaLabel: string, aboutCtaUrl: string, connectedHeading: string, connectedHeadingAccent: string, connectedCtaLabel: string, connectedCtaUrl: string, finalCtaImagePath: string, finalCtaImageAlt: string, finalCtaHeading: string, finalCtaHeadingAccent: string, finalCtaBody: string, finalCtaButtonLabel: string, finalCtaButtonUrl: string, footerDescription: string, footerSupportTitle: string, footerAboutTitle: string, footerCopyright: string, footerNote: string, footerLogoPath: string, footerLogoAlt: string, footerBigLogoPath: string, footerBigLogoAlt: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null, quickFixCards?: Array<{ __typename: 'SiteQuickFixCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, noJargonCards?: Array<{ __typename: 'SiteNoJargonCards', title: string, accent: string, href: string, imagePath: string, linkLabel: string } | null> | null, testimonialsList?: Array<{ __typename: 'SiteTestimonialsList', name: string, area: string, quote: string, imagePath: string } | null> | null, howItWorksSteps?: Array<{ __typename: 'SiteHowItWorksSteps', title: string, description: string } | null> | null, pricingPlans?: Array<{ __typename: 'SitePricingPlans', name: string, subtitle: string, price: string, note: string, badge?: string | null, features: Array<string>, buttonLabel: string, buttonUrl: string } | null> | null, faqList?: Array<{ __typename: 'SiteFaqList', question: string, answer: string } | null> | null, footerSupportLinks?: Array<{ __typename: 'SiteFooterSupportLinks', label: string, href: string } | null> | null, footerAboutLinks?: Array<{ __typename: 'SiteFooterAboutLinks', label: string, href: string } | null> | null } | null } | null> | null } };
 
 export const SitePartsFragmentDoc = gql`
     fragment SiteParts on Site {
@@ -481,15 +787,21 @@ export const SitePartsFragmentDoc = gql`
   baseCity
   whatsappNumber
   primaryArea
+  seoTitle
+  seoDescription
   heroImagePath
   heroHeading
   heroHeadingAccent
   heroSubheading
+  heroImageAlt
   headerMenu {
     __typename
     label
     href
   }
+  headerLogoPath
+  headerLogoAlt
+  mobileMenuToggleLabel
   headerWhatsappLabel
   headerWhatsappUrl
   headerPrimaryCtaLabel
@@ -535,6 +847,94 @@ export const SitePartsFragmentDoc = gql`
     imagePath
     linkLabel
   }
+  testimonialsHeading
+  testimonialsHeadingAccent
+  testimonialsList {
+    __typename
+    name
+    area
+    quote
+    imagePath
+  }
+  commandCenterHeading
+  commandCenterHeadingAccent
+  commandCenterBody
+  commandCenterImagePath
+  commandCenterImageAlt
+  howItWorksHeading
+  howItWorksHeadingAccent
+  howItWorksImagePath
+  howItWorksImageAlt
+  howItWorksSteps {
+    __typename
+    title
+    description
+  }
+  pricingHeading
+  pricingSubheading
+  pricingPlans {
+    __typename
+    name
+    subtitle
+    price
+    note
+    badge
+    features
+    buttonLabel
+    buttonUrl
+  }
+  faqHeading
+  faqHeadingAccent
+  faqList {
+    __typename
+    question
+    answer
+  }
+  faqImagePath
+  faqImageAlt
+  faqCtaHeading
+  faqCtaBody
+  faqCtaLabel
+  faqCtaUrl
+  aboutHeading
+  aboutHeadingAccent
+  aboutBody
+  aboutImagePath
+  aboutImageAlt
+  aboutName
+  aboutRole
+  aboutCtaLabel
+  aboutCtaUrl
+  connectedHeading
+  connectedHeadingAccent
+  connectedCtaLabel
+  connectedCtaUrl
+  finalCtaImagePath
+  finalCtaImageAlt
+  finalCtaHeading
+  finalCtaHeadingAccent
+  finalCtaBody
+  finalCtaButtonLabel
+  finalCtaButtonUrl
+  footerDescription
+  footerSupportTitle
+  footerSupportLinks {
+    __typename
+    label
+    href
+  }
+  footerAboutTitle
+  footerAboutLinks {
+    __typename
+    label
+    href
+  }
+  footerCopyright
+  footerNote
+  footerLogoPath
+  footerLogoAlt
+  footerBigLogoPath
+  footerBigLogoAlt
 }
     `;
 export const SiteDocument = gql`

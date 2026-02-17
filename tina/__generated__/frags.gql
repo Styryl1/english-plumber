@@ -4,15 +4,21 @@ fragment SiteParts on Site {
   baseCity
   whatsappNumber
   primaryArea
+  seoTitle
+  seoDescription
   heroImagePath
   heroHeading
   heroHeadingAccent
   heroSubheading
+  heroImageAlt
   headerMenu {
     __typename
     label
     href
   }
+  headerLogoPath
+  headerLogoAlt
+  mobileMenuToggleLabel
   headerWhatsappLabel
   headerWhatsappUrl
   headerPrimaryCtaLabel
@@ -58,4 +64,92 @@ fragment SiteParts on Site {
     imagePath
     linkLabel
   }
+  testimonialsHeading
+  testimonialsHeadingAccent
+  testimonialsList {
+    __typename
+    name
+    area
+    quote
+    imagePath
+  }
+  commandCenterHeading
+  commandCenterHeadingAccent
+  commandCenterBody
+  commandCenterImagePath
+  commandCenterImageAlt
+  howItWorksHeading
+  howItWorksHeadingAccent
+  howItWorksImagePath
+  howItWorksImageAlt
+  howItWorksSteps {
+    __typename
+    title
+    description
+  }
+  pricingHeading
+  pricingSubheading
+  pricingPlans {
+    __typename
+    name
+    subtitle
+    price
+    note
+    badge
+    features
+    buttonLabel
+    buttonUrl
+  }
+  faqHeading
+  faqHeadingAccent
+  faqList {
+    __typename
+    question
+    answer
+  }
+  faqImagePath
+  faqImageAlt
+  faqCtaHeading
+  faqCtaBody
+  faqCtaLabel
+  faqCtaUrl
+  aboutHeading
+  aboutHeadingAccent
+  aboutBody
+  aboutImagePath
+  aboutImageAlt
+  aboutName
+  aboutRole
+  aboutCtaLabel
+  aboutCtaUrl
+  connectedHeading
+  connectedHeadingAccent
+  connectedCtaLabel
+  connectedCtaUrl
+  finalCtaImagePath
+  finalCtaImageAlt
+  finalCtaHeading
+  finalCtaHeadingAccent
+  finalCtaBody
+  finalCtaButtonLabel
+  finalCtaButtonUrl
+  footerDescription
+  footerSupportTitle
+  footerSupportLinks {
+    __typename
+    label
+    href
+  }
+  footerAboutTitle
+  footerAboutLinks {
+    __typename
+    label
+    href
+  }
+  footerCopyright
+  footerNote
+  footerLogoPath
+  footerLogoAlt
+  footerBigLogoPath
+  footerBigLogoAlt
 }

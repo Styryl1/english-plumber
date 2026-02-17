@@ -113,16 +113,60 @@ type SiteNoJargonCards {
   linkLabel: String!
 }
 
+type SiteTestimonialsList {
+  name: String!
+  area: String!
+  quote: String!
+  imagePath: String!
+}
+
+type SiteHowItWorksSteps {
+  title: String!
+  description: String!
+}
+
+type SitePricingPlans {
+  name: String!
+  subtitle: String!
+  price: String!
+  note: String!
+  badge: String
+  features: [String!]!
+  buttonLabel: String!
+  buttonUrl: String!
+}
+
+type SiteFaqList {
+  question: String!
+  answer: String!
+}
+
+type SiteFooterSupportLinks {
+  label: String!
+  href: String!
+}
+
+type SiteFooterAboutLinks {
+  label: String!
+  href: String!
+}
+
 type Site implements Node & Document {
   businessName: String!
   baseCity: String!
   whatsappNumber: String!
   primaryArea: String!
+  seoTitle: String!
+  seoDescription: String!
   heroImagePath: String!
   heroHeading: String!
   heroHeadingAccent: String!
   heroSubheading: String!
+  heroImageAlt: String!
   headerMenu: [SiteHeaderMenu]
+  headerLogoPath: String!
+  headerLogoAlt: String!
+  mobileMenuToggleLabel: String!
   headerWhatsappLabel: String!
   headerWhatsappUrl: String!
   headerPrimaryCtaLabel: String!
@@ -150,6 +194,62 @@ type Site implements Node & Document {
   noJargonBadgeLabel: String!
   noJargonBadgeValue: String!
   noJargonCards: [SiteNoJargonCards]
+  testimonialsHeading: String!
+  testimonialsHeadingAccent: String!
+  testimonialsList: [SiteTestimonialsList]
+  commandCenterHeading: String!
+  commandCenterHeadingAccent: String!
+  commandCenterBody: String!
+  commandCenterImagePath: String!
+  commandCenterImageAlt: String!
+  howItWorksHeading: String!
+  howItWorksHeadingAccent: String!
+  howItWorksImagePath: String!
+  howItWorksImageAlt: String!
+  howItWorksSteps: [SiteHowItWorksSteps]
+  pricingHeading: String!
+  pricingSubheading: String!
+  pricingPlans: [SitePricingPlans]
+  faqHeading: String!
+  faqHeadingAccent: String!
+  faqList: [SiteFaqList]
+  faqImagePath: String!
+  faqImageAlt: String!
+  faqCtaHeading: String!
+  faqCtaBody: String!
+  faqCtaLabel: String!
+  faqCtaUrl: String!
+  aboutHeading: String!
+  aboutHeadingAccent: String!
+  aboutBody: String!
+  aboutImagePath: String!
+  aboutImageAlt: String!
+  aboutName: String!
+  aboutRole: String!
+  aboutCtaLabel: String!
+  aboutCtaUrl: String!
+  connectedHeading: String!
+  connectedHeadingAccent: String!
+  connectedCtaLabel: String!
+  connectedCtaUrl: String!
+  finalCtaImagePath: String!
+  finalCtaImageAlt: String!
+  finalCtaHeading: String!
+  finalCtaHeadingAccent: String!
+  finalCtaBody: String!
+  finalCtaButtonLabel: String!
+  finalCtaButtonUrl: String!
+  footerDescription: String!
+  footerSupportTitle: String!
+  footerSupportLinks: [SiteFooterSupportLinks]
+  footerAboutTitle: String!
+  footerAboutLinks: [SiteFooterAboutLinks]
+  footerCopyright: String!
+  footerNote: String!
+  footerLogoPath: String!
+  footerLogoAlt: String!
+  footerBigLogoPath: String!
+  footerBigLogoAlt: String!
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -188,16 +288,60 @@ input SiteNoJargonCardsFilter {
   linkLabel: StringFilter
 }
 
+input SiteTestimonialsListFilter {
+  name: StringFilter
+  area: StringFilter
+  quote: StringFilter
+  imagePath: StringFilter
+}
+
+input SiteHowItWorksStepsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input SitePricingPlansFilter {
+  name: StringFilter
+  subtitle: StringFilter
+  price: StringFilter
+  note: StringFilter
+  badge: StringFilter
+  features: StringFilter
+  buttonLabel: StringFilter
+  buttonUrl: StringFilter
+}
+
+input SiteFaqListFilter {
+  question: StringFilter
+  answer: StringFilter
+}
+
+input SiteFooterSupportLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input SiteFooterAboutLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input SiteFilter {
   businessName: StringFilter
   baseCity: StringFilter
   whatsappNumber: StringFilter
   primaryArea: StringFilter
+  seoTitle: StringFilter
+  seoDescription: StringFilter
   heroImagePath: StringFilter
   heroHeading: StringFilter
   heroHeadingAccent: StringFilter
   heroSubheading: StringFilter
+  heroImageAlt: StringFilter
   headerMenu: SiteHeaderMenuFilter
+  headerLogoPath: StringFilter
+  headerLogoAlt: StringFilter
+  mobileMenuToggleLabel: StringFilter
   headerWhatsappLabel: StringFilter
   headerWhatsappUrl: StringFilter
   headerPrimaryCtaLabel: StringFilter
@@ -225,6 +369,62 @@ input SiteFilter {
   noJargonBadgeLabel: StringFilter
   noJargonBadgeValue: StringFilter
   noJargonCards: SiteNoJargonCardsFilter
+  testimonialsHeading: StringFilter
+  testimonialsHeadingAccent: StringFilter
+  testimonialsList: SiteTestimonialsListFilter
+  commandCenterHeading: StringFilter
+  commandCenterHeadingAccent: StringFilter
+  commandCenterBody: StringFilter
+  commandCenterImagePath: StringFilter
+  commandCenterImageAlt: StringFilter
+  howItWorksHeading: StringFilter
+  howItWorksHeadingAccent: StringFilter
+  howItWorksImagePath: StringFilter
+  howItWorksImageAlt: StringFilter
+  howItWorksSteps: SiteHowItWorksStepsFilter
+  pricingHeading: StringFilter
+  pricingSubheading: StringFilter
+  pricingPlans: SitePricingPlansFilter
+  faqHeading: StringFilter
+  faqHeadingAccent: StringFilter
+  faqList: SiteFaqListFilter
+  faqImagePath: StringFilter
+  faqImageAlt: StringFilter
+  faqCtaHeading: StringFilter
+  faqCtaBody: StringFilter
+  faqCtaLabel: StringFilter
+  faqCtaUrl: StringFilter
+  aboutHeading: StringFilter
+  aboutHeadingAccent: StringFilter
+  aboutBody: StringFilter
+  aboutImagePath: StringFilter
+  aboutImageAlt: StringFilter
+  aboutName: StringFilter
+  aboutRole: StringFilter
+  aboutCtaLabel: StringFilter
+  aboutCtaUrl: StringFilter
+  connectedHeading: StringFilter
+  connectedHeadingAccent: StringFilter
+  connectedCtaLabel: StringFilter
+  connectedCtaUrl: StringFilter
+  finalCtaImagePath: StringFilter
+  finalCtaImageAlt: StringFilter
+  finalCtaHeading: StringFilter
+  finalCtaHeadingAccent: StringFilter
+  finalCtaBody: StringFilter
+  finalCtaButtonLabel: StringFilter
+  finalCtaButtonUrl: StringFilter
+  footerDescription: StringFilter
+  footerSupportTitle: StringFilter
+  footerSupportLinks: SiteFooterSupportLinksFilter
+  footerAboutTitle: StringFilter
+  footerAboutLinks: SiteFooterAboutLinksFilter
+  footerCopyright: StringFilter
+  footerNote: StringFilter
+  footerLogoPath: StringFilter
+  footerLogoAlt: StringFilter
+  footerBigLogoPath: StringFilter
+  footerBigLogoAlt: StringFilter
 }
 
 type SiteConnectionEdges {
@@ -283,16 +483,60 @@ input SiteNoJargonCardsMutation {
   linkLabel: String
 }
 
+input SiteTestimonialsListMutation {
+  name: String
+  area: String
+  quote: String
+  imagePath: String
+}
+
+input SiteHowItWorksStepsMutation {
+  title: String
+  description: String
+}
+
+input SitePricingPlansMutation {
+  name: String
+  subtitle: String
+  price: String
+  note: String
+  badge: String
+  features: [String]
+  buttonLabel: String
+  buttonUrl: String
+}
+
+input SiteFaqListMutation {
+  question: String
+  answer: String
+}
+
+input SiteFooterSupportLinksMutation {
+  label: String
+  href: String
+}
+
+input SiteFooterAboutLinksMutation {
+  label: String
+  href: String
+}
+
 input SiteMutation {
   businessName: String
   baseCity: String
   whatsappNumber: String
   primaryArea: String
+  seoTitle: String
+  seoDescription: String
   heroImagePath: String
   heroHeading: String
   heroHeadingAccent: String
   heroSubheading: String
+  heroImageAlt: String
   headerMenu: [SiteHeaderMenuMutation]
+  headerLogoPath: String
+  headerLogoAlt: String
+  mobileMenuToggleLabel: String
   headerWhatsappLabel: String
   headerWhatsappUrl: String
   headerPrimaryCtaLabel: String
@@ -320,6 +564,62 @@ input SiteMutation {
   noJargonBadgeLabel: String
   noJargonBadgeValue: String
   noJargonCards: [SiteNoJargonCardsMutation]
+  testimonialsHeading: String
+  testimonialsHeadingAccent: String
+  testimonialsList: [SiteTestimonialsListMutation]
+  commandCenterHeading: String
+  commandCenterHeadingAccent: String
+  commandCenterBody: String
+  commandCenterImagePath: String
+  commandCenterImageAlt: String
+  howItWorksHeading: String
+  howItWorksHeadingAccent: String
+  howItWorksImagePath: String
+  howItWorksImageAlt: String
+  howItWorksSteps: [SiteHowItWorksStepsMutation]
+  pricingHeading: String
+  pricingSubheading: String
+  pricingPlans: [SitePricingPlansMutation]
+  faqHeading: String
+  faqHeadingAccent: String
+  faqList: [SiteFaqListMutation]
+  faqImagePath: String
+  faqImageAlt: String
+  faqCtaHeading: String
+  faqCtaBody: String
+  faqCtaLabel: String
+  faqCtaUrl: String
+  aboutHeading: String
+  aboutHeadingAccent: String
+  aboutBody: String
+  aboutImagePath: String
+  aboutImageAlt: String
+  aboutName: String
+  aboutRole: String
+  aboutCtaLabel: String
+  aboutCtaUrl: String
+  connectedHeading: String
+  connectedHeadingAccent: String
+  connectedCtaLabel: String
+  connectedCtaUrl: String
+  finalCtaImagePath: String
+  finalCtaImageAlt: String
+  finalCtaHeading: String
+  finalCtaHeadingAccent: String
+  finalCtaBody: String
+  finalCtaButtonLabel: String
+  finalCtaButtonUrl: String
+  footerDescription: String
+  footerSupportTitle: String
+  footerSupportLinks: [SiteFooterSupportLinksMutation]
+  footerAboutTitle: String
+  footerAboutLinks: [SiteFooterAboutLinksMutation]
+  footerCopyright: String
+  footerNote: String
+  footerLogoPath: String
+  footerLogoAlt: String
+  footerBigLogoPath: String
+  footerBigLogoAlt: String
 }
 
 schema {
