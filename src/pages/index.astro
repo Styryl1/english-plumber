@@ -7,6 +7,7 @@ import EditableHeaderHero from '../components/EditableHeaderHero.astro';
 import EditableAutoPilotSection from '../components/EditableAutoPilotSection.astro';
 import EditableQuickFixSection from '../components/EditableQuickFixSection.astro';
 import EditableNoJargonSection from '../components/EditableNoJargonSection.astro';
+import EditableRemainingSite from '../components/EditableRemainingSite.astro';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -1173,7 +1174,7 @@ const initialSiteContent = siteContentQuery.data.site;
     <EditableAutoPilotSection site={initialSiteContent} />
     <EditableQuickFixSection site={initialSiteContent} />
     <EditableNoJargonSection site={initialSiteContent} />
-    <Fragment set:html={bodyInnerWithoutHeaderHero} />
+    <EditableRemainingSite site={initialSiteContent} />
     <SiteContentBridge {...siteContentQuery} client:tina />
   </body>
 </html>

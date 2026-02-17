@@ -1,0 +1,464 @@
+---
+const { site } = Astro.props;
+
+const businessName = site?.businessName || 'English Plumber';
+const baseCity = site?.baseCity || 'Medemblik';
+const primaryArea = site?.primaryArea || 'Hoorn, Heerhugowaard, Purmerend, Alkmaar';
+const whatsappNumber = site?.whatsappNumber || '+31 6 428 699 31';
+const whatsappUrl = site?.headerWhatsappUrl || site?.heroPrimaryCtaUrl || 'https://wa.me/31642869931';
+
+const testimonials = [
+  {
+    name: 'Cathy F.',
+    area: `${baseCity}`,
+    quote: 'Quick response, clear communication in English, and the repair was done cleanly.',
+    imagePath: '/api/media/file/Ellipse%201978.png',
+  },
+  {
+    name: 'Brenda M.',
+    area: 'Hoorn',
+    quote: 'Friendly service and transparent pricing. My radiator issue was fixed quickly and everything was explained clearly.',
+    imagePath: '/api/media/file/testimonial%20photo%204.webp',
+  },
+  {
+    name: 'Mark L.',
+    area: 'Purmerend',
+    quote: 'Boiler servicing was smooth and professional. Heating is stable again and communication over WhatsApp made everything easy.',
+    imagePath: '/api/media/file/Ellipse%201979.png',
+  },
+  {
+    name: 'Angela D.',
+    area: 'Alkmaar',
+    quote: 'Great option for expats in North Holland. Easy to share photos on WhatsApp and book the right visit quickly.',
+    imagePath: '/api/media/file/testimonial%20photo%205.webp',
+  },
+];
+
+const steps = [
+  {
+    title: 'Send Photos on WhatsApp',
+    description: 'Share photos or a short video of the issue and your postcode.',
+  },
+  {
+    title: 'Problem Review',
+    description: 'We review the issue and recommend the best repair approach.',
+  },
+  {
+    title: 'Clear Quote & Plan',
+    description: 'You get transparent pricing: 95 EUR per hour labour and 145 EUR for boiler servicing.',
+  },
+  {
+    title: 'Repair & Follow-Up',
+    description: 'We complete the job cleanly and stay available for follow-up questions.',
+  },
+];
+
+const plans = [
+  {
+    name: 'Standard',
+    subtitle: 'General plumbing visit',
+    price: '95 EUR / hour',
+    note: 'Boiler servicing: 145 EUR',
+    badge: 'Most Requested',
+    features: [
+      'Boiler, tap and radiator repairs',
+      'No drain services',
+      `Home visits in ${baseCity} area`,
+      'Clear diagnosis and repair plan',
+    ],
+  },
+  {
+    name: 'Heating Focus',
+    subtitle: 'Ideal for boiler and radiator issues',
+    price: '95 EUR / hour',
+    note: 'Detailed heating diagnosis',
+    badge: '',
+    features: [
+      'Boiler brands: Vaillant, Intergas, Remeha, ATAG',
+      'Flexible appointment windows',
+      'Free no-obligation quote',
+      'Fair parts pricing',
+    ],
+  },
+  {
+    name: 'Landlord Support',
+    subtitle: 'Planned support for rental homes',
+    price: `Primary area: ${primaryArea}`,
+    note: 'WhatsApp for fast triage',
+    badge: '',
+    features: [
+      'Radiator installation and repair',
+      'Tap repair and replacement',
+      'General plumbing handyman',
+      'Follow-up support over WhatsApp',
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: `Where does ${businessName} provide service?`,
+    a: `Primary service area includes ${baseCity}, ${primaryArea}. Nearby towns within about 40km are also possible.`,
+  },
+  {
+    q: 'Do you work in Amsterdam or Almere?',
+    a: 'Not based in Amsterdam or Almere. If your location is nearby, send a WhatsApp message and we can confirm availability.',
+  },
+  {
+    q: 'What services do you offer?',
+    a: 'Boiler servicing, radiator installation and repair, tap repair and replacement, and general plumbing handyman work. We do not offer drain services.',
+  },
+  {
+    q: 'How does pricing work?',
+    a: '95 EUR per hour labour, 145 EUR for boiler servicing, and free quotes. WhatsApp photos and text for a fast first assessment.',
+  },
+];
+---
+
+<div class="mb-[78px] lg:mb-[263px] mt-[87px] lg:mt-[188px]" id="service-area" data-native-remaining="true">
+  <div class="lg:container max-lg:px-4 overflow-hidden">
+    <h2 class="capitalize font-450 whitespace-nowrap text-heading">
+      <span class="whitespace-pre-wrap">Trusted by local homes</span>
+      <br />
+      <em class="whitespace-pre-wrap font-victorSerif font-medium italic text-heading">for plumbing and heating</em>
+    </h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-[42px]">
+      {testimonials.map((item) => (
+        <div class="w-full p-4 rounded-2xl text-[#52525B] bg-grey-100 transition-all duration-300 ease-in-out min-h-[169px]">
+          <div class="relative z-10 flex items-center gap-2">
+            <img
+              alt={`Profile ${item.name}`}
+              loading="lazy"
+              width="40"
+              height="40"
+              decoding="async"
+              class="shrink-0 size-10 object-cover rounded-full"
+              src={item.imagePath}
+            />
+            <div class="flex flex-col gap-[2px]">
+              <div class="flex items-center gap-1">
+                <span class="text-sm">{item.name}</span>
+              </div>
+              <span class="text-xs text-[#71717A]">{item.area}</span>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-[#71717A]">{item.quote}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div class="mb-[127px] lg:mb-[167px]" id="services">
+  <div class="lg:container max-lg:px-4 xl:px-[115px]">
+    <h2 class="font-450 text-center text-heading">
+      <span class="whitespace-pre-wrap">Your Plumbing Command Center,</span>
+      <br />
+      <em class="whitespace-pre-wrap font-victorSerif capitalize font-medium text-heading">All in one place.</em>
+    </h2>
+    <p class="text-center text-muted-foreground mt-4 max-w-[900px] mx-auto">
+      Send photos and short videos on WhatsApp. {businessName} reviews the issue, shares a clear quote, and books your visit quickly.
+    </p>
+    <div class="mt-10 rounded-[14px] overflow-hidden h-[360px] lg:h-[520px]">
+      <img
+        alt="Plumber service overview"
+        loading="lazy"
+        width="1200"
+        height="700"
+        decoding="async"
+        class="w-full h-full object-cover"
+        src="/IMG_8233.PNG"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="mb-24 lg:mb-30" id="how-it-works">
+  <div class="lg:container max-lg:px-4">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
+      <div
+        style="background:linear-gradient(190deg, #A7DAFF 7.44%, #3DA3ED 97.69%)"
+        class="h-[420px] lg:h-[640px] w-full lg:w-[600px] rounded-[14px] bg-grey-100 relative flex items-center justify-center"
+      >
+        <img
+          alt="Our Process"
+          loading="lazy"
+          width="640"
+          height="600"
+          decoding="async"
+          class="rounded-[14px] absolute object-cover w-full h-full"
+          src="/api/media/file/miles%20bloodwork.webp"
+        />
+      </div>
+
+      <div class="flex-1">
+        <h3 class="text-4xl lg:text-[48px] font-450 capitalize mb-6 lg:mb-10">
+          How <em class="font-victorSerif font-medium italic">it works</em>
+        </h3>
+        <div class="flex flex-col gap-4 lg:gap-6">
+          {steps.map((step, index) => (
+            <div class="flex flex-col">
+              <div>
+                <p class="text-xl font-400 inline text-primary-blue-zodiac">{`0${index + 1}`}/</p>
+                <span class="text-2xl lg:text-[36px] font-400 capitalize ml-2 text-primary-blue-zodiac">{step.title}</span>
+              </div>
+              <div class="overflow-hidden mb-0 mt-3.5" style="max-height:200px">
+                <p class="font-400 text-grey-500 lg:text-xl text-lg">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-24 lg:mt-30 mb-24 lg:mb-30" id="pricing">
+  <div class="lg:container max-lg:px-4">
+    <h2 class="text-blueZodiac font-medium italic font-victorSerif text-heading-sm">Choose Your Service</h2>
+    <p class="capitalize mt-2 text-blueZodiac font-450 text-sm sm:text-base">
+      Plumbing and heating support tailored for homes in and around {baseCity}.
+    </p>
+    <div class="grid lg:grid-cols-3 gap-8 mt-10">
+      {plans.map((plan) => (
+        <div class="flex flex-col h-full gap-6 relative">
+          {plan.badge && (
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs rounded-full bg-blueZodiac text-white px-4 py-1">
+              {plan.badge}
+            </span>
+          )}
+          <div class="bg-grey-50 p-6 h-full border-[0.5px] border-grey-150 rounded-2xl">
+            <h3 class="text-[42px] font-450 text-center">
+              {plan.name}
+            </h3>
+            <p class="capitalize text-center text-sm">{plan.subtitle}</p>
+            <h3 class="text-center italic font-victorSerif font-semibold text-[40px] text-blueZodiac mt-4">{plan.price}</h3>
+            <p class="text-center italic font-victorSerif font-semibold text-xl text-blueZodiac mb-4">{plan.note}</p>
+            <ul class="mt-4 flex flex-col gap-3 text-sm text-[#3f3f46]">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 size-1.5 rounded-full bg-blueZodiac shrink-0"></span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6">
+              <a
+                class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all font-aspekta h-[51px] px-[42px] py-3 text-base bg-blueZodiac text-skyBlue hover:bg-blueZodiac/90 active:bg-blueZodiac font-medium"
+                href={whatsappUrl}
+              >
+                WhatsApp Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div class="mb-[157px] lg:mb-[188px]" id="faq">
+  <div class="lg:container max-lg:px-4 grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 items-start">
+    <div>
+      <h3 class="text-4xl lg:text-[48px] font-450 mb-6">
+        Frequently Asked <em class="font-victorSerif font-medium italic">Plumbing Questions</em>
+      </h3>
+      <div class="flex flex-col gap-4">
+        {faqs.map((item) => (
+          <details class="bg-grey-50 border border-grey-150 rounded-2xl p-5 group">
+            <summary class="cursor-pointer list-none font-500 text-blueZodiac flex items-center justify-between gap-4">
+              <span>{item.q}</span>
+              <span class="text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-3 text-[#6a6e70]">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="lg:pt-[58px]">
+      <div class="rounded-2xl overflow-hidden">
+        <img
+          alt="FAQ support"
+          loading="lazy"
+          width="452"
+          height="276"
+          decoding="async"
+          class="w-full h-full object-cover rounded-2xl"
+          src="/faq.webp"
+        />
+      </div>
+      <div
+        style="box-shadow:-9px 88px 36px 0 rgba(0, 0, 0, 0.01), -5px 50px 30px 0 rgba(0, 0, 0, 0.05), -2px 22px 22px 0 rgba(0, 0, 0, 0.09), -1px 6px 12px 0 rgba(0, 0, 0, 0.10);border:1px solid rgba(255, 255, 255, 0.15);background:rgba(0, 0, 0, 0.10);backdrop-filter:blur(69.5px)"
+        class="py-6 relative z-10 px-[42px] rounded-2xl text-center flex flex-col items-center justify-center gap-4 -mt-10"
+      >
+        <div>
+          <h5 class="font-medium text-xl text-white">Still have questions?</h5>
+          <p class="italic text-grey-100 mt-1 font-victorSerif font-medium">Send a WhatsApp message and include photos of the problem.</p>
+        </div>
+        <a
+          style="border-radius:1920px;border:1px solid rgba(4, 21, 39, 0.10);background:rgba(255, 255, 255, 0.33);box-shadow:0 4px 15px 0 rgba(0, 0, 0, 0.05)"
+          class="flex items-center text-white font-medium justify-center gap-3 py-5 px-10 rounded-full"
+          href={whatsappUrl}
+        >
+          <span class="whitespace-nowrap">WhatsApp us</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-[78px] lg:mb-[123px] mt-[78px] lg:mt-[188px]" id="about">
+  <div class="lg:container max-lg:px-4 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[90px]">
+    <div class="max-lg:order-2">
+      <div class="rounded-[14px] overflow-hidden h-[544px]">
+        <img
+          alt="Founder"
+          loading="lazy"
+          width="519"
+          height="544"
+          decoding="async"
+          class="w-full lg:w-[519px] h-[544px] object-cover"
+          src="/api/media/file/nate%20%2B%20fam.png"
+        />
+      </div>
+      <h3 class="mt-5 text-balticSea text-xl">{businessName}</h3>
+      <p class="text-grey-500 italic font-medium font-victorSerif text-xl">Friendly local plumber in {baseCity}</p>
+    </div>
+
+    <div class="max-lg:order-1">
+      <h2 class="font-450 text-heading">
+        <span class="whitespace-pre-wrap">Built Around</span>
+        <br />
+        <em class="whitespace-pre-wrap font-victorSerif font-medium text-heading">Clear, Reliable Service</em>
+      </h2>
+      <p class="text-muted-foreground mt-4 max-w-[620px]">
+        {businessName} was built to give expats and Dutch homeowners a reliable plumber with clear communication, fair pricing, and quality workmanship.
+      </p>
+      <div class="mt-8">
+        <div class="relative rounded-full w-fit">
+          <div
+            class="absolute inset-0 z-[1] rounded-full pointer-events-none"
+            style="padding:1.44px;background:linear-gradient(0deg, rgba(0, 15, 31, 0) 0%, rgba(0, 15, 31, 0.66) 49%, rgba(0, 15, 31, 0) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+          ></div>
+          <div
+            class="absolute inset-[1.44px] z-[2] rounded-full pointer-events-none"
+            style="padding:1.44px;background:linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.15) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;will-change:transform"
+          ></div>
+          <a
+            class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all font-aspekta h-[51px] px-[42px] py-3 text-base bg-blueZodiac text-skyBlue hover:bg-blueZodiac/90 active:bg-blueZodiac font-medium"
+            href={whatsappUrl}
+          >
+            Book Your Visit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-[78px] lg:mb-[123px] mt-[78px] lg:mt-[263px]">
+  <div class="lg:container max-lg:px-4">
+    <div class="flex flex-col max-lg:gap-10 lg:flex-row items-start justify-between">
+      <h2 class="font-450 text-heading">
+        <span>Quickly Connected</span>
+        <br />
+        <em class="font-victorSerif font-medium italic text-heading">to Your Home</em>
+      </h2>
+      <div class="group relative rounded-full w-fit bg-[#D5EFFF] [--btn-bg:#D5EFFF] hover:[--btn-bg:#C0E7FF] active:[--btn-bg:#C0E7FF] transition-colors duration-200">
+        <div
+          class="relative rounded-full border-[1.44px] border-transparent overflow-hidden shadow-buttonPrimary bg-[var(--btn-bg)]"
+          style="background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%) border-box"
+        >
+          <div
+            class="absolute inset-0 rounded-full pointer-events-none"
+            style="border:1.44px solid transparent;background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%) border-box"
+          ></div>
+          <a
+            class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] font-550 !bg-transparent"
+            href={whatsappUrl}
+          >
+            Message on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="relative overflow-hidden">
+  <div class="h-[625px] lg:h-[847px]">
+    <img
+      alt="Final CTA"
+      loading="lazy"
+      width="1600"
+      height="900"
+      decoding="async"
+      class="w-full h-[625px] lg:h-[847px] object-cover"
+      src="/api/media/file/woman%20newsletter.jpg"
+    />
+  </div>
+  <div class="absolute bottom-0 left-0 w-full bg-black/20 h-full z-[1] inset-0"></div>
+  <div class="container absolute inset-0 z-10 h-full flex flex-col pt-[95px] lg:pt-0 lg:justify-center">
+    <div>
+      <h2 class="text-[7.96vw]/[46px] xs:text-[32px]/[46px] lg:text-[64px]/[92px] font-550 text-white">
+        <span class="whitespace-pre-wrap">Ready for fast plumbing help?</span>
+        <br />
+        <em class="whitespace-pre-wrap font-victorSerif leading-[42px] lg:leading-[84px] font-medium">
+          Send photos on WhatsApp and get a clear plan.
+        </em>
+      </h2>
+      <p class="text-white/90 text-base lg:text-xl mt-5 max-w-[760px]">
+        From boiler issues to leaking taps, we help you solve problems before they become expensive.
+      </p>
+      <div class="mt-8">
+        <a
+          class="relative inline-flex items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] font-550"
+          href={whatsappUrl}
+        >
+          WhatsApp {whatsappNumber}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-[#0d1216] text-grey-200 py-14">
+  <div class="lg:container max-lg:px-4">
+    <div class="flex flex-col lg:flex-row items-start justify-between gap-10">
+      <div>
+        <img alt={`${businessName} logo`} loading="lazy" width="120" height="32" class="h-8 w-auto" src="/logo-blue.svg" />
+        <p class="mt-5 text-sm text-grey-500 max-w-[460px]">
+          {businessName} provides plumbing and heating services in North Holland. Final scope and parts pricing are confirmed after assessment. Emergency 24/7 callouts are not offered.
+        </p>
+      </div>
+
+      <div class="flex lg:gap-10 max-lg:w-full">
+        <div>
+          <p class="text-grey-50">Help &amp; Support</p>
+          <ul class="mt-6 flex flex-col gap-2 text-xs text-grey-200">
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href={whatsappUrl}>Contact Us</a></li>
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href="#faq">FAQs</a></li>
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href="#pricing">Pricing</a></li>
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href="#services">Services</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-grey-50">{`About ${businessName}`}</p>
+          <ul class="mt-6 flex flex-col gap-2 text-xs text-grey-200">
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href="#about">About Us</a></li>
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href="#service-area">Service Area</a></li>
+            <li><a class="cursor-pointer hover:underline hover:text-grey-50" href={whatsappUrl}>WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-center justify-between mt-10 border-t border-white/10 pt-6">
+      <img alt={`${businessName} Logo`} loading="lazy" width="370" height="100" decoding="async" data-nimg="1" class="lg:hidden w-full h-[100px] object-contain mb-6" src="/big-logo.svg" />
+      <p class="text-grey-500 text-sm font-medium">{`© ${new Date().getFullYear()} ${businessName} | All Rights Reserved`}</p>
+      <p class="text-grey-500 text-xs mt-3 lg:mt-0">WhatsApp is the fastest way to reach us.</p>
+    </div>
+  </div>
+</footer>
