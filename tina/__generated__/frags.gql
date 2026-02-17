@@ -19,4 +19,13 @@ fragment SiteParts on Site {
   headerPrimaryCtaUrl
   heroPrimaryCtaLabel
   heroPrimaryCtaUrl
+  autoPilotHeading
+  autoPilotHeadingAccent
+  autoPilotCtaLabel
+  autoPilotCtaUrl
+  autoPilotChips {
+    __typename
+    label
+    iconPath
+  }
 }

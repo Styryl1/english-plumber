@@ -92,6 +92,11 @@ type SiteHeaderMenu {
   href: String!
 }
 
+type SiteAutoPilotChips {
+  label: String!
+  iconPath: String!
+}
+
 type Site implements Node & Document {
   businessName: String!
   baseCity: String!
@@ -108,6 +113,11 @@ type Site implements Node & Document {
   headerPrimaryCtaUrl: String!
   heroPrimaryCtaLabel: String!
   heroPrimaryCtaUrl: String!
+  autoPilotHeading: String!
+  autoPilotHeadingAccent: String!
+  autoPilotCtaLabel: String!
+  autoPilotCtaUrl: String!
+  autoPilotChips: [SiteAutoPilotChips]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -123,6 +133,11 @@ input StringFilter {
 input SiteHeaderMenuFilter {
   label: StringFilter
   href: StringFilter
+}
+
+input SiteAutoPilotChipsFilter {
+  label: StringFilter
+  iconPath: StringFilter
 }
 
 input SiteFilter {
@@ -141,6 +156,11 @@ input SiteFilter {
   headerPrimaryCtaUrl: StringFilter
   heroPrimaryCtaLabel: StringFilter
   heroPrimaryCtaUrl: StringFilter
+  autoPilotHeading: StringFilter
+  autoPilotHeadingAccent: StringFilter
+  autoPilotCtaLabel: StringFilter
+  autoPilotCtaUrl: StringFilter
+  autoPilotChips: SiteAutoPilotChipsFilter
 }
 
 type SiteConnectionEdges {
@@ -178,6 +198,11 @@ input SiteHeaderMenuMutation {
   href: String
 }
 
+input SiteAutoPilotChipsMutation {
+  label: String
+  iconPath: String
+}
+
 input SiteMutation {
   businessName: String
   baseCity: String
@@ -194,6 +219,11 @@ input SiteMutation {
   headerPrimaryCtaUrl: String
   heroPrimaryCtaLabel: String
   heroPrimaryCtaUrl: String
+  autoPilotHeading: String
+  autoPilotHeadingAccent: String
+  autoPilotCtaLabel: String
+  autoPilotCtaUrl: String
+  autoPilotChips: [SiteAutoPilotChipsMutation]
 }
 
 schema {

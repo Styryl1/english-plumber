@@ -171,6 +171,12 @@ export type SiteHeaderMenu = {
   href: Scalars['String']['output'];
 };
 
+export type SiteAutoPilotChips = {
+  __typename?: 'SiteAutoPilotChips';
+  label: Scalars['String']['output'];
+  iconPath: Scalars['String']['output'];
+};
+
 export type Site = Node & Document & {
   __typename?: 'Site';
   businessName: Scalars['String']['output'];
@@ -188,6 +194,11 @@ export type Site = Node & Document & {
   headerPrimaryCtaUrl: Scalars['String']['output'];
   heroPrimaryCtaLabel: Scalars['String']['output'];
   heroPrimaryCtaUrl: Scalars['String']['output'];
+  autoPilotHeading: Scalars['String']['output'];
+  autoPilotHeadingAccent: Scalars['String']['output'];
+  autoPilotCtaLabel: Scalars['String']['output'];
+  autoPilotCtaUrl: Scalars['String']['output'];
+  autoPilotChips?: Maybe<Array<Maybe<SiteAutoPilotChips>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -203,6 +214,11 @@ export type StringFilter = {
 export type SiteHeaderMenuFilter = {
   label?: InputMaybe<StringFilter>;
   href?: InputMaybe<StringFilter>;
+};
+
+export type SiteAutoPilotChipsFilter = {
+  label?: InputMaybe<StringFilter>;
+  iconPath?: InputMaybe<StringFilter>;
 };
 
 export type SiteFilter = {
@@ -221,6 +237,11 @@ export type SiteFilter = {
   headerPrimaryCtaUrl?: InputMaybe<StringFilter>;
   heroPrimaryCtaLabel?: InputMaybe<StringFilter>;
   heroPrimaryCtaUrl?: InputMaybe<StringFilter>;
+  autoPilotHeading?: InputMaybe<StringFilter>;
+  autoPilotHeadingAccent?: InputMaybe<StringFilter>;
+  autoPilotCtaLabel?: InputMaybe<StringFilter>;
+  autoPilotCtaUrl?: InputMaybe<StringFilter>;
+  autoPilotChips?: InputMaybe<SiteAutoPilotChipsFilter>;
 };
 
 export type SiteConnectionEdges = {
@@ -306,6 +327,11 @@ export type SiteHeaderMenuMutation = {
   href?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SiteAutoPilotChipsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  iconPath?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SiteMutation = {
   businessName?: InputMaybe<Scalars['String']['input']>;
   baseCity?: InputMaybe<Scalars['String']['input']>;
@@ -322,16 +348,21 @@ export type SiteMutation = {
   headerPrimaryCtaUrl?: InputMaybe<Scalars['String']['input']>;
   heroPrimaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
   heroPrimaryCtaUrl?: InputMaybe<Scalars['String']['input']>;
+  autoPilotHeading?: InputMaybe<Scalars['String']['input']>;
+  autoPilotHeadingAccent?: InputMaybe<Scalars['String']['input']>;
+  autoPilotCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  autoPilotCtaUrl?: InputMaybe<Scalars['String']['input']>;
+  autoPilotChips?: InputMaybe<Array<InputMaybe<SiteAutoPilotChipsMutation>>>;
 };
 
-export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null };
+export type SitePartsFragment = { __typename: 'Site', businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null };
 
 export type SiteQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null } };
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null } };
 
 export type SiteConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -343,7 +374,7 @@ export type SiteConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null } | null } | null> | null } };
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, businessName: string, baseCity: string, whatsappNumber: string, primaryArea: string, heroImagePath: string, heroHeading: string, heroHeadingAccent: string, heroSubheading: string, headerWhatsappLabel: string, headerWhatsappUrl: string, headerPrimaryCtaLabel: string, headerPrimaryCtaUrl: string, heroPrimaryCtaLabel: string, heroPrimaryCtaUrl: string, autoPilotHeading: string, autoPilotHeadingAccent: string, autoPilotCtaLabel: string, autoPilotCtaUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, headerMenu?: Array<{ __typename: 'SiteHeaderMenu', label: string, href: string } | null> | null, autoPilotChips?: Array<{ __typename: 'SiteAutoPilotChips', label: string, iconPath: string } | null> | null } | null } | null> | null } };
 
 export const SitePartsFragmentDoc = gql`
     fragment SiteParts on Site {
@@ -367,6 +398,15 @@ export const SitePartsFragmentDoc = gql`
   headerPrimaryCtaUrl
   heroPrimaryCtaLabel
   heroPrimaryCtaUrl
+  autoPilotHeading
+  autoPilotHeadingAccent
+  autoPilotCtaLabel
+  autoPilotCtaUrl
+  autoPilotChips {
+    __typename
+    label
+    iconPath
+  }
 }
     `;
 export const SiteDocument = gql`

@@ -27,6 +27,11 @@ const SiteContentBridge = (props) => {
       headerPrimaryCtaUrl: tinaField(site, 'headerPrimaryCtaUrl'),
       heroPrimaryCtaLabel: tinaField(site, 'heroPrimaryCtaLabel'),
       heroPrimaryCtaUrl: tinaField(site, 'heroPrimaryCtaUrl'),
+      autoPilotHeading: tinaField(site, 'autoPilotHeading'),
+      autoPilotHeadingAccent: tinaField(site, 'autoPilotHeadingAccent'),
+      autoPilotCtaLabel: tinaField(site, 'autoPilotCtaLabel'),
+      autoPilotCtaUrl: tinaField(site, 'autoPilotCtaUrl'),
+      autoPilotChips: tinaField(site, 'autoPilotChips'),
     };
 
     window.__SITE_CONTENT__ = site;

@@ -138,6 +138,50 @@ var config_default = defineConfig({
             name: "heroPrimaryCtaUrl",
             label: "Hero CTA URL",
             required: true
+          },
+          {
+            type: "string",
+            name: "autoPilotHeading",
+            label: "AutoPilot Heading",
+            required: true
+          },
+          {
+            type: "string",
+            name: "autoPilotHeadingAccent",
+            label: "AutoPilot Heading Accent",
+            required: true
+          },
+          {
+            type: "string",
+            name: "autoPilotCtaLabel",
+            label: "AutoPilot CTA Label",
+            required: true
+          },
+          {
+            type: "string",
+            name: "autoPilotCtaUrl",
+            label: "AutoPilot CTA URL",
+            required: true
+          },
+          {
+            type: "object",
+            name: "autoPilotChips",
+            label: "AutoPilot Chips",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "label",
+                label: "Label",
+                required: true
+              },
+              {
+                type: "string",
+                name: "iconPath",
+                label: "Icon Path",
+                required: true
+              }
+            ]
           }
         ]
       }

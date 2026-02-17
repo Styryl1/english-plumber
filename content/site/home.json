@@ -42,5 +42,51 @@
   "headerPrimaryCtaLabel": "Free Quote",
   "headerPrimaryCtaUrl": "https://wa.me/31642869931",
   "heroPrimaryCtaLabel": "WhatsApp +31 6 428 699 31",
-  "heroPrimaryCtaUrl": "https://wa.me/31642869931"
+  "heroPrimaryCtaUrl": "https://wa.me/31642869931",
+  "autoPilotHeading": "One Trusted Plumber",
+  "autoPilotHeadingAccent": "Fast, Clean Repairs",
+  "autoPilotCtaLabel": "WhatsApp +31 6 428 699 31",
+  "autoPilotCtaUrl": "https://wa.me/31642869931",
+  "autoPilotChips": [
+    {
+      "label": "Boiler Servicing",
+      "iconPath": "/api/media/file/Metabolic%20Health.png"
+    },
+    {
+      "label": "Radiator Installation",
+      "iconPath": "/api/media/file/Kidney%20and%20Liver%20Function.png"
+    },
+    {
+      "label": "Radiator Repair",
+      "iconPath": "/api/media/file/Cardiovascular%20Health.png"
+    },
+    {
+      "label": "Tap Repair",
+      "iconPath": "/api/media/file/Hormone%20Levels.png"
+    },
+    {
+      "label": "Tap Replacement",
+      "iconPath": "/api/media/file/Nutrient%20Levels.png"
+    },
+    {
+      "label": "General Plumbing",
+      "iconPath": "/api/media/file/Inflammation%20Markers.png"
+    },
+    {
+      "label": "Heating Checks",
+      "iconPath": "/api/media/file/Immunity%20Markers.png"
+    },
+    {
+      "label": "Home Plumbing Checks",
+      "iconPath": "/api/media/file/Biological%20Aging%20Rate.png"
+    },
+    {
+      "label": "Leak Detection",
+      "iconPath": "/api/media/file/Autoimmune%20Indicators.png"
+    },
+    {
+      "label": "Boiler Brands: Vaillant, Intergas, Remeha, ATAG",
+      "iconPath": "/api/media/file/Blood%20Cell%20Analysis.png"
+    }
+  ]
 }

@@ -4,6 +4,7 @@ import path from 'node:path';
 import client from '../../tina/__generated__/client';
 import SiteContentBridge from '../../tina/pages/SiteContentBridge.jsx';
 import EditableHeaderHero from '../components/EditableHeaderHero.astro';
+import EditableAutoPilotSection from '../components/EditableAutoPilotSection.astro';
 
 const sourcePath = path.join(process.cwd(), 'src/mirror/live-index.html');
 
@@ -78,6 +79,16 @@ function stripMirroredHeaderAndHero(input: string): string {
     const nextSection = output.indexOf(nextSectionMarker, heroStart);
     if (nextSection !== -1) {
       output = `${output.slice(0, heroStart)}${output.slice(nextSection)}`;
+    }
+  }
+
+  const firstFeatureSectionMarker = '<div class="mt-[52px] lg:mt-[110px] mb-[52px] lg:mb-[110px]">';
+  const secondFeatureSectionMarker = '<div class="mt-[52px] lg:mt-[265px] mb-[63px] lg:mb-[198px]">';
+  const firstFeatureStart = output.indexOf(firstFeatureSectionMarker);
+  if (firstFeatureStart !== -1) {
+    const secondFeatureStart = output.indexOf(secondFeatureSectionMarker, firstFeatureStart);
+    if (secondFeatureStart !== -1) {
+      output = `${output.slice(0, firstFeatureStart)}${output.slice(secondFeatureStart)}`;
     }
   }
 
@@ -230,6 +241,8 @@ const initialSiteContent = siteContentQuery.data.site;
         let HERO_HEADING_ACCENT = 'Plumber in Medemblik.';
         let HERO_SUBHEADING =
           'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.';
+        let AUTOPILOT_HEADING = 'One Trusted Plumber';
+        let AUTOPILOT_HEADING_ACCENT = 'Fast, Clean Repairs';
 
         const readSiteValue = (key, fallbackValue) => {
           const directValue = normalizeSiteValue(siteContent?.[key]);
@@ -248,6 +261,8 @@ const initialSiteContent = siteContentQuery.data.site;
             'heroSubheading',
             'English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns.',
           );
+          AUTOPILOT_HEADING = readSiteValue('autoPilotHeading', 'One Trusted Plumber');
+          AUTOPILOT_HEADING_ACCENT = readSiteValue('autoPilotHeadingAccent', 'Fast, Clean Repairs');
         };
 
         refreshSiteSettings();
@@ -271,8 +286,8 @@ const initialSiteContent = siteContentQuery.data.site;
             HERO_SUBHEADING,
           ],
           ['Start Testing', 'Free Quote'],
-          ['One Blood Test', 'One Trusted Plumber'],
-          ['Total Optimization', 'Fast, Clean Repairs'],
+          ['One Blood Test', AUTOPILOT_HEADING],
+          ['Total Optimization', AUTOPILOT_HEADING_ACCENT],
           ['Test My Biomarkers Now', `WhatsApp ${WHATSAPP_NUMBER}`],
           ['Metabolic Health', 'Boiler Servicing'],
           ['Kidney and Liver Function', 'Radiator Installation'],
@@ -599,6 +614,8 @@ const initialSiteContent = siteContentQuery.data.site;
             ['heroHeading', HERO_HEADING],
             ['heroHeadingAccent', HERO_HEADING_ACCENT],
             ['heroSubheading', HERO_SUBHEADING],
+            ['autoPilotHeading', AUTOPILOT_HEADING],
+            ['autoPilotHeadingAccent', AUTOPILOT_HEADING_ACCENT],
           ];
 
           fieldMatchers.forEach(([fieldName, textValue]) => {
@@ -1133,6 +1150,7 @@ const initialSiteContent = siteContentQuery.data.site;
   </head>
   <body class={bodyClass} {...bodyAttrs}>
     <EditableHeaderHero site={initialSiteContent} />
+    <EditableAutoPilotSection site={initialSiteContent} />
     <Fragment set:html={bodyInnerWithoutHeaderHero} />
     <SiteContentBridge {...siteContentQuery} client:tina />
   </body>

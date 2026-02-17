@@ -1,0 +1,141 @@
+---
+const { site } = Astro.props;
+
+const autoPilotHeading = site?.autoPilotHeading || 'One Trusted Plumber';
+const autoPilotHeadingAccent = site?.autoPilotHeadingAccent || 'Fast, Clean Repairs';
+const autoPilotCtaLabel = site?.autoPilotCtaLabel || `WhatsApp ${site?.whatsappNumber || ''}`;
+const autoPilotCtaUrl = site?.autoPilotCtaUrl || 'https://wa.me/31642869931';
+
+const defaultChips = [
+  { label: 'Boiler Servicing', iconPath: '/api/media/file/Metabolic%20Health.png' },
+  { label: 'Radiator Installation', iconPath: '/api/media/file/Kidney%20and%20Liver%20Function.png' },
+  { label: 'Radiator Repair', iconPath: '/api/media/file/Cardiovascular%20Health.png' },
+  { label: 'Tap Repair', iconPath: '/api/media/file/Hormone%20Levels.png' },
+  { label: 'Tap Replacement', iconPath: '/api/media/file/Nutrient%20Levels.png' },
+  { label: 'General Plumbing', iconPath: '/api/media/file/Inflammation%20Markers.png' },
+  { label: 'Heating Checks', iconPath: '/api/media/file/Immunity%20Markers.png' },
+  { label: 'Home Plumbing Checks', iconPath: '/api/media/file/Biological%20Aging%20Rate.png' },
+  { label: 'Leak Detection', iconPath: '/api/media/file/Autoimmune%20Indicators.png' },
+  { label: 'Boiler Brands: Vaillant, Intergas, Remeha, ATAG', iconPath: '/api/media/file/Blood%20Cell%20Analysis.png' },
+];
+
+const chips = Array.isArray(site?.autoPilotChips) && site.autoPilotChips.length > 0 ? site.autoPilotChips : defaultChips;
+
+const rowA = chips.slice(0, 3);
+const rowB = chips.slice(3, 7);
+const rowC = chips.slice(7, chips.length);
+const desktopRows = [rowA, rowB, rowC].filter((row) => row.length > 0);
+---
+
+<div class="mt-[52px] lg:mt-[110px] mb-[52px] lg:mb-[110px]" data-native-autopilot="true">
+  <div class="max-lg:px-4 lg:container">
+    <div class="flex flex-col items-center justify-between gap-[42px] xl:flex-row lg:gap-[75px]">
+      <div class="order-0 text-center xl:text-left flex flex-col max-lg:items-center gap-[42px]">
+        <div class="flex flex-col gap-[42px]">
+          <h2 class="font-450 text-heading-section">
+            <span class="whitespace-pre-wrap" data-site-field="autoPilotHeading">{autoPilotHeading}</span>
+            <br />
+            <em
+              class="whitespace-pre-wrap capitalize font-medium font-victorSerif text-heading-section"
+              data-site-field="autoPilotHeadingAccent"
+            >
+              {autoPilotHeadingAccent}
+            </em>
+          </h2>
+        </div>
+
+        <div class="max-lg:hidden">
+          <div class="max-sm:w-full">
+            <div class="w-full">
+              <div class="group relative rounded-full w-fit bg-[#D5EFFF] [--btn-bg:#D5EFFF] hover:[--btn-bg:#C0E7FF] active:[--btn-bg:#C0E7FF] transition-colors duration-200 max-sm:w-full">
+                <div
+                  class="relative rounded-full border-[1.44px] border-transparent overflow-hidden shadow-buttonPrimary bg-[var(--btn-bg)]"
+                  style="background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%) border-box"
+                >
+                  <div
+                    class="absolute inset-0 rounded-full pointer-events-none"
+                    style="border:1.44px solid transparent;background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%) border-box"
+                  ></div>
+                  <a
+                    class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] max-sm:w-full font-semibold !bg-transparent"
+                    href={autoPilotCtaUrl}
+                  >
+                    <span data-site-field="autoPilotCtaLabel">{autoPilotCtaLabel}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-2 lg:hidden">
+        <div class="max-sm:w-full">
+          <div class="w-full">
+            <div class="group relative rounded-full w-fit bg-[#D5EFFF] [--btn-bg:#D5EFFF] hover:[--btn-bg:#C0E7FF] active:[--btn-bg:#C0E7FF] transition-colors duration-200 max-sm:w-full">
+              <div
+                class="relative rounded-full border-[1.44px] border-transparent overflow-hidden shadow-buttonPrimary bg-[var(--btn-bg)]"
+                style="background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(47,145,202,0) 0%, rgba(47,145,202,0.66) 49%, rgba(47,145,202,0) 100%) border-box"
+              >
+                <div
+                  class="absolute inset-0 rounded-full pointer-events-none"
+                  style="border:1.44px solid transparent;background:linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box, linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 49%, rgba(255,255,255,0.52) 100%) border-box"
+                ></div>
+                <a
+                  class="relative inline-flex w-full items-center cursor-pointer justify-center whitespace-nowrap rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-aspekta h-[63px] px-[62px] py-4 text-xl bg-charlotte text-blueZodiac shadow-buttonPrimary hover:bg-[#C0E7FF] active:bg-[#AFE0FF] max-sm:w-full font-semibold !bg-transparent"
+                  href={autoPilotCtaUrl}
+                >
+                  <span data-site-field="autoPilotCtaLabel">{autoPilotCtaLabel}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-lg:order-1">
+        <div class="hidden lg:flex flex-col gap-4" data-site-field="autoPilotChips">
+          {desktopRows.map((row) => (
+            <div class="flex justify-center gap-4">
+              {row.map((chip) => (
+                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]">
+                  <img
+                    alt={chip?.label || 'Service'}
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                    decoding="async"
+                    class="w-10 h-10 object-contain"
+                    src={chip?.iconPath || '/favicon.ico'}
+                  />
+                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac lg:font-450">{chip?.label || 'Service'}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div class="lg:hidden flex flex-col gap-4 w-screen overflow-hidden -mx-4" data-site-field="autoPilotChips">
+          <div class="overflow-x-auto no-scrollbar px-4">
+            <div class="flex gap-4 w-max">
+              {chips.map((chip) => (
+                <div class="bg-white shrink-0 rounded-full py-3 px-4 flex items-center justify-center gap-[10px]">
+                  <img
+                    alt={chip?.label || 'Service'}
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                    decoding="async"
+                    class="w-10 h-10 object-contain"
+                    src={chip?.iconPath || '/favicon.ico'}
+                  />
+                  <span class="font-550 whitespace-nowrap text-sm text-blueZodiac">{chip?.label || 'Service'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
