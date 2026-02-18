@@ -6,6 +6,42 @@
     "whatsappNumber": "+31 6 428 699 31",
     "primaryArea": "Hoorn, Heerhugowaard, Purmerend, Alkmaar",
     "heroImagePath": "/IMG_8233.PNG",
+    "header": {
+      "whatsAppHref": "https://wa.me/31642869931",
+      "primaryCtaLabel": "WhatsApp",
+      "secondaryCtaLabel": "Free Quote",
+      "secondaryCtaHref": "#free-quote",
+      "navItems": [
+        {
+          "label": "Boiler\nServicing",
+          "href": "#boiler-servicing"
+        },
+        {
+          "label": "Radiator\nServices",
+          "href": "#radiator-services"
+        },
+        {
+          "label": "Tap\nRepairs",
+          "href": "#tap-repairs"
+        },
+        {
+          "label": "Plumbing\nHandyman",
+          "href": "#plumbing-handyman"
+        },
+        {
+          "label": "Pricing",
+          "href": "#pricing"
+        },
+        {
+          "label": "Service\nArea",
+          "href": "#service-area"
+        },
+        {
+          "label": "WhatsApp",
+          "href": "#whatsapp"
+        }
+      ]
+    },
     "promoNeedles": [
       "get your discount",
       "your first step toward better health",

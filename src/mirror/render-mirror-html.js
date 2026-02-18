@@ -120,6 +120,7 @@ export function renderMirrorHtml() {
   const guardScript = loadInjection('guard.js');
   const overridesCss = loadInjection('overrides.css');
   const runtimeScript = loadInjection('runtime.js');
+  const headerScript = loadInjection('header.js');
   const siteContent = loadJson(SITE_CONTENT_PATH, {});
   const siteRuntimeContent =
     siteContent && typeof siteContent === 'object' && siteContent.site && typeof siteContent.site === 'object'
@@ -137,5 +138,5 @@ export function renderMirrorHtml() {
   const htmlClassAttr = htmlClass ? ` class="${escapeAttr(htmlClass)}"` : '';
   const bodyClassAttr = bodyClass ? ` class="${escapeAttr(bodyClass)}"` : '';
 
-  return `<!DOCTYPE html><html${langAttr}${htmlClassAttr}${attrSection(htmlAttrString)}><head><script>${guardScript}</script>${headInner}<style>${overridesCss}</style><script>${siteContentScript}${mediaMapScript}</script><script>${runtimeScript}</script></head><body${bodyClassAttr}${attrSection(bodyAttrString)}>${bodyInner}</body></html>`;
+  return `<!DOCTYPE html><html${langAttr}${htmlClassAttr}${attrSection(htmlAttrString)}><head><script>${guardScript}</script>${headInner}<style>${overridesCss}</style><script>${siteContentScript}${mediaMapScript}</script><script>${runtimeScript}</script><script>${headerScript}</script></head><body${bodyClassAttr}${attrSection(bodyAttrString)}>${bodyInner}</body></html>`;
 }
