@@ -6,3 +6,5 @@ dist/
 __pycache__/
 .DS_Store
 *:Zone.Identifier
+public/tina-admin/
+public/admin/.gitignore

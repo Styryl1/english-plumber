@@ -1,0 +1,276 @@
+fragment SiteOverridesParts on SiteOverrides {
+  __typename
+  site {
+    __typename
+    businessName
+    baseCity
+    whatsappNumber
+    primaryArea
+    heroImagePath
+  }
+  seo {
+    __typename
+    title
+    description
+    canonicalUrl
+    homepageUrl
+    ogImage
+  }
+  controls {
+    __typename
+    enableRuntimeCopyRewrite
+    enableServerCopyRewrite
+    enableServerHeaderSlotRewrite
+  }
+  hero {
+    __typename
+    titleLine1
+    titleLine2
+    description
+    primaryCtaLabel
+  }
+  biomarkerPanel {
+    __typename
+    titleLine1
+    titleLine2
+    primaryCtaLabel
+    items {
+      __typename
+      label
+      imagePath
+    }
+  }
+  featurePanel {
+    __typename
+    cardCtaLabel
+    cards {
+      __typename
+      alt
+      titleLine1
+      titleLine2
+      href
+      imagePath
+    }
+    headingLine1
+    headingLine2
+    description
+    careHeadingLine1
+    careHeadingLine2
+    careDescription
+    testimonialAlt
+    badgeTitle
+    badgeStatus
+    stat1 {
+      __typename
+      value
+      line1
+      line2
+    }
+    stat2 {
+      __typename
+      value
+      line1
+      line2
+    }
+    prescriptionCard {
+      __typename
+      alt
+      titleLine1
+      titleLine2
+      href
+      imagePath
+      ctaLabel
+    }
+  }
+  trustSection {
+    __typename
+    headingLine1
+    headingLine2
+    memberLabel
+    readMoreLabel
+    videoCards {
+      __typename
+      thumbnailAlt
+      profileAlt
+      handle
+      meta
+    }
+    textCards {
+      __typename
+      profileAlt
+      name
+      quote
+    }
+  }
+  commandCenterSection {
+    __typename
+    headingLine1
+    headingLine2
+    loadingAnimationLabel
+    description
+    ctaLabel
+    appImageAlt
+  }
+  ourProcessSection {
+    __typename
+    imageAlt
+    headingLine1
+    headingLine2
+    steps {
+      __typename
+      title
+      description
+    }
+  }
+  choosePathSection {
+    __typename
+    title
+    subtitle
+    plans {
+      __typename
+      name
+      nameStyle
+      tagline
+      pricing {
+        __typename
+        oneTimePrice
+        recurringPrice
+        oneTimeLabel
+        recurringLabel
+        discountPercentage
+        twiceAnnuallyBillingText
+        annuallyBillingText
+      }
+      feature {
+        __typename
+        categoryName
+        features {
+          __typename
+          name
+        }
+      }
+      restriction {
+        __typename
+        categoryName
+        features {
+          __typename
+          name
+        }
+      }
+      link {
+        __typename
+        label
+      }
+    }
+  }
+  faqSection {
+    __typename
+    headingLine1
+    headingLine2
+    items {
+      __typename
+      question
+      answer
+    }
+    cardImageAlt
+    supportTitle
+    supportDescription
+    supportCtaLabel
+    supportCtaHref
+  }
+  missionSection {
+    __typename
+    mission {
+      __typename
+      imageAlt
+      imagePath
+      name
+      role
+      headingLine1
+      headingLine2
+      description
+      ctaLabel
+      ctaHref
+    }
+    gallery {
+      __typename
+      headingLine1
+      headingLine2
+      ctaLabel
+      ctaHref
+      images {
+        __typename
+        alt
+        imagePath
+      }
+    }
+  }
+  newsletterSection {
+    __typename
+    backgroundImagePath
+    backgroundImageAlt
+    headingLine1
+    headingLine2
+    description
+    ctaLabel
+    ctaHref
+  }
+  footerSection {
+    __typename
+    logoAlt
+    subscriptionText
+    emailPlaceholder
+    subscribeLabel
+    followUsLabel
+    supportTitle
+    supportLinks {
+      __typename
+      label
+      href
+    }
+    aboutTitle
+    aboutLinks {
+      __typename
+      label
+      href
+    }
+    legalDisclaimer
+    cardImageAlt
+    cardDesktopImagePath
+    cardMobileImagePath
+    appPrompt
+    appStoreAlt
+    appStoreHref
+    appStoreImagePath
+    googlePlayAlt
+    googlePlayHref
+    googlePlayImagePath
+    copyrightText
+  }
+  header {
+    __typename
+    whatsAppHref
+    primaryCtaLabel
+    secondaryCtaLabel
+    secondaryCtaHref
+    navItems {
+      __typename
+      label
+      href
+    }
+  }
+  copy {
+    __typename
+    exactTextReplacements {
+      __typename
+      from
+      to
+    }
+    regexTextReplacements {
+      __typename
+      pattern
+      flags
+      replacement
+    }
+  }
+}

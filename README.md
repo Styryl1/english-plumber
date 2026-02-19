@@ -9,6 +9,8 @@ The homepage HTML source is `src/mirror/live-index.html`. At runtime, Next reads
 - `npm run dev` - start Next dev server on port `4322`
 - `npm run build` - production build
 - `npm run start` - run production server on port `4322`
+- `npm run tina:dev` - start Tina local CMS + Next app on port `4323` (`/tina-admin/index.html`)
+- `npm run tina:build` - build Tina admin and generated client files in local mode (output: `public/tina-admin`)
 - `npm run sync:assets` - re-download live Geviti CSS/font assets into `public/assets`
 - `npm run sync:media` - download mirror image/video assets used by the page into `public/mirror_media`
 - `npm run clone:live` - re-clone live homepage and static bundles into local mirror paths
@@ -20,6 +22,8 @@ The homepage HTML source is `src/mirror/live-index.html`. At runtime, Next reads
 - `src/mirror/live-index.html` - editable mirrored homepage source
 - `src/mirror/injections/*` - guard/runtime/style injections (promo removal, copy rewrite, hero swap, lock fixes)
 - `content/site/mirror-content.json` - single editable content source for site text/brand/copy replacements
+- `content/tina/site.json` - Tina-managed local overrides (safe editable layer merged at render time)
+- `tina/config.ts` - Tina schema/config for local CMS
 - `public/mirror_next/static/*` - mirrored upstream Next bundles (kept separate from real Next `/_next`)
 - `public/mirror_media/*` - locally owned mirrored media assets (images/video) referenced by runtime rewrites
 - `public/assets/styles/*` - localized CSS files
@@ -43,10 +47,25 @@ Images/video links are intentionally left remote where dynamic processing is req
 
 ## Editing copy
 
+### Fast path (recommended): Tina local admin
+
+1. Run:
+   - `npm run tina:dev`
+2. Open:
+   - `http://localhost:4323/tina-admin/index.html`
+3. Edit `Site Overrides` document (`content/tina/site.json`) and save.
+
+### Base fallback source
+
 Edit `content/site/mirror-content.json`:
 
 - `site.businessName`, `site.baseCity`, `site.whatsappNumber`, etc. for brand/contact values.
 - `site.exactTextReplacements` for direct text swaps (`[from, to]` pairs).
 - `site.regexTextReplacements` for pattern-based replacements.
 
-The mirror runtime reads this file on every render, so copy updates do not require code changes.
+Render-time merge order:
+
+1. `content/site/mirror-content.json` (base)
+2. `content/tina/site.json` (overrides from Tina)
+
+This keeps the mirrored visual layer stable while allowing CMS-driven content and SEO updates.

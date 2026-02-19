@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "notes": "Phase 1 scaffolding. Selector-targeted patching will progressively replace broad legacy replacement maps.",
+  "home": {
+    "head": {
+      "titleSelector": "title",
+      "descriptionMetaSelector": "meta[name=\"description\"]",
+      "ogTitleSelector": "meta[property=\"og:title\"]",
+      "ogDescriptionSelector": "meta[property=\"og:description\"]",
+      "ogImageSelector": "meta[property=\"og:image\"]",
+      "twitterTitleSelector": "meta[name=\"twitter:title\"]",
+      "twitterDescriptionSelector": "meta[name=\"twitter:description\"]",
+      "twitterImageSelector": "meta[name=\"twitter:image\"]",
+      "canonicalSelector": "link[rel=\"canonical\"]"
+    },
+    "header": {
+      "desktopNavSelector": "ul.hidden.lg\\:flex > li > a > span",
+      "desktopNavExpectedCount": 7,
+      "desktopPrimaryCtaSelector": "div.max-lg\\:hidden > a:nth-of-type(1) > span",
+      "desktopSecondaryCtaSelector": "div.max-lg\\:hidden > a:nth-of-type(2) > span"
+    }
+  }
+}

@@ -444,11 +444,64 @@
 
   const boot = () => {
     wireHeader();
-    window.setTimeout(wireHeader, 1600);
-    const reinjectInterval = window.setInterval(wireHeader, 4000);
+
+    let frameRequest = null;
+    const scheduleWireHeader = () => {
+      if (frameRequest !== null) return;
+      frameRequest = window.requestAnimationFrame(() => {
+        frameRequest = null;
+        wireHeader();
+      });
+    };
+
+    // Hydration from mirrored bundles can briefly restore original labels/links.
+    // Re-apply configured header content on relevant DOM mutations to prevent flicker.
+    const headerMutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        const target = mutation.target;
+        if (!(target instanceof Node)) continue;
+
+        const targetElement =
+          target instanceof Element ? target : target.parentElement;
+        if (!targetElement) continue;
+
+        const inHeader = targetElement.closest('header.w-full.top-0.left-0.right-0.z-30.fixed');
+        if (inHeader) {
+          scheduleWireHeader();
+          return;
+        }
+
+        if (targetElement.matches('header.w-full.top-0.left-0.right-0.z-30.fixed')) {
+          scheduleWireHeader();
+          return;
+        }
+      }
+    });
+
+    headerMutationObserver.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['href', 'class', 'style', 'aria-expanded', 'aria-label'],
+    });
+
+    // Keep a short stabilization window after boot for aggressive hydration churn.
+    const stabilizationUntil = Date.now() + 4500;
+    const stabilizationInterval = window.setInterval(() => {
+      wireHeader();
+      if (Date.now() >= stabilizationUntil) {
+        window.clearInterval(stabilizationInterval);
+      }
+    }, 120);
+
     const overlayCleanupInterval = window.setInterval(hideLegacyHeaderOverlay, 800);
     window.addEventListener('beforeunload', () => {
-      window.clearInterval(reinjectInterval);
+      if (frameRequest !== null) {
+        window.cancelAnimationFrame(frameRequest);
+      }
+      headerMutationObserver.disconnect();
+      window.clearInterval(stabilizationInterval);
       window.clearInterval(overlayCleanupInterval);
     });
   };

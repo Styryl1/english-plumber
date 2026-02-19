@@ -4,13 +4,492 @@
     "businessName": "English Plumber",
     "baseCity": "Medemblik",
     "whatsappNumber": "+31 6 428 699 31",
-    "primaryArea": "Hoorn, Heerhugowaard, Purmerend, Alkmaar",
+    "primaryArea": "Medemblik + 40km: Hoorn, Heerhugowaard, Purmerend, Alkmaar (not Amsterdam/Almere)",
     "heroImagePath": "/IMG_8233.PNG",
+    "canonicalOrigin": "https://englishplumber.nl/",
+    "homepageUrl": "https://englishplumber.nl/",
+    "seoTitle": "English Plumber | Boiler Service & Plumbing in Medemblik",
+    "seoDescription": "Friendly local plumber for expats and Dutch homeowners in Medemblik and nearby towns. Boiler servicing from €145, general plumbing at €95/hour. Send photos on WhatsApp +31 6 428 699 31.",
+    "ogImage": "/IMG_8233.PNG",
+    "enableRuntimeCopyRewrite": false,
+    "enableServerCopyRewrite": false,
+    "enableServerHeaderSlotRewrite": true,
+    "hero": {
+      "titleLine1": "Friendly Local Plumber",
+      "titleLine2": "For Expats & Locals",
+      "description": "Boiler servicing, radiator work, tap repairs, and general plumbing handyman jobs in Medemblik and nearby towns.",
+      "primaryCtaLabel": "View Services"
+    },
+    "biomarkerPanel": {
+      "titleLine1": "One Plumber",
+      "titleLine2": "Core Services Covered",
+      "primaryCtaLabel": "Get a Quote",
+      "items": [
+        {
+          "label": "Boiler Servicing",
+          "imagePath": "/api/media/file/Metabolic%20Health.png"
+        },
+        {
+          "label": "Radiator Installation",
+          "imagePath": "/api/media/file/Kidney%20and%20Liver%20Function.png"
+        },
+        {
+          "label": "Radiator Repairs",
+          "imagePath": "/api/media/file/Cardiovascular%20Health.png"
+        },
+        {
+          "label": "Tap Repair",
+          "imagePath": "/api/media/file/Hormone%20Levels.png"
+        },
+        {
+          "label": "Tap Replacement",
+          "imagePath": "/api/media/file/Nutrient%20Levels.png"
+        },
+        {
+          "label": "Small Leak Fixes",
+          "imagePath": "/api/media/file/Inflammation%20Markers.png"
+        },
+        {
+          "label": "General Plumbing Handyman",
+          "imagePath": "/api/media/file/Immunity%20Markers.png"
+        },
+        {
+          "label": "Homeowner Support",
+          "imagePath": "/api/media/file/Biological%20Aging%20Rate.png"
+        },
+        {
+          "label": "Expat-Friendly Service",
+          "imagePath": "/api/media/file/Autoimmune%20Indicators.png"
+        },
+        {
+          "label": "Dutch + English Help",
+          "imagePath": "/api/media/file/Blood%20Cell%20Analysis.png"
+        }
+      ]
+    },
+    "featurePanel": {
+      "cardCtaLabel": "Ask on WhatsApp",
+      "cards": [
+        {
+          "alt": "Boiler servicing",
+          "titleLine1": "Boiler",
+          "titleLine2": "Servicing",
+          "href": "https://wa.me/31642869931",
+          "imagePath": "/api/media/file/Testing%20for%20home%20page.webp"
+        },
+        {
+          "alt": "Radiator services",
+          "titleLine1": "Radiator",
+          "titleLine2": "Services",
+          "href": "https://wa.me/31642869931",
+          "imagePath": "/api/media/file/Supps%20for%20home%20page.webp"
+        }
+      ],
+      "headingLine1": "Clear Advice,",
+      "headingLine2": "No Guesswork",
+      "description": "Send photos and a short description on WhatsApp. I will review the issue and give a clear next step with pricing guidance before we book.",
+      "stat1": {
+        "value": "€95",
+        "line1": "Per Hour",
+        "line2": "General Work"
+      },
+      "stat2": {
+        "value": "€145",
+        "line1": "Boiler Service",
+        "line2": "From"
+      },
+      "prescriptionCard": {
+        "alt": "Tap repairs",
+        "titleLine1": "Tap",
+        "titleLine2": "Repairs",
+        "href": "https://wa.me/31642869931",
+        "imagePath": "/api/media/file/Longevity%20Rx%20for%20home%20page.webp",
+        "ctaLabel": "Ask on WhatsApp"
+      },
+      "careHeadingLine1": "Bye home stress,",
+      "careHeadingLine2": "hello reliable plumbing",
+      "careDescription": "Friendly local service for expats and Dutch homeowners. No drains, no 24/7 emergency callouts, just clear communication and quality work.",
+      "testimonialAlt": "English Plumber at work",
+      "badgeTitle": "Certified",
+      "badgeStatus": "CO + VCA"
+    },
+    "trustSection": {
+      "headingLine1": "Expats and locals trust",
+      "headingLine2": "English Plumber",
+      "memberLabel": "Verified Client",
+      "readMoreLabel": "More feedback",
+      "videoCards": [
+        {
+          "thumbnailAlt": "Boiler service in Medemblik",
+          "profileAlt": "Client in Medemblik",
+          "handle": "@medemblikhome",
+          "meta": "Boiler service completed"
+        },
+        {
+          "thumbnailAlt": "Radiator work in Hoorn",
+          "profileAlt": "Client in Hoorn",
+          "handle": "@hoornhome",
+          "meta": "Radiator upgrade completed"
+        },
+        {
+          "thumbnailAlt": "Tap repair in Purmerend",
+          "profileAlt": "Client in Purmerend",
+          "handle": "@purmerendhome",
+          "meta": "Tap repair completed"
+        },
+        {
+          "thumbnailAlt": "Plumbing handyman in Alkmaar",
+          "profileAlt": "Client in Alkmaar",
+          "handle": "@alkmaarhome",
+          "meta": "Small plumbing job completed"
+        }
+      ],
+      "textCards": [
+        {
+          "profileAlt": "Profile Local Homeowner",
+          "name": "Local Homeowner",
+          "quote": "Review section is being updated with real customer feedback. For now, send photos on WhatsApp and I will reply with clear next steps."
+        },
+        {
+          "profileAlt": "Profile Expat Client",
+          "name": "Expat Client",
+          "quote": "I work photo-first on WhatsApp, so you can explain the problem quickly in English and get a straightforward quote."
+        },
+        {
+          "profileAlt": "Profile Dutch Homeowner",
+          "name": "Dutch Homeowner",
+          "quote": "Rates are transparent: €95 per hour for general work, boiler servicing from €145."
+        },
+        {
+          "profileAlt": "Profile Service Area Client",
+          "name": "Service Area Client",
+          "quote": "Main area is Medemblik and nearby towns including Hoorn, Heerhugowaard, Purmerend, and Alkmaar."
+        }
+      ]
+    },
+    "commandCenterSection": {
+      "headingLine1": "Your Plumbing Command Center,",
+      "headingLine2": "all in one chat.",
+      "loadingAnimationLabel": "WhatsApp workflow preview...",
+      "description": "Share photos, explain the issue, and get practical advice, pricing guidance, and booking confirmation in one WhatsApp conversation.",
+      "ctaLabel": "View Services",
+      "appImageAlt": "English Plumber WhatsApp workflow"
+    },
+    "ourProcessSection": {
+      "imageAlt": "English Plumber process",
+      "headingLine1": "How It",
+      "headingLine2": "Works",
+      "steps": [
+        {
+          "title": "Send Photos on WhatsApp",
+          "description": "Send photos and a short message with your postcode and issue."
+        },
+        {
+          "title": "Quick Assessment",
+          "description": "I review the issue and tell you the likely fix and next steps."
+        },
+        {
+          "title": "Clear Quote",
+          "description": "You get transparent pricing guidance before booking."
+        },
+        {
+          "title": "Book the Visit",
+          "description": "We schedule a convenient time and complete the job professionally."
+        }
+      ]
+    },
+    "choosePathSection": {
+      "title": "Choose Your Service",
+      "subtitle": "Simple options for Medemblik and nearby towns. Strongest route: send photos on WhatsApp.",
+      "plans": [
+        {
+          "name": "English Plumber",
+          "nameStyle": "Hourly",
+          "tagline": "General plumbing and handyman support",
+          "isPopular": false,
+          "pricing": {
+            "oneTimePrice": "€95/hr",
+            "recurringPrice": "€95/hr",
+            "oneTimeLabel": "One-off",
+            "recurringLabel": "One-off",
+            "discountPercentage": "Clear",
+            "twiceAnnuallyBillingText": "Minimum 1 hour. Parts extra.",
+            "annuallyBillingText": "No subscription."
+          },
+          "feature": [
+            {
+              "categoryName": "Best for",
+              "features": [
+                {
+                  "name": "Tap repairs and replacements"
+                },
+                {
+                  "name": "Radiator fixes"
+                },
+                {
+                  "name": "Small household plumbing jobs"
+                },
+                {
+                  "name": "Friendly English or Dutch communication"
+                }
+              ]
+            }
+          ],
+          "restriction": [
+            {
+              "categoryName": "Not included",
+              "features": [
+                {
+                  "name": "No drains"
+                },
+                {
+                  "name": "No 24/7 emergency callouts"
+                }
+              ]
+            }
+          ],
+          "link": {
+            "label": "Get Started"
+          }
+        },
+        {
+          "name": "English Plumber",
+          "nameStyle": "Boiler Service",
+          "tagline": "Annual servicing from €145",
+          "isPopular": true,
+          "pricing": {
+            "oneTimePrice": "€145 from",
+            "recurringPrice": "€145 from",
+            "oneTimeLabel": "One-off",
+            "recurringLabel": "One-off",
+            "discountPercentage": "From",
+            "twiceAnnuallyBillingText": "Servicing visit. Parts extra if needed.",
+            "annuallyBillingText": "No subscription."
+          },
+          "feature": [
+            {
+              "categoryName": "Boiler brands",
+              "features": [
+                {
+                  "name": "Vaillant"
+                },
+                {
+                  "name": "Intergas"
+                },
+                {
+                  "name": "Remeha"
+                },
+                {
+                  "name": "ATAG"
+                }
+              ]
+            },
+            {
+              "categoryName": "Includes",
+              "features": [
+                {
+                  "name": "Service check and safety review"
+                },
+                {
+                  "name": "Clear advice before extra work"
+                }
+              ]
+            }
+          ],
+          "restriction": [
+            {
+              "categoryName": "Please note",
+              "features": [
+                {
+                  "name": "Final price depends on boiler condition"
+                }
+              ]
+            }
+          ],
+          "link": {
+            "label": "Get Started"
+          }
+        },
+        {
+          "name": "English Plumber",
+          "nameStyle": "Free Quote",
+          "tagline": "Send photos first",
+          "isPopular": false,
+          "pricing": {
+            "oneTimePrice": "€0",
+            "recurringPrice": "€0",
+            "oneTimeLabel": "Quote",
+            "recurringLabel": "Quote",
+            "discountPercentage": "Fast",
+            "twiceAnnuallyBillingText": "WhatsApp assessment before visit.",
+            "annuallyBillingText": "No call-out commitment."
+          },
+          "feature": [
+            {
+              "categoryName": "What you get",
+              "features": [
+                {
+                  "name": "Photo/video review by WhatsApp"
+                },
+                {
+                  "name": "Recommended next step"
+                },
+                {
+                  "name": "Transparent pricing guidance"
+                }
+              ]
+            }
+          ],
+          "restriction": [
+            {
+              "categoryName": "Service area",
+              "features": [
+                {
+                  "name": "Medemblik + nearby towns"
+                },
+                {
+                  "name": "Not based in Amsterdam or Almere"
+                }
+              ]
+            }
+          ],
+          "link": {
+            "label": "Get Started"
+          }
+        }
+      ]
+    },
+    "faqSection": {
+      "headingLine1": "Frequently Asked",
+      "headingLine2": "Questions",
+      "items": [
+        {
+          "question": "Do you offer 24/7 emergency callouts?",
+          "answer": "No. I do not provide 24/7 emergency callouts. I focus on planned residential plumbing and heating jobs with clear communication."
+        },
+        {
+          "question": "What are your prices?",
+          "answer": "General plumbing work is €95 per hour. Boiler servicing starts from €145. Parts and materials are charged separately."
+        },
+        {
+          "question": "Which areas do you cover?",
+          "answer": "Main area is Medemblik and nearby towns including Hoorn, Heerhugowaard, Purmerend, and Alkmaar. I am not based in Amsterdam or Almere."
+        },
+        {
+          "question": "Which boiler brands and certifications do you work with?",
+          "answer": "I service common systems including Vaillant, Intergas, Remeha, and ATAG. Relevant work follows CO-vakmanschap and VCA standards where applicable. Basic workmanship guarantee: 30 days on the specific repair labour."
+        }
+      ],
+      "cardImageAlt": "English Plumber FAQ",
+      "supportTitle": "Still have questions?",
+      "supportDescription": "Send a WhatsApp message with photos and your postcode.",
+      "supportCtaLabel": "WhatsApp us",
+      "supportCtaHref": "https://wa.me/31642869931"
+    },
+    "missionSection": {
+      "mission": {
+        "imageAlt": "English Plumber on site",
+        "imagePath": "/api/media/file/nate%20%2B%20fam.png",
+        "name": "English Plumber",
+        "role": "Friendly local plumber in Medemblik",
+        "headingLine1": "We Are On A",
+        "headingLine2": "Local Mission",
+        "description": "English Plumber exists to make plumbing help straightforward for expats and Dutch homeowners: clear communication, fair pricing, and dependable work.",
+        "ctaLabel": "Start on WhatsApp",
+        "ctaHref": "https://wa.me/31642869931"
+      },
+      "gallery": {
+        "headingLine1": "Seamlessly Connected",
+        "headingLine2": "to Your Home",
+        "ctaLabel": "Message on WhatsApp",
+        "ctaHref": "https://wa.me/31642869931",
+        "images": [
+          {
+            "alt": "Boiler service project",
+            "imagePath": "/api/media/file/Image%20Container-3.webp"
+          },
+          {
+            "alt": "Plumbing project",
+            "imagePath": "/api/media/file/Image%20Container.webp"
+          }
+        ]
+      }
+    },
+    "newsletterSection": {
+      "backgroundImagePath": "/api/media/file/woman%20newsletter.jpg",
+      "backgroundImageAlt": "English Plumber background",
+      "headingLine1": "Ready for a",
+      "headingLine2": "warm, worry-free home?",
+      "description": "Your home is already showing signs. Send photos on WhatsApp and get clear advice before small issues become expensive problems.",
+      "ctaLabel": "WhatsApp Now",
+      "ctaHref": "https://wa.me/31642869931"
+    },
+    "footerSection": {
+      "logoAlt": "English Plumber logo",
+      "subscriptionText": "Need help fast? Send photos and your postcode on WhatsApp for a clear first response.",
+      "emailPlaceholder": "Email (optional)",
+      "subscribeLabel": "Get Updates",
+      "followUsLabel": "Follow us",
+      "supportTitle": "Help & Support",
+      "supportLinks": [
+        {
+          "label": "WhatsApp Us",
+          "href": "https://wa.me/31642869931"
+        },
+        {
+          "label": "Free Quote",
+          "href": "https://wa.me/31642869931"
+        },
+        {
+          "label": "Boiler Servicing",
+          "href": "#boiler-servicing"
+        },
+        {
+          "label": "Radiator Services",
+          "href": "#radiator-services"
+        },
+        {
+          "label": "Tap Repairs",
+          "href": "#tap-repairs"
+        }
+      ],
+      "aboutTitle": "About English Plumber",
+      "aboutLinks": [
+        {
+          "label": "Service Area",
+          "href": "#service-area"
+        },
+        {
+          "label": "CO-vakmanschap + VCA",
+          "href": "#certifications"
+        },
+        {
+          "label": "English + Dutch",
+          "href": "#language"
+        },
+        {
+          "label": "Not based in Amsterdam",
+          "href": "#service-area"
+        }
+      ],
+      "legalDisclaimer": "NO 24/7 EMERGENCY CALLOUT SERVICE. STANDARD RATE IS €95 PER HOUR FOR GENERAL PLUMBING WORK. BOILER SERVICING STARTS FROM €145. PARTS AND MATERIALS ARE CHARGED SEPARATELY. FINAL PRICE MAY VARY BY JOB CONDITION. MAIN SERVICE AREA: MEDEMBLIK, HOORN, HEERHUGOWAARD, PURMEREND, AND ALKMAAR. ENGLISH PLUMBER IS NOT BASED IN AMSTERDAM OR ALMERE. CO-VAKMANSCHAP AND VCA STANDARDS ARE FOLLOWED WHERE APPLICABLE. BASIC WORKMANSHIP GUARANTEE: 30 DAYS ON THE SPECIFIC REPAIR LABOUR.",
+      "cardImageAlt": "English Plumber service card",
+      "cardDesktopImagePath": "/footer/footer-dekstop.webp",
+      "cardMobileImagePath": "/footer/footer-mobile.webp",
+      "appPrompt": "Best way to reach me: WhatsApp with photos.",
+      "appStoreAlt": "WhatsApp contact",
+      "appStoreHref": "https://wa.me/31642869931",
+      "appStoreImagePath": "/socials/appstore.svg",
+      "googlePlayAlt": "WhatsApp contact",
+      "googlePlayHref": "https://wa.me/31642869931",
+      "googlePlayImagePath": "/socials/googleplay.svg",
+      "copyrightText": "© 2026 English Plumber | All Rights Reserved"
+    },
     "header": {
       "whatsAppHref": "https://wa.me/31642869931",
       "primaryCtaLabel": "WhatsApp",
       "secondaryCtaLabel": "Free Quote",
-      "secondaryCtaHref": "#free-quote",
+      "secondaryCtaHref": "https://wa.me/31642869931",
       "navItems": [
         {
           "label": "Boiler\nServicing",
@@ -38,7 +517,7 @@
         },
         {
           "label": "WhatsApp",
-          "href": "#whatsapp"
+          "href": "https://wa.me/31642869931"
         }
       ]
     },
@@ -57,646 +536,7 @@
       "/footer/",
       "/faq.webp"
     ],
-    "exactTextReplacements": [
-      [
-        "Geviti | Blood Testing & Personalized Longevity Care",
-        "English Plumber | Plumbing & Heating in Medemblik"
-      ],
-      [
-        "Get 25% Off - 24 Hour Flash Sale",
-        "Friendly local plumber in Medemblik"
-      ],
-      [
-        "Bloodwork",
-        "Boiler Servicing"
-      ],
-      [
-        "Supplements",
-        "Radiator Services"
-      ],
-      [
-        "Diagnostics",
-        "Tap Repairs"
-      ],
-      [
-        "Rx Therapies",
-        "Plumbing Handyman"
-      ],
-      [
-        "Blog",
-        "Service Area"
-      ],
-      [
-        "Gift Geviti",
-        "WhatsApp"
-      ],
-      [
-        "Login",
-        "Dutch + English"
-      ],
-      [
-        "Try Geviti",
-        "Free Quote"
-      ],
-      [
-        "Your Best Years",
-        "Friendly Local Plumber"
-      ],
-      [
-        "Haven't Happened Yet.",
-        "Based in Medemblik."
-      ],
-      [
-        "Comprehensive blood testing and personalized care designed to keep you thriving, today and for decades to come.",
-        "English Plumber helps expats and Dutch homeowners with reliable plumbing and heating in Medemblik and nearby towns."
-      ],
-      [
-        "Start Testing",
-        "Free Quote"
-      ],
-      [
-        "One Blood Test",
-        "One Trusted Plumber"
-      ],
-      [
-        "Total Optimization",
-        "Fast, Clean Repairs"
-      ],
-      [
-        "Test My Biomarkers Now",
-        "WhatsApp +31 6 428 699 31"
-      ],
-      [
-        "Metabolic Health",
-        "Boiler Servicing"
-      ],
-      [
-        "Kidney and Liver Function",
-        "Radiator Installation"
-      ],
-      [
-        "Cardiovascular Health",
-        "Radiator Repair"
-      ],
-      [
-        "Hormone Levels",
-        "Tap Repair"
-      ],
-      [
-        "Nutrient Levels",
-        "Tap Replacement"
-      ],
-      [
-        "Inflammation Markers",
-        "General Plumbing"
-      ],
-      [
-        "Immunity Markers",
-        "Heating Checks"
-      ],
-      [
-        "Biological Aging Rate",
-        "Home Plumbing Checks"
-      ],
-      [
-        "Autoimmune Indicators",
-        "Leak Detection"
-      ],
-      [
-        "Blood Cell Analysis",
-        "Boiler Brands: Vaillant, Intergas, Remeha, ATAG"
-      ],
-      [
-        "At-home",
-        "Home"
-      ],
-      [
-        "Lab Tests",
-        "Plumbing Visits"
-      ],
-      [
-        "Learn More",
-        "View Service"
-      ],
-      [
-        "Customized",
-        "Transparent"
-      ],
-      [
-        "Not Just Bloodwork,",
-        "Not Just Quick Fixes,"
-      ],
-      [
-        "Total Body Optimization",
-        "Complete Home Plumbing Support"
-      ],
-      [
-        "Other testing companies stop at the bloodwork. We go beyond by offering access to personalized supplement packs and tailored health protocols, custom built according to the needs of your body. No more guesswork.",
-        "Most companies patch the issue. We diagnose the cause and fix it properly with clear communication, fair pricing, and practical solutions."
-      ],
-      [
-        "100+",
-        "95 EUR"
-      ],
-      [
-        "Biomarkers",
-        "per hour"
-      ],
-      [
-        "Tested",
-        "labour"
-      ],
-      [
-        "12+",
-        "145 EUR"
-      ],
-      [
-        "Health Categories",
-        "boiler servicing"
-      ],
-      [
-        "Prescription Medications",
-        "Free quotes"
-      ],
-      [
-        "Personal Care Team",
-        "CO-vakmanschap + VCA"
-      ],
-      [
-        "Bye bye sick care,",
-        "No confusing jargon,"
-      ],
-      [
-        "hello true health care",
-        "just honest plumbing help."
-      ],
-      [
-        "Our team of functional medicine experts approach care from a proactive and preventative lens. By marrying this approach with our cutting edge technology, and the most advanced longevity therapeutics, we help you achieve a longer, healthier life.",
-        "English Plumber is a friendly local service in Medemblik. We support expats and Dutch homeowners with clear advice, quality repairs, and reliable follow-up."
-      ],
-      [
-        "HSA/FSA",
-        "English + Dutch"
-      ],
-      [
-        "ACCEPTED",
-        "spoken"
-      ],
-      [
-        "Thousands trust geviti",
-        "Trusted by local homes"
-      ],
-      [
-        "with their health",
-        "for plumbing and heating"
-      ],
-      [
-        "@realalexclark",
-        "Medemblik service"
-      ],
-      [
-        "Host of Culture Apothecary, 553K followers",
-        "WhatsApp-first support"
-      ],
-      [
-        "Cathy F.",
-        "Customer Review"
-      ],
-      [
-        "Verified Geviti Member",
-        "Verified Local Client"
-      ],
-      [
-        "I love that I get to meet with the clinician online and get personalized care rather than having to go into an office.",
-        "Quick response, clear communication in English, and the repair was done cleanly."
-      ],
-      [
-        "@nobleroadranch",
-        "Hoorn"
-      ],
-      [
-        "1.4M followers",
-        "Service area"
-      ],
-      [
-        "Brenda M.",
-        "Customer Review"
-      ],
-      [
-        "They really dug into my results and looked for my root cause of issues I’ve been experiencing for years. I finally feel like I’m not crazy for how I feel everyday and why I had no energy or anything just to do the simplest tasks day to day. It’s nice to feel my body responding well to the supplements and the care I am receiving from my care team.",
-        "Friendly service and transparent pricing. My radiator issue was fixed quickly and everything was explained clearly."
-      ],
-      [
-        "Mark L.",
-        "Customer Review"
-      ],
-      [
-        "As someone who used to struggle with constant fatigue, low energy, and poor sleep, I can honestly say that Geviti has been a life-changing experience...Within a few weeks, I noticed a significant boost in my energy levels, and my sleep habits improved dramatically. The personalized wellness plan gave me the tools I needed to not only feel better in the short term but also improve my overall health as I age. Geviti’s approach to health is unlike anything I’ve experienced before.",
-        "Boiler servicing was smooth and professional. Heating is stable again and communication over WhatsApp made everything easy."
-      ],
-      [
-        "@flyingwithbigern",
-        "Purmerend"
-      ],
-      [
-        "130K followers",
-        "Service area"
-      ],
-      [
-        "Angela D.",
-        "Customer Review"
-      ],
-      [
-        "In the two months since beginning the supplementation protocol given to me by my provider, I have only noticed positive changes... Instead of feeling as though I could fall asleep at any point throughout the day, I have noticed that my energy levels feel more like they used to be... I thought I was a healthy 50-year-old and that I would use Geviti to stay ahead of any future problems, but I am so happy to find that I am feeling better than I thought was possible.",
-        "Great option for expats in North Holland. Easy to share photos on WhatsApp and book the right visit quickly."
-      ],
-      [
-        "@baiwood",
-        "Alkmaar"
-      ],
-      [
-        "15.8k followers",
-        "Service area"
-      ],
-      [
-        "Your Health Command Center,",
-        "Your Plumbing Command Center,"
-      ],
-      [
-        "The Geviti app brings together your bloodwork, dedicated care team, supplements, appointments, and daily health tracking into a single, seamless experience—making it effortless to stay on top of your longevity journey.",
-        "Send photos and short videos on WhatsApp. English Plumber reviews the issue, shares a clear quote, and books your visit quickly."
-      ],
-      [
-        "Start With Geviti Today",
-        "Start With English Plumber"
-      ],
-      [
-        "How Does",
-        "How"
-      ],
-      [
-        "it work",
-        "it works"
-      ],
-      [
-        "At-Home Labs",
-        "Send Photos on WhatsApp"
-      ],
-      [
-        "A licensed phlebotomist comes to your home, on your schedule. No waiting rooms, no hassle.",
-        "Share photos or a short video of the issue and your postcode."
-      ],
-      [
-        "Makor AI Analyzes",
-        "Problem Review"
-      ],
-      [
-        "Makor AI analyzes your biomarkers against optimal health ranges and validated clinical protocols.",
-        "We review the issue and recommend the best repair approach."
-      ],
-      [
-        "Personalized Care Plan",
-        "Clear Quote & Plan"
-      ],
-      [
-        "Our expert team builds your Longeviti Blueprint with personalized nutrition, supplements, and lifestyle guidance.",
-        "You get transparent pricing: 95 EUR per hour labour and 145 EUR for boiler servicing."
-      ],
-      [
-        "Ongoing Optimization",
-        "Repair & Follow-Up"
-      ],
-      [
-        "Retest every 6 months. Your care team refines your plan as your body evolves.",
-        "We complete the job cleanly and stay available for follow-up questions."
-      ],
-      [
-        "Choose Your Path",
-        "Choose Your Service"
-      ],
-      [
-        "Explore The Right Plan Tailored To Match Your Specific Requirements And Ambitions",
-        "Plumbing and heating support tailored for homes in and around Medemblik."
-      ],
-      [
-        "Lite",
-        "Standard"
-      ],
-      [
-        "Advanced Bloodwork twice annually",
-        "General plumbing visit"
-      ],
-      [
-        "$66.67/mo",
-        "95 EUR / hour"
-      ],
-      [
-        "(billed at $399.99 every 6mo)",
-        "Boiler servicing: 145 EUR"
-      ],
-      [
-        "Semi-Annually",
-        "Hourly labour"
-      ],
-      [
-        "Annually",
-        "Fixed boiler service"
-      ],
-      [
-        "-15%",
-        "Free quote"
-      ],
-      [
-        "Comprehensive Labs and Review",
-        "Boiler, tap and radiator repairs"
-      ],
-      [
-        "100+ biomarker bloodwork every 6mo",
-        "No drain services"
-      ],
-      [
-        "At-home blood draw*",
-        "Home visits in Medemblik area"
-      ],
-      [
-        "Personalized longevity action plan",
-        "Clear diagnosis and repair plan"
-      ],
-      [
-        "Access to custom supplement packs",
-        "Quality parts when required"
-      ],
-      [
-        "In-app support",
-        "WhatsApp photo support + basic workmanship warranty"
-      ],
-      [
-        "Currently unavailable in",
-        "Not based in"
-      ],
-      [
-        "AK, HI, RI",
-        "Amsterdam or Almere"
-      ],
-      [
-        "Get Started",
-        "WhatsApp Now"
-      ],
-      [
-        "Most Popular",
-        "Most Requested"
-      ],
-      [
-        "Plus",
-        "Heating Focus"
-      ],
-      [
-        "Ideal for those serious about longevity",
-        "Ideal for boiler and radiator issues"
-      ],
-      [
-        "$129.99/mo",
-        "95 EUR / hour"
-      ],
-      [
-        "(billed at $779.99 every 6mo)",
-        "Boiler servicing: 145 EUR"
-      ],
-      [
-        "Everything in Lite, and",
-        "Everything in Standard, and"
-      ],
-      [
-        "45 min expert bloodwork review",
-        "Detailed heating system diagnosis"
-      ],
-      [
-        "Dedicated Functional Longevity Specialist",
-        "Boiler brands: Vaillant, Intergas, Remeha, ATAG"
-      ],
-      [
-        "Quarterly Virtual Visits",
-        "Flexible appointment windows"
-      ],
-      [
-        "Exclusive Savings",
-        "Transparent pricing"
-      ],
-      [
-        "40% off custom supplement protocol",
-        "Free no-obligation quote"
-      ],
-      [
-        "Preferred pricing on specialty diagnostics",
-        "Fair parts pricing"
-      ],
-      [
-        "Plus Rx",
-        "Local Priority"
-      ],
-      [
-        "Complete clinical care solution",
-        "Complete plumbing and heating support"
-      ],
-      [
-        "$149.83/mo",
-        "WhatsApp for quote"
-      ],
-      [
-        "(billed at $898.98 every 6mo)",
-        "Send photos and text for fast triage"
-      ],
-      [
-        "Everything in Plus, and",
-        "Everything in Heating Focus, and"
-      ],
-      [
-        "Quarterly Longevity Practitioner visits",
-        "Planned maintenance options"
-      ],
-      [
-        "Peptide therapy protocols",
-        "Radiator installation and repair"
-      ],
-      [
-        "Hormone optimization therapies",
-        "Tap repair and replacement"
-      ],
-      [
-        "Access to other longevity solutions",
-        "General plumbing handyman"
-      ],
-      [
-        "Plus Rx is exclusively available in:",
-        "Primary service area from Medemblik:"
-      ],
-      [
-        "AZ, CA, CO, DE, FL, GA, IL, IN, KS, LA, MA, MD, MI, MN, MO, MS, NC, NH, NM, NV, OH, OR, PA, TN, TX, UT, VA, WA, WI",
-        "Hoorn, Heerhugowaard, Purmerend, Alkmaar (and nearby towns within ~40km)"
-      ],
-      [
-        "Frequently Asked Questions",
-        "Frequently Asked Plumbing Questions"
-      ],
-      [
-        "What states does Geviti Lite and Geviti Plus cover?",
-        "Where does English Plumber provide service?"
-      ],
-      [
-        "Geviti Lite and Geviti plus are available in all states with the exception of AK, HI, and RI.",
-        "Primary service area includes Medemblik, Hoorn, Heerhugowaard, Purmerend, Alkmaar. Nearby towns within about 40km are also possible."
-      ],
-      [
-        "What states does Geviti Plus Rx cover?",
-        "Do you work in Amsterdam or Almere?"
-      ],
-      [
-        "Geviti Plus Rx is available in AZ, CA, CO, DE, FL, GA, IL, IN, KS, LA, MA, MD, MI, MN, MO, MS, NC, NH, NM, NV, OH, OR, PA, TN, TX, UT, VA, WA, WI. We are actively working to expand to all 50 states in the future.",
-        "Not based in Amsterdam or Almere. If your location is nearby, send a WhatsApp message and we can confirm availability."
-      ],
-      [
-        "Why should I choose Geviti’s Longeviti Blend instead of buying my own supplements?",
-        "What services do you offer?"
-      ],
-      [
-        "The Longeviti Blend is personalized to your bloodwork, ensuring you get exactly what your body needs. While you are not required to purchase supplements from us, many members choose to because of the quality and convenience. We use Xymogen, one of the most trusted and well-researched brands in the industry, so you can feel confident in what you’re taking. Your blend also comes in ready-to-go morning and evening packets, making it simple to stay consistent and stick with your plan long term.",
-        "Boiler servicing, radiator installation and repair, tap repair and replacement, and general plumbing handyman work. We do not offer drain services."
-      ],
-      [
-        "How does Geviti's 'Longeviti Panel' compare to the bloodwork from my Primary Care Physician?",
-        "How does pricing work?"
-      ],
-      [
-        "Most primary care physicians test for only a small set of markers that insurance will cover, often focused on detecting disease once it is already present. The Longeviti Panel takes a broader, more proactive approach by measuring over five times as many biomarkers. Beyond the basics, we look at key areas such as kidney and liver function, cardiovascular health, hormones, nutrients, inflammation, and immunity. This broader view helps us uncover insights into your metabolic health and longevity pathways, so you can take action to optimize your health before problems develop.",
-        "95 EUR per hour labour, 145 EUR for boiler servicing, and free quotes. WhatsApp photos and text for a fast first assessment."
-      ],
-      [
-        "Still have questions?",
-        "Still have questions?"
-      ],
-      [
-        "Feel free to leave a message for us",
-        "Send a WhatsApp message and include photos of the problem."
-      ],
-      [
-        "Message us",
-        "WhatsApp us"
-      ],
-      [
-        "Nathan Graville",
-        "English Plumber"
-      ],
-      [
-        "Founder and CEO @ Geviti",
-        "Friendly local plumber in Medemblik"
-      ],
-      [
-        "We Are On A",
-        "Built Around"
-      ],
-      [
-        "Personal Mission",
-        "Clear, Reliable Service"
-      ],
-      [
-        "After our Founder, Nate Graville, lost his father to what he believes to be a largely preventable disease, he felt compelled to build the system his father never had. Geviti exists to keep you healthy and vibrant through all stages of life, to allow for more memories with your loved ones.",
-        "English Plumber was built to give expats and Dutch homeowners a reliable plumber with clear communication, fair pricing, and quality workmanship."
-      ],
-      [
-        "Start Your Journey",
-        "Book Your Visit"
-      ],
-      [
-        "Seamlessly Connected",
-        "Quickly Connected"
-      ],
-      [
-        "to Your Life",
-        "to Your Home"
-      ],
-      [
-        "Ready to experience",
-        "Ready for fast plumbing help?"
-      ],
-      [
-        "the future of health?",
-        "Send photos on WhatsApp and get a clear plan."
-      ],
-      [
-        "Your body is sending signals. We’ll help you decode them before it's too late.",
-        "From boiler issues to leaking taps, we help you solve problems before they become expensive."
-      ],
-      [
-        "Join Today",
-        "Message on WhatsApp"
-      ],
-      [
-        "Stay in the loop with exclusive offers and product previews.",
-        "Best contact method: WhatsApp with photos and a short description."
-      ],
-      [
-        "Subscribe",
-        "Send Photos"
-      ],
-      [
-        "Become An Ambassador",
-        "For Landlords"
-      ],
-      [
-        "Become A Brand Partner",
-        "For Trade Partners"
-      ],
-      [
-        "About Geviti",
-        "About English Plumber"
-      ],
-      [
-        "Careers",
-        "Service Updates"
-      ],
-      [
-        "Blogs",
-        "Plumbing Tips"
-      ],
-      [
-        "LAB TESTS ARE ORDERED SOLELY AT THE DISCRETION OF LICENSED CLINICIANS. IF A PHYSICIAN DECIDES NOT TO ORDER A TEST, THE COST WILL BE REFUNDED. PRODUCT IMAGES ARE FOR DISPLAY PURPOSES ONLY; ACTUAL ITEMS DISPENSED FROM U.S.-BASED PHARMACIES MAY VARY. THE COST PER MONTH FOR PRESCRIPTION (RX) PRODUCTS IS BASED ON AN AVERAGE DOSING. YOUR COST MAY BE HIGHER OR LOWER DEPENDING ON YOUR PERSONALIZED CARE PLAN. ALL PROFESSIONAL MEDICAL SERVICES ARE PROVIDED BY LICENSED PHYSICIANS AND CLINICIANS PRACTICING THROUGH INDEPENDENTLY OWNED AND PROFESSIONALLY MANAGED MEDICAL GROUPS. GEVITI IS A HEALTHCARE TECHNOLOGY COMPANY AND NOT A LABORATORY OR MEDICAL PROVIDER. ALL LABORATORY AND MEDICAL SERVICES ARE DELIVERED BY INDEPENDENT THIRD-PARTY ENTITIES.",
-        "English Plumber provides plumbing and heating services in North Holland. Final scope and parts pricing are confirmed after assessment. Emergency 24/7 callouts are not offered."
-      ],
-      [
-        "Find us on the App Store and Google Play Store",
-        "WhatsApp is the fastest way to reach us."
-      ],
-      [
-        "Geviti Inc. | All Rights Reserved",
-        "English Plumber | All Rights Reserved"
-      ]
-    ],
-    "regexTextReplacements": [
-      {
-        "pattern": "\\bGeviti\\b",
-        "flags": "g",
-        "replacement": "English Plumber"
-      },
-      {
-        "pattern": "\\bLongeviti\\b",
-        "flags": "g",
-        "replacement": "Plumbing"
-      },
-      {
-        "pattern": "\\bbiomarkers?\\b",
-        "flags": "gi",
-        "replacement": "plumbing and heating"
-      },
-      {
-        "pattern": "\\bwellness\\b",
-        "flags": "gi",
-        "replacement": "home comfort"
-      },
-      {
-        "pattern": "\\blongevity\\b",
-        "flags": "gi",
-        "replacement": "long-term home reliability"
-      }
-    ]
+    "exactTextReplacements": [],
+    "regexTextReplacements": []
   }
 }

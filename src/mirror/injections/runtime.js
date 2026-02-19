@@ -62,6 +62,22 @@
           typeof runtimeConfig.heroImagePath === 'string' && runtimeConfig.heroImagePath
             ? runtimeConfig.heroImagePath
             : '/IMG_8233.PNG';
+        const footerSectionConfig =
+          runtimeConfig.footerSection && typeof runtimeConfig.footerSection === 'object'
+            ? runtimeConfig.footerSection
+            : {};
+        const FOOTER_EMAIL_PLACEHOLDER =
+          typeof footerSectionConfig.emailPlaceholder === 'string' && footerSectionConfig.emailPlaceholder.trim()
+            ? footerSectionConfig.emailPlaceholder
+            : 'Email*';
+        const FOOTER_SUBSCRIBE_LABEL =
+          typeof footerSectionConfig.subscribeLabel === 'string' && footerSectionConfig.subscribeLabel.trim()
+            ? footerSectionConfig.subscribeLabel
+            : 'Subscribe';
+        const ENABLE_RUNTIME_COPY_REWRITE =
+          typeof runtimeConfig.enableRuntimeCopyRewrite === 'boolean'
+            ? runtimeConfig.enableRuntimeCopyRewrite
+            : false;
 
         const exactTextReplacementEntries = Array.isArray(runtimeConfig.exactTextReplacements)
           ? runtimeConfig.exactTextReplacements
@@ -608,11 +624,43 @@
           });
         };
 
+        const rewriteFooterFormInRoot = (root) => {
+          if (!(root instanceof Element || root instanceof Document)) return;
+
+          const footers = [];
+          if (root instanceof Document) {
+            footers.push(...root.querySelectorAll('footer'));
+          } else {
+            if (root.matches('footer')) {
+              footers.push(root);
+            }
+            footers.push(...root.querySelectorAll('footer'));
+          }
+
+          for (const footer of footers) {
+            const emailInput = footer.querySelector('input[type="email"]');
+            if (emailInput instanceof HTMLInputElement && emailInput.placeholder !== FOOTER_EMAIL_PLACEHOLDER) {
+              emailInput.placeholder = FOOTER_EMAIL_PLACEHOLDER;
+            }
+
+            const subscribeButton = footer.querySelector('form button');
+            if (subscribeButton instanceof HTMLButtonElement) {
+              const current = (subscribeButton.textContent || '').replace(/\s+/g, ' ').trim();
+              if (current !== FOOTER_SUBSCRIBE_LABEL) {
+                subscribeButton.textContent = FOOTER_SUBSCRIBE_LABEL;
+              }
+            }
+          }
+        };
+
         const run = () => {
           rewriteMediaUrlsInRoot(document);
           enforceHeroImage(document);
           hidePromoInRoot(document);
-          rewriteCopyInRoot(document);
+          if (ENABLE_RUNTIME_COPY_REWRITE) {
+            rewriteCopyInRoot(document);
+          }
+          rewriteFooterFormInRoot(document);
           unlockInteractionLocks();
         };
 
@@ -640,7 +688,10 @@
 
         window.setTimeout(() => {
           hidePromoInRoot(document);
-          rewriteCopyInRoot(document);
+          if (ENABLE_RUNTIME_COPY_REWRITE) {
+            rewriteCopyInRoot(document);
+          }
+          rewriteFooterFormInRoot(document);
           unlockInteractionLocks();
         }, 1200);
 
@@ -668,6 +719,10 @@
                 rewriteMediaUrlsInRoot(addedNode);
                 enforceHeroImage(addedNode);
                 hidePromoInRoot(addedNode);
+                if (ENABLE_RUNTIME_COPY_REWRITE) {
+                  rewriteCopyInRoot(addedNode);
+                }
+                rewriteFooterFormInRoot(addedNode);
                 unlockInteractionLocks();
               }
             }

@@ -6,6 +6,8 @@
     "dev": "next dev -p 4322",
     "build": "next build",
     "start": "next start -p 4322",
+    "tina:dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev -p 4323\"",
+    "tina:build": "TINA_PUBLIC_IS_LOCAL=true tinacms build --local --skip-cloud-checks",
     "sync:assets": "python scripts/sync_assets.py",
     "sync:media": "python scripts/sync_media_assets.py",
     "clone:live": "bash scripts/clone_live_site.sh"
@@ -18,5 +20,9 @@
     "next": "^14.2.33",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^2.1.5",
+    "tinacms": "^3.4.1"
   }
 }
