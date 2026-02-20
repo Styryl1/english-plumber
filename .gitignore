@@ -8,3 +8,7 @@ __pycache__/
 *:Zone.Identifier
 public/tina-admin/
 public/admin/.gitignore
+
+# OpenNext
+.open-next
+.dev.vars

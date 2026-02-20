@@ -3,26 +3,33 @@
   "version": "1.0.0",
   "description": "Pixel-perfect mirrored site served by Next.js",
   "scripts": {
-    "dev": "next dev -p 4322",
     "build": "next build",
+    "dev": "next dev -p 4322",
     "start": "next start -p 4322",
     "tina:dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev -p 4323\"",
     "tina:build": "TINA_PUBLIC_IS_LOCAL=true tinacms build --local --skip-cloud-checks",
     "sync:assets": "python scripts/sync_assets.py",
     "sync:media": "python scripts/sync_media_assets.py",
-    "clone:live": "bash scripts/clone_live_site.sh"
+    "clone:live": "bash scripts/clone_live_site.sh",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "next": "^14.2.33",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@tinacms/cli": "^2.1.5",
-    "tinacms": "^3.4.1"
-  }
+    "@opennextjs/cloudflare": "^1.16.5",
+    "@tinacms/cli": "^2.1.6",
+    "tinacms": "^3.5.0",
+    "wrangler": "^4.67.0"
+  },
+  "packageManager": "pnpm@10.28.0"
 }
