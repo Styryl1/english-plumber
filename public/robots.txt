@@ -3,9 +3,9 @@ User-agent: *
 Disallow: /admin/*
 
 # Host
-Host: https://gogeviti.com
+Host: https://englishplumber.nl
 
 # Sitemaps
-Sitemap: https://gogeviti.com/sitemap.xml
-Sitemap: https://gogeviti.com/pages-sitemap.xml
-Sitemap: https://gogeviti.com/posts-sitemap.xml
+Sitemap: https://englishplumber.nl/sitemap.xml
+Sitemap: https://englishplumber.nl/pages-sitemap.xml
+Sitemap: https://englishplumber.nl/posts-sitemap.xml

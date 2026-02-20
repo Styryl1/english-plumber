@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$ROOT_DIR/.cache/live-clone"
 SOURCE_HTML="$ROOT_DIR/src/mirror/live-index.html"
 PUBLIC_DIR="$ROOT_DIR/public"
-ORIGIN="https://www.gogeviti.com"
+ORIGIN="https://englishplumber.nl"
 UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
 
 echo "[clone:live] preparing temp workspace..."
@@ -33,7 +33,7 @@ mkdir -p "$(dirname "$SOURCE_HTML")"
 cp "$TMP_DIR/index.html" "$SOURCE_HTML"
 
 echo "[clone:live] rewriting dynamic image/API endpoints to live origin..."
-perl -0pi -e 's@(?<!https://www\.gogeviti\.com)/_next/image\?@https://www.gogeviti.com/_next/image?@g; s@(?<!https://www\.gogeviti\.com)/api/globals/@https://www.gogeviti.com/api/globals/@g; s@(?<!https://www\.gogeviti\.com)/api/search/@https://www.gogeviti.com/api/search/@g;' "$SOURCE_HTML"
+perl -0pi -e 's@(?<!https://englishplumber\.nl)/_next/image\?@https://englishplumber.nl/_next/image?@g; s@(?<!https://englishplumber\.nl)/api/globals/@https://englishplumber.nl/api/globals/@g; s@(?<!https://englishplumber\.nl)/api/search/@https://englishplumber.nl/api/search/@g;' "$SOURCE_HTML"
 
 echo "[clone:live] syncing static files into public/..."
 rm -rf "$PUBLIC_DIR/mirror_next"

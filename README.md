@@ -1,6 +1,6 @@
 # Next.js Mirror Snapshot
 
-This project serves a pixel-clone snapshot of `gogeviti.com` through Next.js, while keeping mirrored assets local and editable.
+This project serves a pixel-clone snapshot of `englishplumber.nl` through Next.js, while keeping mirrored assets local and editable.
 
 The homepage HTML source is `src/mirror/live-index.html`. At runtime, Next reads that file, injects local overrides, and serves it directly (no React hydration for the mirrored page), which keeps scripts/animations stable.
 
@@ -11,7 +11,7 @@ The homepage HTML source is `src/mirror/live-index.html`. At runtime, Next reads
 - `npm run start` - run production server on port `4322`
 - `npm run tina:dev` - start Tina local CMS + Next app on port `4323` (`/tina-admin/index.html`)
 - `npm run tina:build` - build Tina admin and generated client files in local mode (output: `public/tina-admin`)
-- `npm run sync:assets` - re-download live Geviti CSS/font assets into `public/assets`
+- `npm run sync:assets` - re-download live mirrored CSS/font assets into `public/assets`
 - `npm run sync:media` - download mirror image/video assets used by the page into `public/mirror_media`
 - `npm run clone:live` - re-clone live homepage and static bundles into local mirror paths
 

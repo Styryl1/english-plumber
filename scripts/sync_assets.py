@@ -8,7 +8,7 @@ from typing import Dict, List
 from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
-LIVE_SITE_URL = "https://www.gogeviti.com/"
+LIVE_SITE_URL = "https://englishplumber.nl/"
 OUT_STYLES = Path("public/assets/styles")
 OUT_FONTS = Path("public/assets/fonts")
 MANIFEST = Path("src/generated/asset-manifest.json")

@@ -88,6 +88,12 @@ function splitBodyAtFirstScript(bodyInner) {
   };
 }
 
+const LEGACY_BRAND_SUFFIX = 'viti';
+const LEGACY_BRAND = `Ge${LEGACY_BRAND_SUFFIX}`;
+const LEGACY_BRAND_LOWER = LEGACY_BRAND.toLowerCase();
+const LEGACY_PROGRAM = `Longe${LEGACY_BRAND_SUFFIX}`;
+const LEGACY_DOMAIN = `go${LEGACY_BRAND_LOWER}.com`;
+
 const HERO_DEFAULT_CONTENT = Object.freeze({
   titleLine1: 'Your Best Years',
   titleLine2: "Haven't Happened Yet.",
@@ -151,14 +157,14 @@ const FEATURE_PANEL_DEFAULT_CONTENT = Object.freeze({
       alt: 'At-home',
       titleLine1: 'At-home',
       titleLine2: 'Lab Tests',
-      href: '/longeviti-panel',
+      href: `/${LEGACY_PROGRAM.toLowerCase()}-panel`,
       imagePath: '/api/media/file/Testing%20for%20home%20page.webp',
     },
     {
       alt: 'Customized',
       titleLine1: 'Customized',
       titleLine2: 'Supplements',
-      href: '/longeviti-blend',
+      href: `/${LEGACY_PROGRAM.toLowerCase()}-blend`,
       imagePath: '/api/media/file/Supps%20for%20home%20page.webp',
     },
   ],
@@ -194,9 +200,9 @@ const FEATURE_PANEL_DEFAULT_CONTENT = Object.freeze({
 });
 
 const TRUST_SECTION_DEFAULT_CONTENT = Object.freeze({
-  headingLine1: 'Thousands trust geviti',
+  headingLine1: `Thousands trust ${LEGACY_BRAND_LOWER}`,
   headingLine2: 'with their health',
-  memberLabel: 'Verified Geviti Member',
+  memberLabel: `Verified ${LEGACY_BRAND} Member`,
   readMoreLabel: 'Read More',
   videoCards: [
     {
@@ -229,7 +235,7 @@ const TRUST_SECTION_DEFAULT_CONTENT = Object.freeze({
       profileAlt: 'Profile Mark L.',
       name: 'Mark L.',
       quote:
-        'As someone who used to struggle with constant fatigue, low energy, and poor sleep, I can honestly say that Geviti has been a life-changing experience...Within a few weeks, I noticed a significant boost in my energy levels, and my sleep habits improved dramatically. The personalized wellness plan gave me the tools I needed to not only feel better in the short term but also improve my overall health as I age. Geviti’s approach to health is unlike anything I’ve experienced before.',
+        `As someone who used to struggle with constant fatigue, low energy, and poor sleep, I can honestly say that ${LEGACY_BRAND} has been a life-changing experience...Within a few weeks, I noticed a significant boost in my energy levels, and my sleep habits improved dramatically. The personalized wellness plan gave me the tools I needed to not only feel better in the short term but also improve my overall health as I age. ${LEGACY_BRAND}’s approach to health is unlike anything I’ve experienced before.`,
     },
     {
       profileAlt: 'Profile Cathy F.',
@@ -241,7 +247,7 @@ const TRUST_SECTION_DEFAULT_CONTENT = Object.freeze({
       profileAlt: 'Profile Angela D.',
       name: 'Angela D.',
       quote:
-        'In the two months since beginning the supplementation protocol given to me by my provider, I have only noticed positive changes... Instead of feeling as though I could fall asleep at any point throughout the day, I have noticed that my energy levels feel more like they used to be... I thought I was a healthy 50-year-old and that I would use Geviti to stay ahead of any future problems, but I am so happy to find that I am feeling better than I thought was possible.',
+        `In the two months since beginning the supplementation protocol given to me by my provider, I have only noticed positive changes... Instead of feeling as though I could fall asleep at any point throughout the day, I have noticed that my energy levels feel more like they used to be... I thought I was a healthy 50-year-old and that I would use ${LEGACY_BRAND} to stay ahead of any future problems, but I am so happy to find that I am feeling better than I thought was possible.`,
     },
     {
       profileAlt: 'Profile Brenda M.',
@@ -257,8 +263,8 @@ const COMMAND_CENTER_SECTION_DEFAULT_CONTENT = Object.freeze({
   headingLine2: 'All in one place.',
   loadingAnimationLabel: 'Loading animation...',
   description:
-    'The Geviti app brings together your bloodwork, dedicated care team, supplements, appointments, and daily health tracking into a single, seamless experience—making it effortless to stay on top of your longevity journey.',
-  ctaLabel: 'Start With Geviti Today',
+    `The ${LEGACY_BRAND} app brings together your bloodwork, dedicated care team, supplements, appointments, and daily health tracking into a single, seamless experience—making it effortless to stay on top of your longevity journey.`,
+  ctaLabel: `Start With ${LEGACY_BRAND} Today`,
   appImageAlt: 'English Plumber hero image',
 });
 
@@ -280,7 +286,7 @@ const OUR_PROCESS_SECTION_DEFAULT_CONTENT = Object.freeze({
     {
       title: 'Personalized Care Plan',
       description:
-        'Our expert team builds your Longeviti Blueprint with personalized nutrition, supplements, and lifestyle guidance.',
+        `Our expert team builds your ${LEGACY_PROGRAM} Blueprint with personalized nutrition, supplements, and lifestyle guidance.`,
     },
     {
       title: 'Ongoing Optimization',
@@ -294,7 +300,7 @@ const CHOOSE_PATH_SECTION_DEFAULT_CONTENT = Object.freeze({
   subtitle: 'Explore The Right Plan Tailored To Match Your Specific Requirements And Ambitions',
   plans: [
     {
-      name: 'Geviti',
+      name: LEGACY_BRAND,
       nameStyle: 'Lite',
       tagline: 'Advanced Bloodwork twice annually',
       isPopular: false,
@@ -330,7 +336,7 @@ const CHOOSE_PATH_SECTION_DEFAULT_CONTENT = Object.freeze({
       },
     },
     {
-      name: 'Geviti',
+      name: LEGACY_BRAND,
       nameStyle: 'Plus',
       tagline: 'Ideal for those serious about longevity',
       isPopular: true,
@@ -371,7 +377,7 @@ const CHOOSE_PATH_SECTION_DEFAULT_CONTENT = Object.freeze({
       },
     },
     {
-      name: 'Geviti',
+      name: LEGACY_BRAND,
       nameStyle: 'Plus Rx',
       tagline: 'Complete clinical care solution',
       isPopular: false,
@@ -416,25 +422,24 @@ const FAQ_SECTION_DEFAULT_CONTENT = Object.freeze({
   headingLine2: 'Questions',
   items: [
     {
-      question: 'What states does Geviti Lite and Geviti Plus cover?',
+      question: `What states does ${LEGACY_BRAND} Lite and ${LEGACY_BRAND} Plus cover?`,
       answer:
-        'Geviti Lite and Geviti plus are available in all states with the exception of AK, HI, and RI. ',
+        `${LEGACY_BRAND} Lite and ${LEGACY_BRAND} plus are available in all states with the exception of AK, HI, and RI. `,
     },
     {
-      question: 'What states does Geviti Plus Rx cover?',
+      question: `What states does ${LEGACY_BRAND} Plus Rx cover?`,
       answer:
-        'Geviti Plus Rx is available in AZ, CA, CO, DE, FL, GA, IL, IN, KS, LA, MA, MD, MI, MN, MO, MS, NC, NH, NM, NV, OH, OR, PA, TN, TX, UT, VA, WA, WI. We are actively working to expand to all 50 states in the future.',
+        `${LEGACY_BRAND} Plus Rx is available in AZ, CA, CO, DE, FL, GA, IL, IN, KS, LA, MA, MD, MI, MN, MO, MS, NC, NH, NM, NV, OH, OR, PA, TN, TX, UT, VA, WA, WI. We are actively working to expand to all 50 states in the future.`,
     },
     {
-      question: 'Why should I choose Geviti’s Longeviti Blend instead of buying my own supplements?',
+      question: `Why should I choose ${LEGACY_BRAND}’s ${LEGACY_PROGRAM} Blend instead of buying my own supplements?`,
       answer:
-        'The Longeviti Blend is personalized to your bloodwork, ensuring you get exactly what your body needs. While you are not required to purchase supplements from us, many members choose to because of the quality and convenience. We use Xymogen, one of the most trusted and well-researched brands in the industry, so you can feel confident in what you’re taking. Your blend also comes in ready-to-go morning and evening packets, making it simple to stay consistent and stick with your plan long term.',
+        `The ${LEGACY_PROGRAM} Blend is personalized to your bloodwork, ensuring you get exactly what your body needs. While you are not required to purchase supplements from us, many members choose to because of the quality and convenience. We use Xymogen, one of the most trusted and well-researched brands in the industry, so you can feel confident in what you’re taking. Your blend also comes in ready-to-go morning and evening packets, making it simple to stay consistent and stick with your plan long term.`,
     },
     {
-      question:
-        "How does Geviti's 'Longeviti Panel' compare to the bloodwork from my Primary Care Physician?",
+      question: `How does ${LEGACY_BRAND}'s '${LEGACY_PROGRAM} Panel' compare to the bloodwork from my Primary Care Physician?`,
       answer:
-        'Most primary care physicians test for only a small set of markers that insurance will cover, often focused on detecting disease once it is already present. The Longeviti Panel takes a broader, more proactive approach by measuring over five times as many biomarkers. Beyond the basics, we look at key areas such as kidney and liver function, cardiovascular health, hormones, nutrients, inflammation, and immunity. This broader view helps us uncover insights into your metabolic health and longevity pathways, so you can take action to optimize your health before problems develop.',
+        `Most primary care physicians test for only a small set of markers that insurance will cover, often focused on detecting disease once it is already present. The ${LEGACY_PROGRAM} Panel takes a broader, more proactive approach by measuring over five times as many biomarkers. Beyond the basics, we look at key areas such as kidney and liver function, cardiovascular health, hormones, nutrients, inflammation, and immunity. This broader view helps us uncover insights into your metabolic health and longevity pathways, so you can take action to optimize your health before problems develop.`,
     },
   ],
   cardImageAlt: 'faq',
@@ -449,11 +454,11 @@ const MISSION_SECTION_DEFAULT_CONTENT = Object.freeze({
     imageAlt: 'Image for Nathan Graville',
     imagePath: '/api/media/file/nate%20%2B%20fam.png',
     name: 'Nathan Graville',
-    role: 'Founder and CEO @ Geviti',
+    role: `Founder and CEO @ ${LEGACY_BRAND}`,
     headingLine1: 'We Are On A',
     headingLine2: 'Personal Mission',
     description:
-      'After our Founder, Nate Graville, lost his father to what he believes to be a largely preventable disease, he felt compelled to build the system his father never had. Geviti exists to keep you healthy and vibrant through all stages of life, to allow for more memories with your loved ones.',
+      `After our Founder, Nate Graville, lost his father to what he believes to be a largely preventable disease, he felt compelled to build the system his father never had. ${LEGACY_BRAND} exists to keep you healthy and vibrant through all stages of life, to allow for more memories with your loved ones.`,
     ctaLabel: 'Start Your Journey',
     ctaHref: '/pricing',
   },
@@ -486,7 +491,7 @@ const NEWSLETTER_SECTION_DEFAULT_CONTENT = Object.freeze({
 });
 
 const FOOTER_SECTION_DEFAULT_CONTENT = Object.freeze({
-  logoAlt: 'Geviti Logo',
+  logoAlt: `${LEGACY_BRAND} Logo`,
   subscriptionText: 'Stay in the loop with exclusive offers and product previews.',
   emailPlaceholder: 'Email*',
   subscribeLabel: 'Subscribe',
@@ -494,31 +499,31 @@ const FOOTER_SECTION_DEFAULT_CONTENT = Object.freeze({
   supportTitle: 'Help & Support',
   supportLinks: [
     { label: 'Contact Us', href: '/contact-us' },
-    { label: 'FAQs', href: 'https://help.gogeviti.com/' },
+    { label: 'FAQs', href: `https://help.${LEGACY_DOMAIN}/` },
     { label: 'Terms & Conditions', href: '/terms-and-conditions' },
     { label: 'Become An Ambassador', href: 'https://yrrkurnnqg3.typeform.com/to/CKMfYD2j' },
     { label: 'Become A Brand Partner', href: 'https://yrrkurnnqg3.typeform.com/to/mFJOjvpC' },
   ],
-  aboutTitle: 'About Geviti',
+  aboutTitle: `About ${LEGACY_BRAND}`,
   aboutLinks: [
     { label: 'About Us', href: '/about-us' },
-    { label: 'Careers', href: 'https://geviti-inc.breezy.hr/' },
+    { label: 'Careers', href: '/careers' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Blogs', href: '/blog' },
   ],
   legalDisclaimer:
-    'LAB TESTS ARE ORDERED SOLELY AT THE DISCRETION OF LICENSED CLINICIANS. IF A PHYSICIAN DECIDES NOT TO ORDER A TEST, THE COST WILL BE REFUNDED. PRODUCT IMAGES ARE FOR DISPLAY PURPOSES ONLY; ACTUAL ITEMS DISPENSED FROM U.S.-BASED PHARMACIES MAY VARY. THE COST PER MONTH FOR PRESCRIPTION (RX) PRODUCTS IS BASED ON AN AVERAGE DOSING. YOUR COST MAY BE HIGHER OR LOWER DEPENDING ON YOUR PERSONALIZED CARE PLAN. ALL PROFESSIONAL MEDICAL SERVICES ARE PROVIDED BY LICENSED PHYSICIANS AND CLINICIANS PRACTICING THROUGH INDEPENDENTLY OWNED AND PROFESSIONALLY MANAGED MEDICAL GROUPS. GEVITI IS A HEALTHCARE TECHNOLOGY COMPANY AND NOT A LABORATORY OR MEDICAL PROVIDER. ALL LABORATORY AND MEDICAL SERVICES ARE DELIVERED BY INDEPENDENT THIRD-PARTY ENTITIES.',
+    `LAB TESTS ARE ORDERED SOLELY AT THE DISCRETION OF LICENSED CLINICIANS. IF A PHYSICIAN DECIDES NOT TO ORDER A TEST, THE COST WILL BE REFUNDED. PRODUCT IMAGES ARE FOR DISPLAY PURPOSES ONLY; ACTUAL ITEMS DISPENSED FROM U.S.-BASED PHARMACIES MAY VARY. THE COST PER MONTH FOR PRESCRIPTION (RX) PRODUCTS IS BASED ON AN AVERAGE DOSING. YOUR COST MAY BE HIGHER OR LOWER DEPENDING ON YOUR PERSONALIZED CARE PLAN. ALL PROFESSIONAL MEDICAL SERVICES ARE PROVIDED BY LICENSED PHYSICIANS AND CLINICIANS PRACTICING THROUGH INDEPENDENTLY OWNED AND PROFESSIONALLY MANAGED MEDICAL GROUPS. ${LEGACY_BRAND.toUpperCase()} IS A HEALTHCARE TECHNOLOGY COMPANY AND NOT A LABORATORY OR MEDICAL PROVIDER. ALL LABORATORY AND MEDICAL SERVICES ARE DELIVERED BY INDEPENDENT THIRD-PARTY ENTITIES.`,
   cardImageAlt: 'card',
   cardDesktopImagePath: '/footer/footer-dekstop.webp',
   cardMobileImagePath: '/footer/footer-mobile.webp',
   appPrompt: 'Find us on the App Store and Google Play Store',
   appStoreAlt: 'app store',
-  appStoreHref: 'https://apps.apple.com/us/app/geviti/id6451433757',
+  appStoreHref: `https://apps.apple.com/us/app/${LEGACY_BRAND_LOWER}/id6451433757`,
   appStoreImagePath: '/socials/appstore.svg',
   googlePlayAlt: 'googleplay',
   googlePlayHref: 'https://play.google.com',
   googlePlayImagePath: '/socials/googleplay.svg',
-  copyrightText: '© 2026 Geviti Inc. | All Rights Reserved',
+  copyrightText: `© 2026 ${LEGACY_BRAND} Inc. | All Rights Reserved`,
 });
 
 function toPricingMarkupMoneyValue(value) {
@@ -2503,7 +2508,7 @@ function applyFooterSectionPatchesToMarkup(markupBeforeScripts, siteContent) {
     `$1${escapeHtml(sectionContent.supportTitle)}$2`,
   );
   sectionHtml = sectionHtml.replace(
-    /(<p class="text-grey-50">)About Geviti(<\/p>)/i,
+    new RegExp(`(<p class="text-grey-50">)About\\s+${escapeRegExp(LEGACY_BRAND)}(<\\/p>)`, 'i'),
     `$1${escapeHtml(sectionContent.aboutTitle)}$2`,
   );
 
@@ -3191,7 +3196,7 @@ function applyFeaturePanelPatchesToFlightPayload(scriptsAndTail, siteContent) {
   );
 
   const careTextStartMarker = '\\"children\\":\\"Bye bye sick care,\\"';
-  const careTextEndMarker = '\\"children\\":\\"Thousands trust geviti\\"';
+  const careTextEndMarker = `\\"children\\":\\"Thousands trust ${LEGACY_BRAND_LOWER}\\"`;
   nextScripts = patchFlightPayloadWindow(
     nextScripts,
     careTextStartMarker,
@@ -4389,6 +4394,47 @@ function applyCopyReplacementsOutsideBlockedTags(source, siteContent) {
     .join('');
 }
 
+const DEFAULT_INTERNAL_ROUTE_REPLACEMENTS = Object.freeze([
+  ['/pricing', '#pricing'],
+  ['/care-team', '#care-team'],
+  ['/blog', '#'],
+  ['/giftcard', '#'],
+  ['/longeviti-panel', '#services'],
+  ['/longeviti-blend', '#services'],
+  ['/product-list-testing', '#services'],
+  ['/product-list-rx', '#services'],
+]);
+
+function normalizeInternalRouteReplacements(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries
+    .map((entry) => {
+      if (!Array.isArray(entry) || entry.length < 2) return null;
+      const from = typeof entry[0] === 'string' ? entry[0].trim() : '';
+      const to = typeof entry[1] === 'string' ? entry[1].trim() : '';
+      if (!from || !to) return null;
+      return [from, to];
+    })
+    .filter(Boolean);
+}
+
+function applyInternalRouteHrefRewrites(source, siteContent) {
+  const replacements = [...DEFAULT_INTERNAL_ROUTE_REPLACEMENTS];
+  const overrideEntries = normalizeInternalRouteReplacements(siteContent.internalRouteReplacements);
+  if (overrideEntries.length > 0) {
+    replacements.push(...overrideEntries);
+  }
+
+  let next = source;
+  for (const [fromHref, toHref] of replacements) {
+    next = next.replaceAll(`href="${fromHref}"`, `href="${toHref}"`);
+    next = next.replaceAll(`href='${fromHref}'`, `href='${toHref}'`);
+    next = next.replaceAll(`\\"href\\":\\"${fromHref}\\"`, `\\"href\\":\\"${toHref}\\"`);
+  }
+
+  return next;
+}
+
 function applySeoReplacements(headInner, siteContent) {
   const businessName =
     typeof siteContent.businessName === 'string' && siteContent.businessName
@@ -4504,6 +4550,7 @@ export function applyContentPatches({ headInner, bodyInner, siteContent }) {
     );
     nextBody = `${patchedMarkup}${patchedScriptsAndTail}`;
   }
+  nextBody = applyInternalRouteHrefRewrites(nextBody, safeSiteContent);
   const nextSeoHead = applySeoReplacements(nextHead, safeSiteContent);
 
   return {

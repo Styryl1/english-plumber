@@ -10,7 +10,7 @@ from urllib.parse import urljoin
 
 INPUT_PATH = Path("layout.builder (1).json")
 OUTPUT_PATH = Path("index.from-json.html")
-LIVE_SITE_URL = "https://www.gogeviti.com/"
+LIVE_SITE_URL = "https://englishplumber.nl/"
 
 VOID_TAGS = {
     "area",
@@ -61,11 +61,11 @@ DROP_FONT_FAMILIES = {
 FALLBACK_HTML_CLASS = "__variable_e4fffa __variable_528cae __variable_3057fb"
 FALLBACK_BODY_CLASS = "font-aspekta"
 FALLBACK_STYLESHEET_URLS = [
-    "https://www.gogeviti.com/_next/static/css/c166d0121e54d56c.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
-    "https://www.gogeviti.com/_next/static/css/2da20e92923ef490.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
-    "https://www.gogeviti.com/_next/static/css/b808377ec36a43ee.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
-    "https://www.gogeviti.com/_next/static/css/d61da687db648e05.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
-    "https://www.gogeviti.com/critical-mobile.css",
+    "https://englishplumber.nl/_next/static/css/c166d0121e54d56c.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
+    "https://englishplumber.nl/_next/static/css/2da20e92923ef490.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
+    "https://englishplumber.nl/_next/static/css/b808377ec36a43ee.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
+    "https://englishplumber.nl/_next/static/css/d61da687db648e05.css?dpl=dpl_Dr9PCzXjGVYsy4rPKKwmrBjrTwpK",
+    "https://englishplumber.nl/critical-mobile.css",
 ]
 
 

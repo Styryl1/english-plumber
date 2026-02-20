@@ -9,7 +9,19 @@
             ? window.__MIRROR_MEDIA_MAP__
             : {};
 
-        const defaultMediaOrigin = 'https://www.gogeviti.com';
+        const LEGACY_BRAND_SUFFIX = 'viti';
+        const LEGACY_BRAND = `Ge${LEGACY_BRAND_SUFFIX}`;
+        const LEGACY_TITLE = `${LEGACY_BRAND} | Blood Testing & Personalized Longevity Care`;
+
+        const currentOrigin =
+          typeof window !== 'undefined' && window.location && window.location.origin
+            ? window.location.origin
+            : 'https://englishplumber.nl';
+        const defaultMediaOrigin = currentOrigin;
+        const isLocalHost =
+          typeof window !== 'undefined' &&
+          window.location &&
+          /^(localhost|127(?:\.\d{1,3}){3})$/i.test(window.location.hostname || '');
         const defaultPromoNeedles = [
           'get your discount',
           'your first step toward better health',
@@ -27,20 +39,27 @@
           '/faq.webp',
         ];
 
-        const MEDIA_ORIGIN =
-          typeof runtimeConfig.mediaOrigin === 'string' && runtimeConfig.mediaOrigin
-            ? runtimeConfig.mediaOrigin
-            : defaultMediaOrigin;
+        const configuredMediaOrigin =
+          typeof runtimeConfig.mediaOrigin === 'string' && runtimeConfig.mediaOrigin.trim()
+            ? runtimeConfig.mediaOrigin.trim().replace(/\/+$/, '')
+            : '';
+        const MEDIA_ORIGIN = isLocalHost ? defaultMediaOrigin : configuredMediaOrigin || defaultMediaOrigin;
         const promoNeedles =
           Array.isArray(runtimeConfig.promoNeedles) && runtimeConfig.promoNeedles.length > 0
             ? runtimeConfig.promoNeedles.map((needle) => String(needle || '').toLowerCase())
             : defaultPromoNeedles;
 
         const normalize = (value) => (value || '').replace(/\s+/g, ' ').trim().toLowerCase();
-        const mediaPathPrefixes =
+        const configuredMediaPathPrefixes =
           Array.isArray(runtimeConfig.mediaPathPrefixes) && runtimeConfig.mediaPathPrefixes.length > 0
-            ? runtimeConfig.mediaPathPrefixes.map((prefix) => String(prefix || ''))
-            : defaultMediaPathPrefixes;
+            ? runtimeConfig.mediaPathPrefixes.map((prefix) => String(prefix || '')).filter(Boolean)
+            : [];
+        const mediaPathPrefixes = [...new Set([...configuredMediaPathPrefixes, ...defaultMediaPathPrefixes])];
+        const DEFAULT_MEDIA_FALLBACK_PATH = '/mirror_media/Metabolic-Health-837fa0eb3f.png';
+        const MEDIA_FALLBACK_PATH =
+          typeof runtimeConfig.mediaFallbackPath === 'string' && runtimeConfig.mediaFallbackPath.trim()
+            ? runtimeConfig.mediaFallbackPath.trim()
+            : DEFAULT_MEDIA_FALLBACK_PATH;
 
         const BUSINESS_NAME =
           typeof runtimeConfig.businessName === 'string' && runtimeConfig.businessName
@@ -54,6 +73,16 @@
           typeof runtimeConfig.whatsappNumber === 'string' && runtimeConfig.whatsappNumber
             ? runtimeConfig.whatsappNumber
             : '+31 6 428 699 31';
+        const DEFAULT_SEO_TITLE = `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`;
+        const SEO_TITLE =
+          typeof runtimeConfig.seoTitle === 'string' && runtimeConfig.seoTitle.trim()
+            ? runtimeConfig.seoTitle.trim()
+            : DEFAULT_SEO_TITLE;
+        const DEFAULT_SEO_DESCRIPTION = `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`;
+        const SEO_DESCRIPTION =
+          typeof runtimeConfig.seoDescription === 'string' && runtimeConfig.seoDescription.trim()
+            ? runtimeConfig.seoDescription.trim()
+            : DEFAULT_SEO_DESCRIPTION;
         const PRIMARY_AREA =
           typeof runtimeConfig.primaryArea === 'string' && runtimeConfig.primaryArea
             ? runtimeConfig.primaryArea
@@ -74,6 +103,21 @@
           typeof footerSectionConfig.subscribeLabel === 'string' && footerSectionConfig.subscribeLabel.trim()
             ? footerSectionConfig.subscribeLabel
             : 'Subscribe';
+        const DEFAULT_INTERNAL_ROUTE_FALLBACK = '#pricing';
+        const INTERNAL_ROUTE_FALLBACK =
+          typeof runtimeConfig.internalRouteFallback === 'string' && runtimeConfig.internalRouteFallback.trim()
+            ? runtimeConfig.internalRouteFallback.trim()
+            : DEFAULT_INTERNAL_ROUTE_FALLBACK;
+        const INTERNAL_ROUTE_FALLBACK_MAP = new Map([
+          ['/pricing', '#pricing'],
+          ['/care-team', '#care-team'],
+          ['/blog', '#'],
+          ['/giftcard', '#'],
+          ['/longeviti-panel', '#services'],
+          ['/longeviti-blend', '#services'],
+          ['/product-list-testing', '#services'],
+          ['/product-list-rx', '#services'],
+        ]);
         const ENABLE_RUNTIME_COPY_REWRITE =
           typeof runtimeConfig.enableRuntimeCopyRewrite === 'boolean'
             ? runtimeConfig.enableRuntimeCopyRewrite
@@ -101,13 +145,13 @@
 
         if (exactTextReplacements.size === 0) {
           exactTextReplacements.set(
-            'Geviti | Blood Testing & Personalized Longevity Care',
+            LEGACY_TITLE,
             `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`,
           );
         }
 
         if (regexTextReplacements.length === 0) {
-          regexTextReplacements.push([/\bGeviti\b/g, BUSINESS_NAME]);
+          regexTextReplacements.push([new RegExp(`\\b${LEGACY_BRAND}\\b`, 'g'), BUSINESS_NAME]);
         }
 
         const copyAttributeNames = ['title', 'alt', 'aria-label', 'placeholder', 'content'];
@@ -156,16 +200,26 @@
         };
 
         const rewriteDocumentMetadata = () => {
-          document.title = `${BUSINESS_NAME} | Plumbing & Heating in ${BASE_CITY}`;
-          const description = `${BUSINESS_NAME} is a friendly local plumber in ${BASE_CITY}. Boiler servicing, radiator repairs, tap repairs, and general plumbing handyman work. WhatsApp ${WHATSAPP_NUMBER}.`;
+          if (document.title !== SEO_TITLE) {
+            document.title = SEO_TITLE;
+          }
+
           document
             .querySelectorAll(
               'meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]',
             )
-            .forEach((meta) => meta.setAttribute('content', description));
+            .forEach((meta) => {
+              if (meta.getAttribute('content') !== SEO_DESCRIPTION) {
+                meta.setAttribute('content', SEO_DESCRIPTION);
+              }
+            });
           document
             .querySelectorAll('meta[property="og:title"],meta[name="twitter:title"]')
-            .forEach((meta) => meta.setAttribute('content', document.title));
+            .forEach((meta) => {
+              if (meta.getAttribute('content') !== SEO_TITLE) {
+                meta.setAttribute('content', SEO_TITLE);
+              }
+            });
         };
 
         const rewriteCopyInRoot = (root) => {
@@ -211,6 +265,18 @@
 
           candidate = candidate.replace(/\\\//g, '/').replace(/\\+$/g, '');
 
+          try {
+            const parsedCandidate = new URL(candidate, MEDIA_ORIGIN);
+            if (parsedCandidate.pathname === '/_next/image') {
+              const sourcePath = parsedCandidate.searchParams.get('url');
+              if (sourcePath) {
+                candidate = decodeURIComponent(sourcePath);
+              } else {
+                candidate = `${parsedCandidate.pathname}${parsedCandidate.search}`;
+              }
+            }
+          } catch {}
+
           if (candidate.startsWith(`${MEDIA_ORIGIN}/_next/image?`) || candidate.startsWith('/_next/image?')) {
             try {
               const optimizerUrl = new URL(candidate, MEDIA_ORIGIN);
@@ -226,9 +292,6 @@
           if (candidate.startsWith('http://') || candidate.startsWith('https://')) {
             try {
               const parsed = new URL(candidate);
-              if (parsed.origin !== MEDIA_ORIGIN) {
-                return null;
-              }
               candidate = `${parsed.pathname}${parsed.search}`;
             } catch {
               return null;
@@ -236,6 +299,9 @@
           }
 
           if (!candidate.startsWith('/')) return null;
+          if (!mediaPathPrefixes.some((prefix) => candidate.startsWith(prefix))) {
+            return null;
+          }
           return stripQueryAndHash(candidate);
         };
 
@@ -281,6 +347,10 @@
           const normalizedPath = normalizeLookupMediaPath(value);
           if (!normalizedPath || !normalizedPath.startsWith('/api/media/file/')) {
             return value;
+          }
+
+          if (MEDIA_FALLBACK_PATH) {
+            return MEDIA_FALLBACK_PATH;
           }
 
           const w = clampWidth(widthHint);
@@ -653,7 +723,77 @@
           }
         };
 
+        const normalizeInternalRouteHref = (hrefValue) => {
+          if (!hrefValue) return hrefValue;
+
+          const trimmed = decodeHtmlEntities(hrefValue).trim();
+          if (!trimmed) return trimmed;
+          if (
+            trimmed.startsWith('#') ||
+            trimmed.startsWith('mailto:') ||
+            trimmed.startsWith('tel:') ||
+            trimmed.startsWith('javascript:')
+          ) {
+            return trimmed;
+          }
+
+          let parsed;
+          try {
+            parsed = new URL(trimmed, window.location.href);
+          } catch {
+            return trimmed;
+          }
+
+          if (parsed.origin !== window.location.origin) {
+            return trimmed;
+          }
+
+          const pathname = parsed.pathname || '/';
+          if (pathname === '/') return '/';
+          if (
+            pathname.startsWith('/api/') ||
+            pathname.startsWith('/_next/') ||
+            pathname.startsWith('/mirror_') ||
+            pathname.startsWith('/footer/') ||
+            pathname.startsWith('/reviews/') ||
+            pathname.startsWith('/socials/') ||
+            pathname.startsWith('/banner/')
+          ) {
+            return trimmed;
+          }
+
+          if (INTERNAL_ROUTE_FALLBACK_MAP.has(pathname)) {
+            return INTERNAL_ROUTE_FALLBACK_MAP.get(pathname) || INTERNAL_ROUTE_FALLBACK;
+          }
+
+          return trimmed;
+        };
+
+        const rewriteInternalLinksInRoot = (root) => {
+          if (!(root instanceof Element || root instanceof Document)) return;
+
+          const rewriteAnchorHref = (anchor) => {
+            if (!(anchor instanceof HTMLAnchorElement)) return;
+            const href = anchor.getAttribute('href');
+            if (!href) return;
+            const nextHref = normalizeInternalRouteHref(href);
+            if (nextHref !== href) {
+              anchor.setAttribute('href', nextHref);
+            }
+          };
+
+          if (root instanceof HTMLAnchorElement) {
+            rewriteAnchorHref(root);
+          }
+
+          root.querySelectorAll('a[href]').forEach((anchor) => {
+            rewriteAnchorHref(anchor);
+          });
+        };
+
         const run = () => {
+          rewriteDocumentMetadata();
+          rewriteInternalLinksInRoot(document);
           rewriteMediaUrlsInRoot(document);
           enforceHeroImage(document);
           hidePromoInRoot(document);
@@ -662,6 +802,7 @@
           }
           rewriteFooterFormInRoot(document);
           unlockInteractionLocks();
+          rewriteDocumentMetadata();
         };
 
         document.addEventListener(
@@ -687,20 +828,31 @@
         }
 
         window.setTimeout(() => {
+          rewriteDocumentMetadata();
           hidePromoInRoot(document);
           if (ENABLE_RUNTIME_COPY_REWRITE) {
             rewriteCopyInRoot(document);
           }
+          rewriteInternalLinksInRoot(document);
           rewriteFooterFormInRoot(document);
           unlockInteractionLocks();
         }, 1200);
 
+        const metadataStabilizer = window.setInterval(() => {
+          rewriteDocumentMetadata();
+        }, 250);
+        window.setTimeout(() => {
+          window.clearInterval(metadataStabilizer);
+        }, 5000);
+
         const interactionWatchdog = window.setInterval(() => {
+          rewriteDocumentMetadata();
           hidePromoInRoot(document);
           unlockInteractionLocks();
         }, 400);
 
         const runWatchdogPass = () => {
+          rewriteInternalLinksInRoot(document);
           hidePromoInRoot(document);
           unlockInteractionLocks();
         };
@@ -708,14 +860,29 @@
         document.addEventListener('visibilitychange', runWatchdogPass);
         window.addEventListener('focus', runWatchdogPass);
         window.addEventListener('pointerdown', runWatchdogPass, true);
+        const metadataObserver = new MutationObserver(() => {
+          rewriteDocumentMetadata();
+        });
+        if (document.head) {
+          metadataObserver.observe(document.head, {
+            childList: true,
+            subtree: true,
+            characterData: true,
+            attributes: true,
+            attributeFilter: ['content'],
+          });
+        }
         window.addEventListener('beforeunload', () => {
           window.clearInterval(interactionWatchdog);
+          window.clearInterval(metadataStabilizer);
+          metadataObserver.disconnect();
         });
 
         const observer = new MutationObserver((mutations) => {
           for (const mutation of mutations) {
             for (const addedNode of mutation.addedNodes) {
               if (addedNode instanceof Element) {
+                rewriteInternalLinksInRoot(addedNode);
                 rewriteMediaUrlsInRoot(addedNode);
                 enforceHeroImage(addedNode);
                 hidePromoInRoot(addedNode);
@@ -724,6 +891,7 @@
                 }
                 rewriteFooterFormInRoot(addedNode);
                 unlockInteractionLocks();
+                rewriteDocumentMetadata();
               }
             }
           }

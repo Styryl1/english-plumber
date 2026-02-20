@@ -10,7 +10,7 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 from urllib.parse import parse_qs, quote, unquote, urlparse
 from urllib.request import Request, urlopen
 
-LIVE_ORIGIN = "https://www.gogeviti.com"
+LIVE_ORIGIN = "https://englishplumber.nl"
 SOURCE_HTML = Path("src/mirror/live-index.html")
 OUT_MEDIA = Path("public/mirror_media")
 MANIFEST = Path("src/generated/media-manifest.json")
@@ -23,7 +23,7 @@ ALLOWED_PREFIXES = (
     "/faq.webp",
 )
 
-NEXT_IMAGE_PATTERN = re.compile(r"(?:https://www\.gogeviti\.com)?/_next/image\?[^\"'<>\\s]+")
+NEXT_IMAGE_PATTERN = re.compile(r"(?:https?://[^/]+)?/_next/image\?[^\"'<>\\s]+")
 DIRECT_PATH_PATTERN = re.compile(r"/(?:api/media/file|banner|reviews|footer)/[^\"'<>\\s]+|/faq\.webp(?:\?[^\"'<>\\s]+)?")
 
 CONTENT_TYPE_EXT = {
@@ -74,8 +74,6 @@ def canonicalize_path(raw_value: str) -> Optional[str]:
 
     if candidate.startswith("http://") or candidate.startswith("https://"):
         parsed = urlparse(candidate)
-        if parsed.netloc not in ("www.gogeviti.com", "gogeviti.com"):
-            return None
         candidate = parsed.path
 
     if not candidate.startswith("/"):
