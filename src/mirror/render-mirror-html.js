@@ -1,14 +1,113 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { applyContentPatches } from './apply-content-patches.js';
+import { MIRROR_RUNTIME_BUNDLE } from '../generated/mirror-runtime-bundle.js';
 
-const SOURCE_PATH = path.join(process.cwd(), 'src/mirror/live-index.html');
-const INJECTION_DIR = path.join(process.cwd(), 'src/mirror/injections');
-const SITE_CONTENT_PATH = path.join(process.cwd(), 'content/site/mirror-content.json');
-const TINA_SITE_OVERRIDES_PATH = path.join(process.cwd(), 'content/tina/site.json');
-const MEDIA_MANIFEST_PATH = path.join(process.cwd(), 'src/generated/media-manifest.json');
+const MODULE_DIR = path.dirname(fileURLToPath(import.meta.url));
+const SOURCE_RELATIVE_PATH = 'src/mirror/live-index.html';
+const INJECTION_DIR_RELATIVE_PATH = 'src/mirror/injections';
+const SITE_CONTENT_RELATIVE_PATH = 'content/site/mirror-content.json';
+const TINA_SITE_OVERRIDES_RELATIVE_PATH = 'content/tina/site.json';
+const MEDIA_MANIFEST_RELATIVE_PATH = 'src/generated/media-manifest.json';
 const LEGACY_NEXT_PREFIX = '/_next/static/';
 const LOCAL_MIRROR_NEXT_PREFIX = '/mirror_next/static/';
+
+let resolvedRuntimePaths = null;
+
+function uniquePaths(paths) {
+  return [...new Set(paths.filter(Boolean).map((candidate) => path.normalize(candidate)))];
+}
+
+function isFile(candidatePath) {
+  if (!fs.existsSync(candidatePath)) return false;
+  try {
+    return fs.statSync(candidatePath).isFile();
+  } catch {
+    return false;
+  }
+}
+
+function isDirectory(candidatePath) {
+  if (!fs.existsSync(candidatePath)) return false;
+  try {
+    return fs.statSync(candidatePath).isDirectory();
+  } catch {
+    return false;
+  }
+}
+
+function requiredPathErrorMessage(displayName, candidates, hint = '') {
+  const hintText = hint ? ` ${hint}` : '';
+  const attempted = candidates.map((candidate) => `- ${candidate}`).join('\n');
+  return `Missing ${displayName}.${hintText}\nAttempted paths:\n${attempted}`;
+}
+
+function resolveRequiredFile(displayName, candidates, hint = '') {
+  for (const candidate of candidates) {
+    if (isFile(candidate)) return candidate;
+  }
+  throw new Error(requiredPathErrorMessage(displayName, candidates, hint));
+}
+
+function resolveRequiredDirectory(displayName, candidates) {
+  for (const candidate of candidates) {
+    if (isDirectory(candidate)) return candidate;
+  }
+  throw new Error(requiredPathErrorMessage(displayName, candidates));
+}
+
+function resolveOptionalFile(candidates) {
+  for (const candidate of candidates) {
+    if (isFile(candidate)) return candidate;
+  }
+  return candidates[0];
+}
+
+function resolveRuntimePaths() {
+  if (resolvedRuntimePaths) return resolvedRuntimePaths;
+
+  const currentWorkingDirectory = process.cwd();
+  const runtimeRootCandidates = uniquePaths([
+    currentWorkingDirectory,
+    path.join(currentWorkingDirectory, '.open-next/server-functions/default'),
+    path.join(currentWorkingDirectory, 'server-functions/default'),
+    path.resolve(MODULE_DIR, '../..'),
+    path.resolve(MODULE_DIR, '../../..'),
+  ]);
+
+  const sourcePathCandidates = uniquePaths([
+    path.join(MODULE_DIR, 'live-index.html'),
+    ...runtimeRootCandidates.map((root) => path.join(root, SOURCE_RELATIVE_PATH)),
+  ]);
+  const injectionDirCandidates = uniquePaths([
+    path.join(MODULE_DIR, 'injections'),
+    ...runtimeRootCandidates.map((root) => path.join(root, INJECTION_DIR_RELATIVE_PATH)),
+  ]);
+  const siteContentPathCandidates = uniquePaths(
+    runtimeRootCandidates.map((root) => path.join(root, SITE_CONTENT_RELATIVE_PATH)),
+  );
+  const tinaSiteOverridesPathCandidates = uniquePaths(
+    runtimeRootCandidates.map((root) => path.join(root, TINA_SITE_OVERRIDES_RELATIVE_PATH)),
+  );
+  const mediaManifestPathCandidates = uniquePaths(
+    runtimeRootCandidates.map((root) => path.join(root, MEDIA_MANIFEST_RELATIVE_PATH)),
+  );
+
+  resolvedRuntimePaths = {
+    sourcePath: resolveRequiredFile(
+      SOURCE_RELATIVE_PATH,
+      sourcePathCandidates,
+      'Run: npm run clone:live',
+    ),
+    injectionDir: resolveRequiredDirectory(INJECTION_DIR_RELATIVE_PATH, injectionDirCandidates),
+    siteContentPath: resolveOptionalFile(siteContentPathCandidates),
+    tinaSiteOverridesPath: resolveOptionalFile(tinaSiteOverridesPathCandidates),
+    mediaManifestPath: resolveOptionalFile(mediaManifestPathCandidates),
+  };
+
+  return resolvedRuntimePaths;
+}
 
 function decodeEntities(input) {
   return input
@@ -66,10 +165,10 @@ function attrsToString(attrs) {
     .join(' ');
 }
 
-function loadInjection(fileName) {
-  const fullPath = path.join(INJECTION_DIR, fileName);
+function loadInjection(injectionDir, fileName) {
+  const fullPath = path.join(injectionDir, fileName);
   if (!fs.existsSync(fullPath)) {
-    throw new Error(`Missing injection file: ${path.relative(process.cwd(), fullPath)}`);
+    throw new Error(`Missing injection file: ${fullPath}`);
   }
   return fs.readFileSync(fullPath, 'utf-8').trim();
 }
@@ -967,11 +1066,25 @@ function mergeSiteContent(baseContent, tinaOverrides) {
 }
 
 export function renderMirrorHtml() {
-  if (!fs.existsSync(SOURCE_PATH)) {
-    throw new Error('Missing src/mirror/live-index.html. Run: npm run clone:live');
-  }
+  const runtimeBundle = isObject(MIRROR_RUNTIME_BUNDLE) ? MIRROR_RUNTIME_BUNDLE : {};
+  const bundledInjections = isObject(runtimeBundle.injections) ? runtimeBundle.injections : {};
+  const bundledSourceHtml = toNonEmptyString(runtimeBundle.sourceHtml);
+  const bundledGuardScript = toNonEmptyString(bundledInjections.guard);
+  const bundledOverridesCss = toNonEmptyString(bundledInjections.overridesCss);
+  const bundledRuntimeScript = toNonEmptyString(bundledInjections.runtime);
+  const bundledSiteContent = isObject(runtimeBundle.siteContent) ? runtimeBundle.siteContent : null;
+  const bundledTinaSiteOverrides = isObject(runtimeBundle.tinaSiteOverrides)
+    ? runtimeBundle.tinaSiteOverrides
+    : null;
+  const bundledMediaManifest = isObject(runtimeBundle.mediaManifest) ? runtimeBundle.mediaManifest : null;
 
-  const sourceHtml = fs.readFileSync(SOURCE_PATH, 'utf-8');
+  let paths = null;
+  const getPaths = () => {
+    if (!paths) paths = resolveRuntimePaths();
+    return paths;
+  };
+
+  const sourceHtml = bundledSourceHtml ?? fs.readFileSync(getPaths().sourcePath, 'utf-8');
 
   const htmlAttrs = parseAttrs(extractOpenTag(sourceHtml, 'html'), 'html');
   const bodyAttrs = parseAttrs(extractOpenTag(sourceHtml, 'body'), 'body');
@@ -994,17 +1107,17 @@ export function renderMirrorHtml() {
   const htmlAttrString = attrsToString(htmlAttrs);
   const bodyAttrString = attrsToString(bodyAttrs);
 
-  const guardScript = loadInjection('guard.js');
-  const overridesCss = loadInjection('overrides.css');
-  const runtimeScript = loadInjection('runtime.js');
-  const siteContent = loadJson(SITE_CONTENT_PATH, {});
+  const guardScript = bundledGuardScript ?? loadInjection(getPaths().injectionDir, 'guard.js');
+  const overridesCss = bundledOverridesCss ?? loadInjection(getPaths().injectionDir, 'overrides.css');
+  const runtimeScript = bundledRuntimeScript ?? loadInjection(getPaths().injectionDir, 'runtime.js');
+  const siteContent = bundledSiteContent ?? loadJson(getPaths().siteContentPath, {});
   const siteRuntimeDefaults =
     siteContent && typeof siteContent === 'object' && siteContent.site && typeof siteContent.site === 'object'
       ? siteContent.site
       : {};
-  const tinaSiteOverrides = loadJson(TINA_SITE_OVERRIDES_PATH, {});
+  const tinaSiteOverrides = bundledTinaSiteOverrides ?? loadJson(getPaths().tinaSiteOverridesPath, {});
   const siteRuntimeContent = mergeSiteContent(siteRuntimeDefaults, tinaSiteOverrides);
-  const mediaManifest = loadJson(MEDIA_MANIFEST_PATH, {});
+  const mediaManifest = bundledMediaManifest ?? loadJson(getPaths().mediaManifestPath, {});
   const mediaMap =
     mediaManifest && typeof mediaManifest === 'object' && mediaManifest.media && typeof mediaManifest.media === 'object'
       ? mediaManifest.media
