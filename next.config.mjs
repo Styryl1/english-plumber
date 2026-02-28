@@ -2,6 +2,22 @@
 const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: false,
+  outputFileTracingIncludes: {
+    '/': [
+      './src/mirror/live-index.html',
+      './src/mirror/injections/**/*',
+      './content/site/mirror-content.json',
+      './content/tina/site.json',
+      './src/generated/media-manifest.json',
+    ],
+    '/[...slug]': [
+      './src/mirror/live-index.html',
+      './src/mirror/injections/**/*',
+      './content/site/mirror-content.json',
+      './content/tina/site.json',
+      './src/generated/media-manifest.json',
+    ],
+  },
   async rewrites() {
     return [
       {
