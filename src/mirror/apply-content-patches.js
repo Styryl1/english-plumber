@@ -4435,6 +4435,15 @@ function applyInternalRouteHrefRewrites(source, siteContent) {
   return next;
 }
 
+function stripLegacyDomainHeadHints(headInner) {
+  const legacyDomainPattern = escapeRegExp(LEGACY_DOMAIN);
+  const legacyLinkHintPattern = new RegExp(
+    `<link\\b[^>]*(?:href|imageSrcSet|imagesrcset)\\s*=\\s*(?:"[^"]*${legacyDomainPattern}[^"]*"|'[^']*${legacyDomainPattern}[^']*')[^>]*>`,
+    'gi',
+  );
+  return String(headInner).replace(legacyLinkHintPattern, '');
+}
+
 function applySeoReplacements(headInner, siteContent) {
   const businessName =
     typeof siteContent.businessName === 'string' && siteContent.businessName
@@ -4456,7 +4465,7 @@ function applySeoReplacements(headInner, siteContent) {
   const seoDescription =
     typeof siteContent.seoDescription === 'string' && siteContent.seoDescription ? siteContent.seoDescription : defaultDescription;
 
-  let nextHead = headInner;
+  let nextHead = stripLegacyDomainHeadHints(headInner);
   nextHead = upsertTitle(nextHead, seoTitle);
   nextHead = upsertMetaTag(nextHead, 'name', 'description', seoDescription);
   nextHead = upsertMetaTag(nextHead, 'property', 'og:title', seoTitle);
