@@ -78,9 +78,51 @@
           }
         };
 
+        const shouldBlockInlineCriticalMobileScript = (node) => {
+          if (!(node instanceof HTMLScriptElement)) return false;
+          const rawSrc = (node.getAttribute('src') || node.src || '').trim();
+          if (rawSrc) return false;
+          const inlineText = `${node.text || ''}${node.textContent || ''}`;
+          return inlineText.includes('critical-mobile-preload');
+        };
+
+        const shouldBlockRemoteLinkHint = (node) => {
+          if (!(node instanceof HTMLLinkElement)) return false;
+
+          const relValue = (node.getAttribute('rel') || '').toLowerCase();
+          if (!relValue) return false;
+          const relTokens = new Set(relValue.split(/\s+/).filter(Boolean));
+          const isHint =
+            relTokens.has('preload') ||
+            relTokens.has('preconnect') ||
+            relTokens.has('dns-prefetch');
+          if (!isHint) return false;
+
+          const linkId = (node.getAttribute('id') || '').trim();
+          if (linkId === 'critical-mobile-preload') return true;
+
+          const rawHref = (node.getAttribute('href') || node.href || '').trim();
+          if (!rawHref) return false;
+          if (rawHref.startsWith('/')) return false;
+          if (rawHref.startsWith('//')) return true;
+
+          try {
+            const parsed = new URL(rawHref, window.location.href);
+            return parsed.origin !== window.location.origin;
+          } catch {
+            return false;
+          }
+        };
+
         const guardInsertion = (node) => {
           rewriteNodeAssetPath(node);
           if (shouldBlockRemoteScript(node)) {
+            return false;
+          }
+          if (shouldBlockInlineCriticalMobileScript(node)) {
+            return false;
+          }
+          if (shouldBlockRemoteLinkHint(node)) {
             return false;
           }
           return true;

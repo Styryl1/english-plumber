@@ -791,16 +791,40 @@
           });
         };
 
+        const runMaintenancePassInRoot = (root) => {
+          if (!(root instanceof Element || root instanceof Document)) return;
+          rewriteInternalLinksInRoot(root);
+          rewriteMediaUrlsInRoot(root);
+          enforceHeroImage(root);
+          hidePromoInRoot(root);
+          if (ENABLE_RUNTIME_COPY_REWRITE) {
+            rewriteCopyInRoot(root);
+          }
+          rewriteFooterFormInRoot(root);
+        };
+
+        let maintenancePassScheduled = false;
+        const scheduleMaintenancePass = () => {
+          if (maintenancePassScheduled) return;
+          maintenancePassScheduled = true;
+
+          const flush = () => {
+            maintenancePassScheduled = false;
+            runMaintenancePassInRoot(document);
+            unlockInteractionLocks();
+            rewriteDocumentMetadata();
+          };
+
+          if (typeof window.requestIdleCallback === 'function') {
+            window.requestIdleCallback(flush, { timeout: 750 });
+          } else {
+            window.setTimeout(flush, 0);
+          }
+        };
+
         const run = () => {
           rewriteDocumentMetadata();
-          rewriteInternalLinksInRoot(document);
-          rewriteMediaUrlsInRoot(document);
-          enforceHeroImage(document);
-          hidePromoInRoot(document);
-          if (ENABLE_RUNTIME_COPY_REWRITE) {
-            rewriteCopyInRoot(document);
-          }
-          rewriteFooterFormInRoot(document);
+          runMaintenancePassInRoot(document);
           unlockInteractionLocks();
           rewriteDocumentMetadata();
         };
@@ -828,40 +852,41 @@
         }
 
         window.setTimeout(() => {
-          rewriteDocumentMetadata();
-          hidePromoInRoot(document);
-          if (ENABLE_RUNTIME_COPY_REWRITE) {
-            rewriteCopyInRoot(document);
-          }
-          rewriteInternalLinksInRoot(document);
-          rewriteFooterFormInRoot(document);
-          unlockInteractionLocks();
+          scheduleMaintenancePass();
         }, 1200);
 
         const metadataStabilizer = window.setInterval(() => {
           rewriteDocumentMetadata();
-        }, 250);
+        }, 600);
         window.setTimeout(() => {
           window.clearInterval(metadataStabilizer);
-        }, 5000);
+        }, 3000);
 
+        let interactionWatchdogRuns = 0;
         const interactionWatchdog = window.setInterval(() => {
-          rewriteDocumentMetadata();
+          interactionWatchdogRuns += 1;
           hidePromoInRoot(document);
           unlockInteractionLocks();
-        }, 400);
+          if (interactionWatchdogRuns >= 8) {
+            window.clearInterval(interactionWatchdog);
+          }
+        }, 1500);
 
         const runWatchdogPass = () => {
-          rewriteInternalLinksInRoot(document);
-          hidePromoInRoot(document);
-          unlockInteractionLocks();
+          scheduleMaintenancePass();
         };
 
         document.addEventListener('visibilitychange', runWatchdogPass);
         window.addEventListener('focus', runWatchdogPass);
         window.addEventListener('pointerdown', runWatchdogPass, true);
+        let metadataPassScheduled = false;
         const metadataObserver = new MutationObserver(() => {
-          rewriteDocumentMetadata();
+          if (metadataPassScheduled) return;
+          metadataPassScheduled = true;
+          window.setTimeout(() => {
+            metadataPassScheduled = false;
+            rewriteDocumentMetadata();
+          }, 0);
         });
         if (document.head) {
           metadataObserver.observe(document.head, {
@@ -879,22 +904,11 @@
         });
 
         const observer = new MutationObserver((mutations) => {
-          for (const mutation of mutations) {
-            for (const addedNode of mutation.addedNodes) {
-              if (addedNode instanceof Element) {
-                rewriteInternalLinksInRoot(addedNode);
-                rewriteMediaUrlsInRoot(addedNode);
-                enforceHeroImage(addedNode);
-                hidePromoInRoot(addedNode);
-                if (ENABLE_RUNTIME_COPY_REWRITE) {
-                  rewriteCopyInRoot(addedNode);
-                }
-                rewriteFooterFormInRoot(addedNode);
-                unlockInteractionLocks();
-                rewriteDocumentMetadata();
-              }
-            }
-          }
+          const hasElementAddition = mutations.some((mutation) =>
+            Array.from(mutation.addedNodes).some((node) => node instanceof Element),
+          );
+          if (!hasElementAddition) return;
+          scheduleMaintenancePass();
         });
 
         observer.observe(document.documentElement, {

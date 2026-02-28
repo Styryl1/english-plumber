@@ -63,7 +63,7 @@
         },
         {
           "label": "Dutch + English Help",
-          "imagePath": "/api/media/file/Blood%20Cell%20Analysis.png"
+          "imagePath": "/api/media/file/Immunity%20Markers.png"
         }
       ]
     },
@@ -75,14 +75,14 @@
           "titleLine1": "Boiler",
           "titleLine2": "Servicing",
           "href": "https://wa.me/31642869931",
-          "imagePath": "/api/media/file/Testing%20for%20home%20page.webp"
+          "imagePath": "/api/media/file/Longevity%20Rx%20for%20home%20page.webp"
         },
         {
           "alt": "Radiator services",
           "titleLine1": "Radiator",
           "titleLine2": "Services",
           "href": "https://wa.me/31642869931",
-          "imagePath": "/api/media/file/Supps%20for%20home%20page.webp"
+          "imagePath": "/api/media/file/Care%20team%20for%20home%20page.webp"
         }
       ],
       "headingLine1": "Clear Advice,",

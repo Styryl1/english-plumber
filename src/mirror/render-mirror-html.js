@@ -200,6 +200,209 @@ function toNonEmptyString(value) {
   return trimmed ? trimmed : null;
 }
 
+function readTagAttr(tag, attrName) {
+  const match = tag.match(new RegExp(`\\b${attrName}="([^"]*)"`, 'i'));
+  if (!match || typeof match[1] !== 'string') return '';
+  return decodeEntities(match[1]).trim();
+}
+
+function toRelationTokens(value) {
+  if (!value) return new Set();
+  return new Set(
+    value
+      .toLowerCase()
+      .split(/\s+/)
+      .map((token) => token.trim())
+      .filter(Boolean),
+  );
+}
+
+function isThirdPartyOrigin(href) {
+  if (!href || href.startsWith('#')) return false;
+  if (href.startsWith('//')) return true;
+  if (href.startsWith('/')) return false;
+  if (href.startsWith('data:')) return true;
+  try {
+    const parsed = new URL(href, 'https://englishplumber.nl');
+    return parsed.origin !== 'https://englishplumber.nl';
+  } catch {
+    return false;
+  }
+}
+
+function shouldDropHeadLinkTag(tag) {
+  const relTokens = toRelationTokens(readTagAttr(tag, 'rel'));
+  const href = readTagAttr(tag, 'href');
+  const asValue = readTagAttr(tag, 'as').toLowerCase();
+  const imageSrcSet = readTagAttr(tag, 'imagesrcset');
+
+  if (relTokens.has('preconnect') || relTokens.has('dns-prefetch')) {
+    if (isThirdPartyOrigin(href)) return true;
+  }
+
+  if (relTokens.has('preload') && asValue === 'script') {
+    if (href.startsWith('data:') || isThirdPartyOrigin(href)) return true;
+  }
+
+  if (relTokens.has('preload') && asValue === 'image') {
+    if (imageSrcSet) return true;
+    if (href.includes('/api/media/file/') || href.includes('/_next/image?')) return true;
+    if (href.includes('gogeviti.com/_next/image?')) return true;
+  }
+
+  return false;
+}
+
+function sanitizeHeadForPerformance(headInner) {
+  if (!headInner) return headInner;
+
+  let nextHead = headInner.replace(/<link\b[^>]*>/gi, (tag) => {
+    if (shouldDropHeadLinkTag(tag)) return '';
+    return tag;
+  });
+
+  // Keep a single viewport tag to avoid duplicate parse work and lint noise.
+  let sawViewport = false;
+  nextHead = nextHead.replace(/<meta\b[^>]*name="viewport"[^>]*>/gi, (tag) => {
+    if (sawViewport) return '';
+    sawViewport = true;
+    return tag;
+  });
+
+  // Strip non-essential third-party script URLs that can be injected by mirrored runtime payloads.
+  nextHead = nextHead
+    .replaceAll('https://unpkg.com/cloudinary-video-player@1.11.1/dist/cld-video-player.min.js', '')
+    .replaceAll('//www.googletagmanager.com', '')
+    .replaceAll('//fonts.googleapis.com', '');
+
+  // Avoid preload-not-used churn for the critical mobile stylesheet.
+  nextHead = nextHead.replace(
+    /<link\b[^>]*id="critical-mobile-preload"[^>]*>/gi,
+    '<link rel="stylesheet" href="/critical-mobile.css"/>',
+  );
+  nextHead = nextHead.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (tag) => {
+    if (!tag.includes('critical-mobile-preload')) return tag;
+    return '';
+  });
+  nextHead = nextHead.replace(
+    /<noscript>\s*<link[^>]*href="\/critical-mobile\.css"[^>]*>\s*<\/noscript>/gi,
+    '',
+  );
+
+  return nextHead;
+}
+
+function toHeroImagePath(value) {
+  const fallback = '/IMG_8233.PNG';
+  const normalized = toNonEmptyString(value) || fallback;
+
+  if (
+    normalized.startsWith('/image?') ||
+    normalized.startsWith('/_next/image?') ||
+    normalized.startsWith('data:') ||
+    normalized.startsWith('blob:') ||
+    normalized.startsWith('http://') ||
+    normalized.startsWith('https://')
+  ) {
+    return normalized;
+  }
+
+  if (!normalized.startsWith('/')) return fallback;
+  return `/image?url=${encodeURIComponent(normalized)}&w=1920&q=75`;
+}
+
+function ensureHeroPreload(headInner, heroImagePath) {
+  if (!heroImagePath) return headInner;
+  const escapedHeroPath = escapeAttr(heroImagePath);
+  const preloadTag = `<link rel="preload" as="image" href="${escapedHeroPath}" fetchpriority="high"/>`;
+  if (headInner.includes(preloadTag)) return headInner;
+  return `${preloadTag}${headInner}`;
+}
+
+function injectHeroImageServerSide(bodyInner, heroImagePath) {
+  if (!bodyInner || !heroImagePath) return bodyInner;
+
+  const escapedHeroPath = escapeAttr(heroImagePath);
+  const heroImageTag =
+    `<img data-hero-image="english-plumber" alt="English Plumber hero image" loading="eager" decoding="async" fetchpriority="high" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center" style="pointer-events:none;z-index:0" src="${escapedHeroPath}"/>`;
+
+  const existingHeroImagePattern = /<img\b[^>]*data-hero-image="english-plumber"[^>]*>/i;
+  if (existingHeroImagePattern.test(bodyInner)) {
+    return bodyInner.replace(
+      /(<img\b[^>]*data-hero-image="english-plumber"[^>]*\bsrc=")[^"]*(")/gi,
+      `$1${escapedHeroPath}$2`,
+    );
+  }
+
+  return bodyInner.replace(
+    /(<div\b[^>]*class="[^"]*\bhero-video-wrapper\b[^"]*"[^>]*>)/gi,
+    `$1${heroImageTag}`,
+  );
+}
+
+function lazyLoadInstagramEmbeds(bodyInner) {
+  if (!bodyInner) return bodyInner;
+
+  return bodyInner.replace(/<iframe\b([^>]*)>/gi, (match, attrs) => {
+    if (!/instagram\.com/i.test(attrs)) return match;
+    if (/\bloading=/i.test(attrs)) return match;
+    return `<iframe loading="lazy"${attrs}>`;
+  });
+}
+
+function normalizeLegacyImageOptimizerUrls(html, mediaMap) {
+  if (!html) return html;
+
+  const normalizeMapPath = (value) => {
+    if (typeof value !== 'string') return '';
+    const trimmed = value.trim();
+    return trimmed || '';
+  };
+
+  const pickLocalMediaPath = (sourcePath) => {
+    if (!sourcePath) return '';
+    const direct = normalizeMapPath(mediaMap[sourcePath]);
+    if (direct) return direct;
+    const withoutQuery = sourcePath.split('#')[0].split('?')[0];
+    return normalizeMapPath(mediaMap[withoutQuery]);
+  };
+
+  const toOptimizerUrl = (sourcePath, widthHint) => {
+    const localMediaPath = pickLocalMediaPath(sourcePath);
+    if (localMediaPath) return localMediaPath;
+    const width = Number.parseInt(String(widthHint || ''), 10);
+    const clampedWidth = Number.isFinite(width) && width > 0 ? Math.max(96, Math.min(3840, width)) : 1920;
+    return `/image?url=${encodeURIComponent(sourcePath)}&w=${clampedWidth}&q=75`;
+  };
+
+  return html.replace(
+    /(?:https:\/\/www\.gogeviti\.com)?\/(?:_next\/image|image)\?url=[^"' )>]+/gi,
+    (rawUrl) => {
+      const containsHtmlEntities = rawUrl.includes('&amp;');
+      const decodedUrl = rawUrl.replaceAll('&amp;', '&');
+      let nextPath = '';
+
+      try {
+        const parsed = new URL(decodedUrl, 'https://englishplumber.nl');
+        if (parsed.pathname !== '/_next/image' && parsed.pathname !== '/image') return rawUrl;
+
+        const sourceParam = parsed.searchParams.get('url');
+        if (!sourceParam) return rawUrl;
+        const sourcePath = decodeURIComponent(sourceParam);
+        if (!sourcePath.startsWith('/')) return rawUrl;
+
+        nextPath = toOptimizerUrl(sourcePath, parsed.searchParams.get('w'));
+      } catch {
+        return rawUrl;
+      }
+
+      if (!nextPath) return rawUrl;
+      if (!containsHtmlEntities) return nextPath;
+      return nextPath.replaceAll('&', '&amp;');
+    },
+  );
+}
+
 function normalizeExactEntries(entries) {
   if (!Array.isArray(entries)) return [];
 
@@ -1117,6 +1320,8 @@ export function renderMirrorHtml() {
       : {};
   const tinaSiteOverrides = bundledTinaSiteOverrides ?? loadJson(getPaths().tinaSiteOverridesPath, {});
   const siteRuntimeContent = mergeSiteContent(siteRuntimeDefaults, tinaSiteOverrides);
+  const heroImagePath = toHeroImagePath(siteRuntimeContent.heroImagePath);
+  siteRuntimeContent.heroImagePath = heroImagePath;
   const mediaManifest = bundledMediaManifest ?? loadJson(getPaths().mediaManifestPath, {});
   const mediaMap =
     mediaManifest && typeof mediaManifest === 'object' && mediaManifest.media && typeof mediaManifest.media === 'object'
@@ -1130,12 +1335,16 @@ export function renderMirrorHtml() {
     bodyInner,
     siteContent: siteRuntimeContent,
   });
-  headInner = patchedContent.headInner;
-  bodyInner = patchedContent.bodyInner;
+  headInner = normalizeLegacyImageOptimizerUrls(patchedContent.headInner, mediaMap);
+  headInner = sanitizeHeadForPerformance(headInner);
+  headInner = ensureHeroPreload(headInner, heroImagePath);
+  bodyInner = normalizeLegacyImageOptimizerUrls(patchedContent.bodyInner, mediaMap);
+  bodyInner = injectHeroImageServerSide(bodyInner, heroImagePath);
+  bodyInner = lazyLoadInstagramEmbeds(bodyInner);
 
   const langAttr = ` lang="${escapeAttr(htmlLang)}"`;
   const htmlClassAttr = htmlClass ? ` class="${escapeAttr(htmlClass)}"` : '';
   const bodyClassAttr = bodyClass ? ` class="${escapeAttr(bodyClass)}"` : '';
 
-  return `<!DOCTYPE html><html${langAttr}${htmlClassAttr}${attrSection(htmlAttrString)}><head><script>${guardScript}</script>${headInner}<style>${overridesCss}</style><script>${siteContentScript}${mediaMapScript}</script><script>${runtimeScript}</script></head><body${bodyClassAttr}${attrSection(bodyAttrString)}>${bodyInner}</body></html>`;
+  return `<!DOCTYPE html><html${langAttr}${htmlClassAttr}${attrSection(htmlAttrString)}><head><script>${guardScript}</script>${headInner}<style>${overridesCss}</style><script>${siteContentScript}${mediaMapScript}</script></head><body${bodyClassAttr}${attrSection(bodyAttrString)}>${bodyInner}<script>${runtimeScript}</script></body></html>`;
 }
